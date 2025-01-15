@@ -1,15 +1,15 @@
-import { Dock, DockIcon } from "@/components/magicui/dock";
-import { ModeToggle } from "@/components/mode-toggle";
-import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Dock, DockIcon } from "@/components/magicui/dock"
+import { ModeToggle } from "@/components/mode-toggle"
+import { buttonVariants } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+} from "@/components/ui/tooltip"
+import { DATA } from "@/data/resume"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 export default function Navbar() {
   return (
@@ -22,6 +22,10 @@ export default function Navbar() {
               <TooltipTrigger asChild>
                 <Link
                   href={item.href}
+                  target={item.label !== "Home" ? "_blank" : "_self"}
+                  rel={
+                    item.label !== "Home" ? "noopener noreferrer" : undefined
+                  }
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
                     "size-12"
@@ -45,6 +49,8 @@ export default function Navbar() {
                 <TooltipTrigger asChild>
                   <Link
                     href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
                       "size-12"
@@ -72,5 +78,5 @@ export default function Navbar() {
         </DockIcon>
       </Dock>
     </div>
-  );
+  )
 }

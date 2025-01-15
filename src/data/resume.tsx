@@ -4,15 +4,13 @@ import { HomeIcon } from "lucide-react"
 export const DATA = {
   name: "CRZ",
   initials: "CRZ",
-  url: "https://dillion.io",
+  url: "https://crzweb.vercel.app/",
   location: "Brasil",
-  locationLink: "https://www.google.com/maps/place/saopaulo",
   description: "Aqui, transformamos ideias em soluções web personalizadas.",
-  // summary:
-  //   "At the start of 2023, I quit my job as a architecture intern to go fulltime into building and scaling websites and softwares. Nowdays, [I am graduating in Software Analysis and Development.](/#education), PROJECT, and [college projects](/#hackathons).",
   summary:
     "Na CRZ, criamos sites e softwares sob medida para ajudar negócios a crescer. Combinamos tecnologia moderna e design funcional para entregar resultados que impressionam. Vamos transformar o digital no maior aliado da sua empresa?",
   avatarUrl: "/crz.png",
+  
   skills: [
     "Typescript",
     "Node.Js",
@@ -61,8 +59,7 @@ export const DATA = {
   ],
 
   contact: {
-    email: "crzwebdigital@gmail.com",
-    tel: "+5519997172825",
+    email: "",
     social: {
       Instagram: {
         name: "Instagram",
@@ -78,7 +75,7 @@ export const DATA = {
       },
       WhatsApp: {
         name: "Whatsapp",
-        url: "https://wa.me/5519997172825",
+        url: "https://wa.me/",
         icon: Icons.phone,
         navbar: false,
       },
@@ -96,7 +93,7 @@ export const DATA = {
       },
       email: {
         name: "Email",
-        url: "mailto:crzwebdigital@gmail.com",
+        url: "",
         icon: Icons.email,
         navbar: false,
       },
