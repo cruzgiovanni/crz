@@ -9,6 +9,7 @@ import { DATA } from "@/data/resume"
 import Link from "next/link"
 import Markdown from "react-markdown"
 import IconCloud from "../components/ui/icon-cloud"
+import { MarqueeDemo } from "@/components/marquee-demo"
 
 const BLUR_FADE_DELAY = 0.04
 
@@ -215,7 +216,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="contact">
+      <section id="contact" style={{ marginTop: "-20px" }}>
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
@@ -251,6 +252,10 @@ export default function Page() {
             </div>
           </BlurFade>
         </div>
+      </section>
+
+      <section id="footer" style={{ marginTop: "-10px" }}>
+        <MarqueeDemo />
       </section>
     </main>
   )

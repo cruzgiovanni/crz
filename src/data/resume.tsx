@@ -10,7 +10,7 @@ export const DATA = {
   summary:
     "Na CRZ, criamos sites e softwares sob medida para ajudar negócios a crescer. Combinamos tecnologia moderna e design funcional para entregar resultados que impressionam. Vamos transformar o digital no maior aliado da sua empresa?",
   avatarUrl: "/crz.png",
-  
+
   skills: [
     "Typescript",
     "Node.Js",
@@ -214,4 +214,50 @@ export const DATA = {
       image: "/me.jpeg",
     },
   ],
+
+  reviews: [
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+    {
+      name: "CRZ",
+      username: "@crz.web",
+      body: "@ 2025 - Feito com ❤️ e fé.",
+      img: "https://crzweb.vercel.app/crz.png",
+    },
+  ],
+  
 } as const
