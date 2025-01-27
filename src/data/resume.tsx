@@ -9,7 +9,8 @@ export const DATA = {
   description: "Aqui, transformamos ideias em soluções web personalizadas.",
   summary:
     "Na CRZ, criamos sites e softwares sob medida para ajudar negócios a crescer. Combinamos tecnologia moderna e design funcional para entregar resultados que impressionam. Vamos transformar o digital no maior aliado da sua empresa?",
-  avatarUrl: "/crz.png",
+  avatarUrl: "/crz-light.png",
+  avatarUrlDark: "/crz.png",
 
   skills: [
     "Typescript",
@@ -259,5 +260,4 @@ export const DATA = {
       img: "https://crzweb.vercel.app/crz.png",
     },
   ],
-  
 } as const

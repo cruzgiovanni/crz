@@ -1,3 +1,5 @@
+"use client"
+
 import { HackathonCard } from "@/components/hackathon-card"
 import BlurFade from "@/components/magicui/blur-fade"
 import BlurFadeText from "@/components/magicui/blur-fade-text"
@@ -10,10 +12,12 @@ import Link from "next/link"
 import Markdown from "react-markdown"
 import IconCloud from "../components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
+import { useTheme } from "next-themes"
 
 const BLUR_FADE_DELAY = 0.04
 
 export default function Page() {
+  const { theme } = useTheme()
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
       <section id="hero">
@@ -34,8 +38,19 @@ export default function Page() {
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
+                {theme === "light" ? (
+                  <AvatarImage
+                    alt={DATA.name}
+                    src={DATA.avatarUrl}
+                    title={DATA.name}
+                  />
+                ) : (
+                  <AvatarImage
+                    alt={DATA.name}
+                    src={DATA.avatarUrlDark}
+                    title={DATA.name}
+                  />
+                )}
               </Avatar>
             </BlurFade>
           </div>
