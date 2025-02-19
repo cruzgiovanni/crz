@@ -28,7 +28,7 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
                 yOffset={8}
-                text={`Bem-vindo à ${DATA.name.split(" ")[0]} 👋`}
+                text={`Welcome to ${DATA.name.split(" ")[0]} 👋`}
               />
               <BlurFadeText
                 className="max-w-[600px] md:text-xl"
@@ -59,7 +59,7 @@ export default function Page() {
 
       <section id="about">
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold">Sobre</h2>
+          <h2 className="text-xl font-bold">About</h2>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
@@ -71,7 +71,7 @@ export default function Page() {
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold">Alguns dos nossos parceiros</h2>
+            <h2 className="text-xl font-bold">Some of our partners</h2>{" "}
           </BlurFade>
           {DATA.work.map((work, id) => (
             <BlurFade
@@ -122,8 +122,8 @@ export default function Page() {
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">
-              Na CRZ, usamos as tecnologias mais avançadas para entregar
-              inovação, eficiência e resultados excepcionais.
+              At CRZ, we use the most advanced technologies to deliver
+              innovation, efficiency, and exceptional results.
             </h2>{" "}
           </BlurFade>
 
@@ -151,15 +151,15 @@ export default function Page() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Projetos
+                  Projects
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Veja nossos últimos projetos
+                  Check out our latest projects
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  De soluções simples a sistemas web sofisticados, criamos
-                  experiências digitais que atendem às necessidades de cada
-                  cliente, sempre com qualidade e inovação.
+                  From simple solutions to sophisticated web systems, we create
+                  digital experiences that meet each client&apos;s needs, always
+                  with quality and innovation.
                 </p>
               </div>
             </div>
@@ -193,10 +193,10 @@ export default function Page() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Desenvolvedor
+                  Developer
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Sobre o desenvolvedor
+                  About the developer
                 </h2>
                 {/* <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   During my time in university, I attended{" "}
@@ -236,14 +236,14 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
               <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                Contato
+                Contact
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl pt-6 pb-2">
-                Vamos conversar?
+                Let&apos;s talk?
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Se você tem uma ideia ou precisa de uma solução digital
-                inovadora, mande uma mensagem para a gente! É só nos chamar no{" "}
+                If you have an idea or need an innovative digital solution, send
+                us a message! Just reach out to us on{" "}
                 <Link
                   href={DATA.contact.social.InstagramDM.url}
                   className="text-blue-500 hover:underline"
@@ -252,7 +252,7 @@ export default function Page() {
                 >
                   Instagram
                 </Link>{" "}
-                ou no{" "}
+                or on{" "}
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
                   className="text-blue-500 hover:underline"
@@ -261,8 +261,8 @@ export default function Page() {
                 >
                   LinkedIn
                 </Link>
-                {""}, e vamos responder rapidinho. Vamos construir algo incrível
-                juntos!
+                {""}, and we will respond quickly. Let&apos;s build something amazing
+                together!
               </p>
             </div>
           </BlurFade>

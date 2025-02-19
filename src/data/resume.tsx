@@ -5,29 +5,26 @@ export const DATA = {
   name: "CRZ",
   initials: "CRZ",
   url: "https://crzweb.vercel.app/",
-  location: "Brasil",
-  description: "Aqui, transformamos ideias em soluções web personalizadas.",
+  location: "Brazil",
+  description: "Here, we transform ideas into personalized web solutions.",
   summary:
-    "Na CRZ, criamos sites e softwares sob medida para ajudar negócios a crescer. Combinamos tecnologia moderna e design funcional para entregar resultados que impressionam. Vamos transformar o digital no maior aliado da sua empresa?",
+    "At CRZ, we create custom websites and software to help businesses grow. We combine modern technology and functional design to deliver impressive results. Let's make digital your company's greatest ally?",
   avatarUrl: "/crz-light.png",
   avatarUrlDark: "/crz.png",
 
   skills: [
+    "Next.js",
     "Typescript",
     "Node.Js",
-    "React",
-    "Next.js",
     "Pocketbase",
-    "Pockethost",
-    "JavaScript",
-    "Python",
-    "Java",
+    "Prisma",
     "MongoDB",
-    "SQL",
+    "Firebase",
   ],
 
   skills_cloud: [
     "React",
+    "nextdotjs",
     "typescript",
     "nodedotjs",
     "Pocketbase",
@@ -52,6 +49,9 @@ export const DATA = {
     "firebase",
     "aws",
     "oracle",
+    "prisma",
+    "firebase",
+    "supabase",
   ],
 
   navbar: [
@@ -107,36 +107,36 @@ export const DATA = {
       href: "https://atomic.finance",
       badges: [],
       location: "Remote",
-      title: "Corretora de seguros",
+      title: "Insurance Broker",
       logoUrl: "/piva.png",
       start: "",
       end: "",
       description:
-        'Criação de um software de gestão e cadastro de seguros. "A mudança para o software da CRZ melhorou em 100% a nossa produtividade, agilidade e usabilidade em relação ao sistema antigo que usavamos." - Marcel Andréa, Sócio Proprietário da Piva Seguros.',
+        'Creation of insurance management and registration software. "The switch to CRZ software improved our productivity, agility, and usability by 100% compared to the old system we used." - Marcel Andréa, Co-owner of Piva Seguros.',
     },
     {
       company: "Loja Mikonos",
       href: "",
       badges: [],
       location: "Remote",
-      title: "E-commerce de roupas",
+      title: "Clothing E-commerce",
       logoUrl: "/mikonos.jpg",
       start: "",
       end: "",
       description:
-        "Remodelação do site, deixando seu visual mais atrativo e moderno.",
+        "Website redesign, making its look more attractive and modern.",
     },
     {
       company: "Facchini Advogados",
       href: "",
       badges: [],
       location: "Remote",
-      title: "Escritório de advocacia",
+      title: "Law Firm",
       logoUrl: "/facchini.svg",
       start: "",
       end: "",
       description:
-        "Criação do site da empresa, com foco em SEO e otimização para dispositivos móveis.",
+        "Creation of the company's website, focusing on SEO and mobile optimization.",
     },
   ],
 
@@ -153,12 +153,12 @@ export const DATA = {
 
   projects: [
     {
-      title: "Piva Orçamentos",
-      href: "https://pivasolucoes.com.br/formulario",
+      title: "Piva Seguros",
+      href: "https://github.com/emiliobiasi/pivaseguros",
       dates: "11/2024",
       active: true,
       description:
-        "Desenvolvimento de uma plataforma completa, no qual os clientes cadastram os dados para os seguros desejados, e, através de um gerenciamento privativo, a empresa consegue visualizar e gerenciar os seguros de seus clientes, analisando gráficos e gerando relatórios.",
+        "Development of a complete platform where clients register data for desired insurance, and through private management, the company can view and manage their clients' insurance, analyzing graphs and generating reports.",
       technologies: [
         // "Next.js",
         "Typescript",
@@ -172,9 +172,9 @@ export const DATA = {
       ],
       links: [
         {
-          type: "Website",
-          href: "https://pivasolucoes.com.br/formulario",
-          icon: <Icons.globe className="size-3" />,
+          type: "GitHub",
+          href: "https://github.com/emiliobiasi/pivaseguros",
+          icon: <Icons.github className="size-3" />,
         },
         // {
         //   type: "Source",
@@ -191,7 +191,7 @@ export const DATA = {
       dates: "02/2024",
       active: true,
       description:
-        "Desenvolvimento de uma landig page moderna e responsiva para o escritório de advocacia Facchini Advogados.",
+        "Development of a modern and responsive landing page for the law firm Facchini Advogados.",
       technologies: ["HTML", "CSS", "JavaScript", "SEO"],
       links: [
         {
@@ -209,9 +209,9 @@ export const DATA = {
     {
       title: "Giovanni Cruz",
       dates: "",
-      location: "São Paulo, Brasil",
+      location: "São Paulo, Brazil",
       description:
-        "Co-founder da CRZ, especializado em desenvolvimento web, mídias sociais, tráfego pago e design. Atua no mercado de tecnologia desde 2021, com foco em desenvolvimento de sites e softwares.",
+        "Co-founder of CRZ, specialized in web development, social media, paid traffic, and design. Active in the technology market since 2021, focusing on website and software development.",
       image: "/me.jpeg",
     },
   ],
@@ -220,43 +220,43 @@ export const DATA = {
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
     {
       name: "CRZ",
       username: "@crz.web",
-      body: "@ 2025 - Feito com ❤️ e fé.",
+      body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
       img: "https://crzweb.vercel.app/crz.png",
     },
   ],
