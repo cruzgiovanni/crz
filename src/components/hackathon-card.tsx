@@ -1,18 +1,18 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
 
 interface Props {
-  title: string;
-  description: string;
-  dates: string;
-  location: string;
-  image?: string;
+  title: string
+  description: string
+  dates: string
+  location: string
+  image?: string
   links?: readonly {
-    icon: React.ReactNode;
-    title: string;
-    href: string;
-  }[];
+    icon: React.ReactNode
+    title: string
+    href: string
+  }[]
 }
 
 export function HackathonCard({
@@ -24,10 +24,15 @@ export function HackathonCard({
   links,
 }: Props) {
   return (
-    <li className="relative ml-10 py-4">
-      <div className="absolute -left-16 top-2 flex items-center justify-center bg-white rounded-full">
-        <Avatar className="border size-12 m-auto">
-          <AvatarImage src={image} alt={title} className="object-contain" />
+    <li className="relative ml-16 py-4">
+      {" "}
+      {/* Ajuste o espaçamento lateral */}
+      <div className="absolute -left-20 top-2 flex items-center justify-center bg-white rounded-full">
+        <Avatar className="border w-16 h-16 m-auto">
+          {" "}
+          {/* Aumente o tamanho do Avatar */}
+          <AvatarImage src={image} alt={title} className="object-cover" />{" "}
+          {/* Use object-cover */}
           <AvatarFallback>{title[0]}</AvatarFallback>
         </Avatar>
       </div>
@@ -58,5 +63,5 @@ export function HackathonCard({
         </div>
       )}
     </li>
-  );
+  )
 }

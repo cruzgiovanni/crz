@@ -1,16 +1,18 @@
 "use client"
 
+import { useState, useEffect } from "react"
+import Navbar from "@/components/navbar"
+import { DATA } from "@/data/resume"
 import { HackathonCard } from "@/components/hackathon-card"
 import BlurFade from "@/components/magicui/blur-fade"
 import BlurFadeText from "@/components/magicui/blur-fade-text"
 import { ProjectCard } from "@/components/project-card"
 import { ResumeCard } from "@/components/resume-card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { DATA } from "@/data/resume"
 import Link from "next/link"
 import Markdown from "react-markdown"
-import IconCloud from "../components/ui/icon-cloud"
+import IconCloud from "@/components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
 import { useTheme } from "next-themes"
 
@@ -18,8 +20,25 @@ const BLUR_FADE_DELAY = 0.04
 
 export default function Page() {
   const { theme } = useTheme()
+
+  // Estado para controlar o idioma (padrão: inglês)
+  const [language, setLanguage] = useState<"en" | "pt">("pt")
+
+  useEffect(() => {
+    const browserLanguage = navigator.language.startsWith("pt") ? "pt" : "en"
+    console.log("Idioma do navegador detectado:", navigator.language)
+    setLanguage(browserLanguage)
+  }, [])
+
+  // Dados baseados no idioma selecionado
+  const currentData = DATA[language]
+
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
+      {/* Botão para alternar idioma */}
+      <Navbar onLanguageChange={(lang) => setLanguage(lang)} />
+
+      {/* Hero Section */}
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -28,12 +47,13 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
                 yOffset={8}
-                text={`Welcome to ${DATA.name.split(" ")[0]} 👋`}
+                text={`${currentData.welcome} ${DATA.name.split(" ")[0]} 👋`}
               />
+
               <BlurFadeText
                 className="max-w-[600px] md:text-xl"
                 delay={BLUR_FADE_DELAY}
-                text={DATA.description}
+                text={currentData.description}
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
@@ -41,13 +61,13 @@ export default function Page() {
                 {theme === "light" ? (
                   <AvatarImage
                     alt={DATA.name}
-                    src={DATA.avatarUrl}
+                    src={currentData.avatarUrl}
                     title={DATA.name}
                   />
                 ) : (
                   <AvatarImage
                     alt={DATA.name}
-                    src={DATA.avatarUrlDark}
+                    src={currentData.avatarUrlDark}
                     title={DATA.name}
                   />
                 )}
@@ -57,23 +77,25 @@ export default function Page() {
         </div>
       </section>
 
+      {/* About Section */}
       <section id="about">
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold">About</h2>
+          <h2 className="text-xl font-bold">{currentData.sections[0]}</h2>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            {DATA.summary}
+            {currentData.summary}
           </Markdown>
         </BlurFade>
       </section>
 
+      {/* Work Section */}
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold">Some of our partners</h2>{" "}
+            <h2 className="text-xl font-bold">{currentData.sections[1]}</h2>
           </BlurFade>
-          {DATA.work.map((work, id) => (
+          {currentData.work.map((work, id) => (
             <BlurFade
               key={work.company}
               delay={BLUR_FADE_DELAY * 6 + id * 0.05}
@@ -94,37 +116,13 @@ export default function Page() {
         </div>
       </section>
 
-      {/* <section id="education">
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold">Formação</h2>
-          </BlurFade>
-          {DATA.education.map((education, id) => (
-            <BlurFade
-              key={education.school}
-              delay={BLUR_FADE_DELAY * 8 + id * 0.05}
-            >
-              <ResumeCard
-                key={education.school}
-                href={education.href}
-                logoUrl={education.logoUrl}
-                altText={education.school}
-                title={education.school}
-                subtitle={education.degree}
-                period={`${education.start} - ${education.end}`}
-              />
-            </BlurFade>
-          ))}
-        </div>
-      </section> */}
-
+      {/* Skills Section */}
       <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">
-              At CRZ, we use the most advanced technologies to deliver
-              innovation, efficiency, and exceptional results.
-            </h2>{" "}
+              {currentData.sections[2].text}
+            </h2>
           </BlurFade>
 
           <div className="relative pb-8">
@@ -145,27 +143,26 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Projects Section */}
       <section id="projects">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Projects
+                  {currentData.sections[3].section}
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Check out our latest projects
+                  {currentData.sections[3].tittle}
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  From simple solutions to sophisticated web systems, we create
-                  digital experiences that meet each client&apos;s needs, always
-                  with quality and innovation.
+                  {currentData.sections[3].text}
                 </p>
               </div>
             </div>
           </BlurFade>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-            {DATA.projects.map((project, id) => (
+            {currentData.projects.map((project, id) => (
               <BlurFade
                 key={project.title}
                 delay={BLUR_FADE_DELAY * 12 + id * 0.05}
@@ -187,42 +184,35 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="hackathons">
+      <section id="developer">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 13}>
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Developer
+                  {currentData.sections[4].section}
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  About the developer
+                  {currentData.sections[4].text}
                 </h2>
-                {/* <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  During my time in university, I attended{" "}
-                  {DATA.developer.length}+ hackathons. People from around the
-                  country would come together and build incredible things in 2-3
-                  days. It was eye-opening to see the endless possibilities
-                  brought to life by a group of motivated and passionate
-                  individuals.
-                </p> */}
               </div>
             </div>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-              {DATA.developer.map((project, id) => (
+            <ul className="mb-4 ml-4">
+              {" "}
+              {/* Removido divide-y */}
+              {currentData.developer.map((dev, id) => (
                 <BlurFade
-                  key={project.title + project.dates}
+                  key={dev.title + dev.dates}
                   delay={BLUR_FADE_DELAY * 15 + id * 0.05}
                 >
                   <HackathonCard
-                    title={project.title}
-                    description={project.description}
-                    location={project.location}
-                    dates={project.dates}
-                    image={project.image}
-                    // links={project.links}
+                    title={dev.title}
+                    description={dev.description}
+                    location={dev.location}
+                    dates={dev.dates}
+                    image={dev.image}
                   />
                 </BlurFade>
               ))}
@@ -231,19 +221,19 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Contact Section */}
       <section id="contact" style={{ marginTop: "-20px" }}>
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
               <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                Contact
+                {currentData.sections[5].section}
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl pt-6 pb-2">
-                Let&apos;s talk?
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl pb-2">
+                {currentData.sections[5].tittle}
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                If you have an idea or need an innovative digital solution, send
-                us a message! Just reach out to us on{" "}
+                {currentData.sections[5].text_1}{" "}
                 <Link
                   href={DATA.contact.social.InstagramDM.url}
                   className="text-blue-500 hover:underline"
@@ -252,7 +242,7 @@ export default function Page() {
                 >
                   Instagram
                 </Link>{" "}
-                or on{" "}
+                {currentData.sections[5].text_2}{" "}
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
                   className="text-blue-500 hover:underline"
@@ -261,8 +251,7 @@ export default function Page() {
                 >
                   LinkedIn
                 </Link>
-                {""}, and we will respond quickly. Let&apos;s build something amazing
-                together!
+                {""}, {currentData.sections[5].text_3}
               </p>
             </div>
           </BlurFade>

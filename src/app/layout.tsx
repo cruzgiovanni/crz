@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { DATA } from "@/data/resume"
@@ -18,13 +17,13 @@ export const metadata: Metadata = {
     default: DATA.name,
     template: `%s | ${DATA.name}`,
   },
-  description: DATA.description,
+  description: DATA.pt.description,
   openGraph: {
     title: `${DATA.name}`,
-    description: DATA.description,
+    description: DATA.pt.description,
     url: DATA.url,
     siteName: `${DATA.name}`,
-    locale: "en_US",
+    locale: "pt_BR",
     type: "website",
   },
   robots: {
@@ -62,10 +61,7 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <TooltipProvider delayDuration={0}>
-            {children}
-            <Navbar />
-          </TooltipProvider>
+          <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

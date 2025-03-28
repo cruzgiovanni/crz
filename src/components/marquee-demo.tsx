@@ -1,11 +1,9 @@
 "use client"
 
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import Marquee from "@/components/ui/marquee"
 import { DATA } from "@/data/resume"
-
-const firstRow = DATA.reviews.slice(0, DATA.reviews.length / 2)
-const secondRow = DATA.reviews.slice(DATA.reviews.length / 2)
 
 const ReviewCard = ({
   img,
@@ -46,6 +44,16 @@ const ReviewCard = ({
 }
 
 export function MarqueeDemo() {
+  // Estado para controlar o idioma (padrão: inglês)
+  const [language, setLanguage] = useState<"en" | "pt">("en")
+
+  // Dados baseados no idioma selecionado
+  const currentData = DATA[language]
+
+  // Divida as reviews em duas linhas
+  const firstRow = currentData.reviews.slice(0, currentData.reviews.length / 2)
+  const secondRow = currentData.reviews.slice(currentData.reviews.length / 2)
+
   return (
     <div className="relative flex h-[300px] w-full flex-col items-center justify-center overflow-hidden md:shadow-xl mb-12 md:mb-4">
       <Marquee pauseOnHover className="[--duration:18s]">

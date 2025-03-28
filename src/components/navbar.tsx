@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { Dock, DockIcon } from "@/components/magicui/dock"
 import { ModeToggle } from "@/components/mode-toggle"
 import { buttonVariants } from "@/components/ui/button"
@@ -10,8 +13,36 @@ import {
 import { DATA } from "@/data/resume"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 
-export default function Navbar() {
+export default function Navbar({
+  onLanguageChange,
+}: {
+  onLanguageChange: (lang: "en" | "pt") => void
+}) {
+  const [language, setLanguage] = useState<"en" | "pt" | null>(null) // Inicializa como null
+  const [isLoading, setIsLoading] = useState(true) // Estado de carregamento
+
+  // Detecta o idioma do navegador ao carregar
+  useEffect(() => {
+    const browserLanguage = navigator.language.startsWith("pt") ? "pt" : "en"
+    setLanguage(browserLanguage)
+    onLanguageChange(browserLanguage) // Notifica o componente pai sobre o idioma inicial
+    setIsLoading(false) // Define como carregado
+  }, [onLanguageChange])
+
+  const toggleLanguage = () => {
+    if (!language) return // Evita alternar enquanto o idioma não foi carregado
+    const newLanguage = language === "en" ? "pt" : "en"
+    setLanguage(newLanguage)
+    onLanguageChange(newLanguage)
+  }
+
+  // Exibe um estado de carregamento enquanto o idioma não é detectado
+  if (isLoading) {
+    return <div className="h-16 w-full bg-background"></div> // Placeholder enquanto carrega
+  }
+
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
       <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
@@ -66,6 +97,42 @@ export default function Navbar() {
             </DockIcon>
           ))}
         <Separator orientation="vertical" className="h-full py-2" />
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={toggleLanguage}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                  "size-12"
+                )}
+              >
+                <Image
+                  src={
+                    language === "en"
+                      ? DATA.flagIcons[0].br
+                      : DATA.flagIcons[0].usa
+                  }
+                  alt={
+                    language === "en"
+                      ? "Switch to Portuguese"
+                      : "Switch to English"
+                  }
+                  width={24}
+                  height={24}
+                  className="w-6 h-6"
+                />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                {language === "en"
+                  ? "Mudar para Português"
+                  : "Switch to English"}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
         <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
