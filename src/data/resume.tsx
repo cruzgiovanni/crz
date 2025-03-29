@@ -248,7 +248,7 @@ export const DATA = {
           'Criação de software de gerenciamento e registro de seguros. "A mudança para o software CRZ melhorou nossa produtividade, agilidade e usabilidade em 100% em comparação com o sistema antigo que usávamos." - Marcel Andréa, Co-proprietário da Piva Seguros.',
       },
       {
-        company: "Mikonos Store",
+        company: "Loja Mikonos",
         href: "",
         badges: [],
         location: "Remoto",
