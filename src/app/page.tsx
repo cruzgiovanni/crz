@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Navbar from "@/components/navbar"
 import { DATA } from "@/data/resume"
 import { HackathonCard } from "@/components/hackathon-card"
@@ -15,28 +14,19 @@ import Markdown from "react-markdown"
 import IconCloud from "@/components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
 import { useTheme } from "next-themes"
+import { useLanguage } from "../../languageContext"
 
 const BLUR_FADE_DELAY = 0.04
 
 export default function Page() {
   const { theme } = useTheme()
 
-  // Estado para controlar o idioma (padrão: inglês)
-  const [language, setLanguage] = useState<"en" | "pt">("pt")
-
-  useEffect(() => {
-    const browserLanguage = navigator.language.startsWith("pt") ? "pt" : "en"
-    console.log("Idioma do navegador detectado:", navigator.language)
-    setLanguage(browserLanguage)
-  }, [])
-
-  // Dados baseados no idioma selecionado
+  const { language } = useLanguage()
   const currentData = DATA[language]
 
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
-      {/* Botão para alternar idioma */}
-      <Navbar onLanguageChange={(lang) => setLanguage(lang)} />
+      <Navbar />
 
       {/* Hero Section */}
       <section id="hero">
@@ -201,7 +191,6 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 14}>
             <ul className="mb-4 ml-4">
               {" "}
-              {/* Removido divide-y */}
               {currentData.developer.map((dev, id) => (
                 <BlurFade
                   key={dev.title + dev.dates}

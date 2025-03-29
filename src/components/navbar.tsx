@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Dock, DockIcon } from "@/components/magicui/dock"
 import { ModeToggle } from "@/components/mode-toggle"
 import { buttonVariants } from "@/components/ui/button"
@@ -14,34 +13,10 @@ import { DATA } from "@/data/resume"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
+import { useLanguage } from "../../languageContext"
 
-export default function Navbar({
-  onLanguageChange,
-}: {
-  onLanguageChange: (lang: "en" | "pt") => void
-}) {
-  const [language, setLanguage] = useState<"en" | "pt" | null>(null) // Inicializa como null
-  const [isLoading, setIsLoading] = useState(true) // Estado de carregamento
-
-  // Detecta o idioma do navegador ao carregar
-  useEffect(() => {
-    const browserLanguage = navigator.language.startsWith("pt") ? "pt" : "en"
-    setLanguage(browserLanguage)
-    onLanguageChange(browserLanguage) // Notifica o componente pai sobre o idioma inicial
-    setIsLoading(false) // Define como carregado
-  }, [onLanguageChange])
-
-  const toggleLanguage = () => {
-    if (!language) return // Evita alternar enquanto o idioma não foi carregado
-    const newLanguage = language === "en" ? "pt" : "en"
-    setLanguage(newLanguage)
-    onLanguageChange(newLanguage)
-  }
-
-  // Exibe um estado de carregamento enquanto o idioma não é detectado
-  if (isLoading) {
-    return <div className="h-16 w-full bg-background"></div> // Placeholder enquanto carrega
-  }
+export default function Navbar() {
+  const { language, toggleLanguage } = useLanguage()
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
