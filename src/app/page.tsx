@@ -6,7 +6,7 @@ import { HackathonCard } from "@/components/hackathon-card"
 import BlurFade from "@/components/magicui/blur-fade"
 import BlurFadeText from "@/components/magicui/blur-fade-text"
 import { ProjectCard } from "@/components/project-card"
-import { ResumeCard } from "@/components/resume-card"
+// import { ResumeCard } from "@/components/resume-card"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
@@ -80,7 +80,7 @@ export default function Page() {
       </section>
 
       {/* Work Section */}
-      <section id="work">
+      {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">{currentData.sections[1]}</h2>
@@ -104,7 +104,7 @@ export default function Page() {
             </BlurFade>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Skills Section */}
       <section id="skills">

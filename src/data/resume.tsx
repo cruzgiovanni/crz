@@ -36,7 +36,7 @@ export const DATA = {
     ],
 
     summary:
-      "At CRZ, we create custom websites and software to help businesses grow. We combine modern technology and functional design to deliver impressive results. Let's make digital your company's greatest ally?",
+      "We create custom websites and software to help businesses grow. We combine modern technology and functional design to deliver impressive results. Let's make digital your company's greatest ally?",
     avatarUrl: "/crz-light.png",
     avatarUrlDark: "/crz.png",
 
@@ -91,6 +91,71 @@ export const DATA = {
     ],
 
     projects: [
+      {
+        title: "Livro SaaS",
+        href: "https://github.com/euCRUZ/livroSaas",
+        dates: "02/2025",
+        active: true,
+        description:
+          "SaaS system with authentication (NextAuth), Prisma DB, and Stripe subscriptions. Only logged-in users with active plans can access protected routes.",
+        technologies: [
+          "Typescript",
+          "Prisma ORM",
+          "NeonDB",
+          "TailwindCSS",
+          "Shadcn UI",
+          "React",
+          "Next.js",
+          "NextAuth",
+          "Stripe",
+        ],
+        links: [
+          {
+            type: "GitHub",
+            href: "https://github.com/euCRUZ/livroSaas",
+            icon: <Icons.github className="size-3" />,
+          },
+          {
+            type: "Website",
+            href: "https://livro-saas.vercel.app/",
+            icon: <Icons.globe className="size-3" />,
+          },
+        ],
+        image: "/livrosaas.png",
+        video: "",
+      },
+      {
+        title: "FSW Delivery",
+        href: "https://github.com/euCRUZ/fsw-delivery",
+        dates: "02/2025",
+        active: true,
+        description:
+          "Delivery system where users select products, add to cart, and track order status in real time.",
+        technologies: [
+          "Typescript",
+          "Prisma ORM",
+          "NeonDB",
+          "TailwindCSS",
+          "Shadcn UI",
+          "React",
+          "Next.js",
+          "Stripe",
+        ],
+        links: [
+          {
+            type: "GitHub",
+            href: "https://github.com/euCRUZ/fsw-delivery",
+            icon: <Icons.github className="size-3" />,
+          },
+          {
+            type: "Website",
+            href: "https://fsw-delivery.vercel.app",
+            icon: <Icons.globe className="size-3" />,
+          },
+        ],
+        image: "/fsw.svg",
+        video: "",
+      },
       {
         title: "Piva Insurances",
         href: "https://github.com/emiliobiasi/pivaseguros",
@@ -230,7 +295,7 @@ export const DATA = {
     ],
 
     summary:
-      "Na CRZ, criamos sites e softwares personalizados para ajudar empresas a crescerem. Combinamos tecnologia moderna e design funcional para entregar resultados impressionantes. Vamos fazer do digital o maior aliado da sua empresa?",
+      "Criamos sites e softwares personalizados para ajudar empresas a crescerem. Combinamos tecnologia moderna e design funcional para entregar resultados impressionantes. Vamos fazer do digital o maior aliado da sua empresa?",
     avatarUrl: "/crz-light.png",
     avatarUrlDark: "/crz.png",
 
@@ -286,6 +351,71 @@ export const DATA = {
 
     projects: [
       {
+        title: "Livro SaaS",
+        href: "https://github.com/euCRUZ/livroSaas",
+        dates: "02/2025",
+        active: true,
+        description:
+          "Sistema SaaS com autenticação via NextAuth, banco de dados com Prisma e pagamentos recorrentes usando Stripe. Apenas usuários logados e assinantes ativos têm acesso às rotas protegidas (Assinaturas fictícias para testes).",
+        technologies: [
+          "Typescript",
+          "Prisma ORM",
+          "NeonDB",
+          "TailwindCSS",
+          "Shadcn UI",
+          "React",
+          "Next.js",
+          "NextAuth",
+          "Stripe",
+        ],
+        links: [
+          {
+            type: "GitHub",
+            href: "https://github.com/euCRUZ/livroSaas",
+            icon: <Icons.github className="size-3" />,
+          },
+          {
+            type: "Website",
+            href: "https://livro-saas.vercel.app/",
+            icon: <Icons.globe className="size-3" />,
+          },
+        ],
+        image: "/livrosaas.png",
+        video: "",
+      },
+      {
+        title: "FSW Delivery",
+        href: "https://github.com/euCRUZ/fsw-delivery",
+        dates: "02/2025",
+        active: true,
+        description:
+          "Sistema de delivery onde o usuário escolhe produtos, adiciona à sacola e acompanha o status do pedido em tempo real.",
+        technologies: [
+          "Typescript",
+          "Prisma ORM",
+          "NeonDB",
+          "TailwindCSS",
+          "Shadcn UI",
+          "React",
+          "Next.js",
+          "Stripe",
+        ],
+        links: [
+          {
+            type: "GitHub",
+            href: "https://github.com/euCRUZ/fsw-delivery",
+            icon: <Icons.github className="size-3" />,
+          },
+          {
+            type: "Website",
+            href: "https://fsw-delivery.vercel.app",
+            icon: <Icons.globe className="size-3" />,
+          },
+        ],
+        image: "/fsw.svg",
+        video: "",
+      },
+      {
         title: "Piva Seguros",
         href: "https://github.com/emiliobiasi/pivaseguros",
         dates: "11/2024",
@@ -309,6 +439,7 @@ export const DATA = {
         image: "/pivascreen.png",
         video: "",
       },
+
       {
         title: "Facchini Advogados",
         href: "https://facchiniadvogados.com.br/",
