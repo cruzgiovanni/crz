@@ -6,7 +6,6 @@ import { HackathonCard } from "@/components/hackathon-card"
 import BlurFade from "@/components/magicui/blur-fade"
 import BlurFadeText from "@/components/magicui/blur-fade-text"
 import { ProjectCard } from "@/components/project-card"
-// import { ResumeCard } from "@/components/resume-card"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
@@ -15,6 +14,8 @@ import IconCloud from "@/components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
 import { useTheme } from "next-themes"
 import { useLanguage } from "../../languageContext"
+import { useEffect } from "react"
+import Lenis from "lenis"
 
 const BLUR_FADE_DELAY = 0.04
 
@@ -23,6 +24,12 @@ export default function Page() {
 
   const { language } = useLanguage()
   const currentData = DATA[language]
+
+  // useEffect(() => {
+  //   const lenis = new Lenis({
+  //     autoRaf: true,
+  //   })
+  // }, [])
 
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
@@ -78,33 +85,6 @@ export default function Page() {
           </Markdown>
         </BlurFade>
       </section>
-
-      {/* Work Section */}
-      {/* <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold">{currentData.sections[1]}</h2>
-          </BlurFade>
-          {currentData.work.map((work, id) => (
-            <BlurFade
-              key={work.company}
-              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-            >
-              <ResumeCard
-                key={work.company}
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start} - ${work.end ?? "Present"}`}
-                description={work.description}
-              />
-            </BlurFade>
-          ))}
-        </div>
-      </section> */}
 
       {/* Skills Section */}
       <section id="skills">
