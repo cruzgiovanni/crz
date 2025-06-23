@@ -37,8 +37,8 @@ export const DATA = {
 
     summary:
       "We create custom websites and software to help businesses grow. We combine modern technology and functional design to deliver impressive results. Let's make digital your company's greatest ally?",
-    avatarUrl: "/crz-light.png",
-    avatarUrlDark: "/crz.png",
+    avatarUrl: "/crz-light.avif",
+    avatarUrlDark: "/crz.avif",
 
     work: [
       {
@@ -121,7 +121,7 @@ export const DATA = {
             icon: <Icons.globe className="size-3" />,
           },
         ],
-        image: "/livrosaas.png",
+        image: "/livrosaas.avif",
         video: "",
       },
       {
@@ -182,7 +182,7 @@ export const DATA = {
           //   icon: <Icons.github className="size-3" />,
           // },
         ],
-        image: "/pivascreen.png",
+        image: "/pivascreen.avif",
         video: "",
       },
       {
@@ -200,7 +200,7 @@ export const DATA = {
             icon: <Icons.globe className="size-3" />,
           },
         ],
-        image: "/advscreen.png",
+        image: "/advscreen.avif",
         video: "",
       },
     ],
@@ -212,7 +212,7 @@ export const DATA = {
         location: "São Paulo, Brazil",
         description:
           "Founder of CRZ, specialized in web development, social media, paid traffic, and design. Active in the technology market since 2021, focusing on website and software development.",
-        image: "/me.jpg",
+        image: "/me.avif",
       },
     ],
 
@@ -221,43 +221,43 @@ export const DATA = {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Made with ❤️ and faith.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
     ],
   },
@@ -296,8 +296,8 @@ export const DATA = {
 
     summary:
       "Criamos sites e softwares personalizados para ajudar empresas a crescerem. Combinamos tecnologia moderna e design funcional para entregar resultados impressionantes. Vamos fazer do digital o maior aliado da sua empresa?",
-    avatarUrl: "/crz-light.png",
-    avatarUrlDark: "/crz.png",
+    avatarUrl: "/crz-light.avif",
+    avatarUrlDark: "/crz.avif",
 
     work: [
       {
@@ -380,7 +380,7 @@ export const DATA = {
             icon: <Icons.globe className="size-3" />,
           },
         ],
-        image: "/livrosaas.png",
+        image: "/livrosaas.avif",
         video: "",
       },
       {
@@ -436,7 +436,7 @@ export const DATA = {
             icon: <Icons.github className="size-3" />,
           },
         ],
-        image: "/pivascreen.png",
+        image: "/pivascreen.avif",
         video: "",
       },
 
@@ -455,7 +455,7 @@ export const DATA = {
             icon: <Icons.globe className="size-3" />,
           },
         ],
-        image: "/advscreen.png",
+        image: "/advscreen.avif",
         video: "",
       },
     ],
@@ -467,7 +467,7 @@ export const DATA = {
         location: "São Paulo, Brasil",
         description:
           "Fundador da CRZ, especializado em desenvolvimento web, redes sociais, tráfego pago e design. Atua no mercado de tecnologia desde 2021, com foco em desenvolvimento de sites e softwares.",
-        image: "/me.jpg",
+        image: "/me.avif",
       },
     ],
 
@@ -476,43 +476,43 @@ export const DATA = {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
       {
         name: "CRZ",
         username: "@crz.web",
         body: `@ ${new Date().getFullYear()} - Feito com ❤️ e fé.`,
-        img: "https://crzweb.vercel.app/crz.png",
+        img: "https://crzweb.vercel.app/crz.avif",
       },
     ],
   },

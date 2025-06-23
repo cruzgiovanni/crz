@@ -14,9 +14,11 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
 import { useLanguage } from "../../languageContext"
+import { useState } from "react"
 
 export default function Navbar() {
   const { language, toggleLanguage } = useLanguage()
+  const [loading, setLoading] = useState(true)
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
@@ -82,6 +84,30 @@ export default function Navbar() {
                   "size-12"
                 )}
               >
+                {/* Loading spinner para a bandeira */}
+                {loading && (
+                  <span className="w-6 h-6 flex items-center justify-center animate-spin mr-2">
+                    <svg
+                      className="w-4 h-4 text-muted-foreground"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      />
+                    </svg>
+                  </span>
+                )}
                 <Image
                   src={
                     language === "en"
@@ -95,7 +121,10 @@ export default function Navbar() {
                   }
                   width={24}
                   height={24}
-                  className="w-6 h-6"
+                  className={cn("w-6 h-6", loading ? "hidden" : "")}
+                  priority
+                  onLoad={() => setLoading(false)}
+                  onError={() => setLoading(false)}
                 />
               </button>
             </TooltipTrigger>

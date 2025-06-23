@@ -14,8 +14,8 @@ import IconCloud from "@/components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
 import { useTheme } from "next-themes"
 import { useLanguage } from "../../languageContext"
-import { useEffect } from "react"
-import Lenis from "lenis"
+// import { useEffect } from "react"
+// import Lenis from "lenis"
 
 const BLUR_FADE_DELAY = 0.04
 
@@ -26,9 +26,14 @@ export default function Page() {
   const currentData = DATA[language]
 
   // useEffect(() => {
-  //   const lenis = new Lenis({
-  //     autoRaf: true,
-  //   })
+  //   const lenis = new Lenis()
+
+  //   function raf(time: any) {
+  //     lenis.raf(time)
+  //     requestAnimationFrame(raf)
+  //   }
+
+  //   requestAnimationFrame(raf)
   // }, [])
 
   return (
