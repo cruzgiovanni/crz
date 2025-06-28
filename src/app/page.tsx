@@ -14,6 +14,8 @@ import IconCloud from "@/components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
 import { useTheme } from "next-themes"
 import { useLanguage } from "../../languageContext"
+import CalendlyModal from "@/components/calendly-modal"
+import { BorderBeam } from "@/components/magicui/border-beam"
 // import { useEffect } from "react"
 // import Lenis from "lenis"
 
@@ -108,7 +110,7 @@ export default function Page() {
             />
           </div>
 
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1 justify-center">
             {DATA.skills.map((skill, id) => (
               <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
                 <Badge key={skill}>{skill}</Badge>
@@ -227,13 +229,46 @@ export default function Page() {
                 </Link>
                 {""}, {currentData.sections[5].text_3}
               </p>
+              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed font-medium">
+                {currentData.sections[5].text_4}
+              </p>
+            </div>
+          </BlurFade>
+
+          {/* Calendly Widget */}
+          <BlurFade delay={BLUR_FADE_DELAY * 17}>
+            <div className="flex justify-center mt-8">
+              <CalendlyModal
+                url="https://calendly.com/iamgiovannicruz?hide_gdpr_banner=1"
+                triggerText={
+                  language === "pt" ? "Agendar Conversa" : "Schedule a Chat"
+                }
+                triggerClassName="relative overflow-hidden bg-background text-foreground border-2 border-neutral-900 hover:border-zinc-700  hover:bg-accent hover:text-accent-foreground font-semibold px-8 py-3 rounded-md transition-all duration-300 transform hover:scale-105"
+              >
+                <BorderBeam
+                  size={60}
+                  initialOffset={0}
+                  duration={2}
+                  colorFrom="#fbbf24"
+                  colorTo="#f59e0b"
+                  borderWidth={2}
+                  className="from-yellow-400 via-yellow-500 to-orange-500 z-0"
+                  transition={{
+                    type: "spring",
+                    stiffness: 40,
+                    damping: 10,
+                  }}
+                />
+              </CalendlyModal>
             </div>
           </BlurFade>
         </div>
       </section>
 
       <section id="footer" style={{ marginTop: "-10px" }}>
-        <MarqueeDemo />
+        <BlurFade delay={BLUR_FADE_DELAY * 18}>
+          <MarqueeDemo />
+        </BlurFade>
       </section>
     </main>
   )

@@ -163,3 +163,45 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 } */
+
+body.calendly-blur #__next {
+  filter: blur(20px) brightness(0.5);
+  transition: filter 0.3s;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes border-animation {
+  0% {
+    border-image: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706, #fbbf24) 1;
+  }
+  25% {
+    border-image: linear-gradient(135deg, #f59e0b, #d97706, #fbbf24, #f59e0b) 1;
+  }
+  50% {
+    border-image: linear-gradient(225deg, #d97706, #fbbf24, #f59e0b, #d97706) 1;
+  }
+  75% {
+    border-image: linear-gradient(315deg, #fbbf24, #f59e0b, #d97706, #fbbf24) 1;
+  }
+  100% {
+    border-image: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706, #fbbf24) 1;
+  }
+}
+
+.animate-border {
+  animation: border-animation 3s linear infinite;
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706, #fbbf24) 1;
+}
+
+/* Estilos para garantir que o BorderBeam seja visível */
+.border-beam-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-beam-container > * {
+  position: relative;
+  z-index: 1;
+}

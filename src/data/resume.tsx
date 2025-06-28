@@ -28,10 +28,12 @@ export const DATA = {
         section: "Contact",
         tittle: "Let's talk?",
         text_1:
-          "If you have an idea or need an innovative digital solution, send us a message! Just reach out to us on",
+          "Whether you're a recruiter looking for talent or a client seeking innovative digital solutions, I'd love to hear from you! Reach out to me on",
         text_2: "or on",
         text_3:
-          "and we will respond quickly. Let's build something amazing together!",
+          "and I'll respond quickly. Let's discuss opportunities and build something amazing together!",
+        text_4:
+          "Or schedule a meeting directly below to discuss your project or opportunity:",
       },
     ],
 
@@ -287,10 +289,12 @@ export const DATA = {
         section: "Contato",
         tittle: "Vamos conversar?",
         text_1:
-          "Se você tem uma ideia ou precisa de uma solução digital inovadora, envie-nos uma mensagem! Entre em contato conosco pelo",
-        text_2: "ou pelo",
+          "Seja você um recrutador em busca de talentos ou um cliente procurando soluções digitais inovadoras, adoraria ouvir de você! Entre em contato comigo pelo",
+        text_2: "ou no",
         text_3:
-          "e responderemos rapidamente. Vamos construir algo incrível juntos!",
+          "e responderei rapidamente. Vamos discutir oportunidades e construir algo incrível juntos!",
+        text_4:
+          "Ou agende uma reunião diretamente abaixo para discutir seu projeto ou oportunidade:",
       },
     ],
 

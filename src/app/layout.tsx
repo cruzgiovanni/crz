@@ -68,6 +68,8 @@ export default function RootLayout({
               <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
             </LanguageProvider>
           </ThemeProvider>
+
+          
         </body>
       </ReactLenis>
     </html>
