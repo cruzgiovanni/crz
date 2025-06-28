@@ -93,7 +93,7 @@ export default function CalendlyModal({
       />
 
       {/* Modal */}
-      <div className="relative bg-white dark:bg-zinc-900 rounded-2xl dark:shadow shadow-2xl w-full max-w-lg h-[90vh] flex flex-col overflow-hidden z-10">
+      <div className="relative bg-white dark:bg-zinc-900 rounded-2xl dark:shadow shadow-2xl w-full max-w-lg h-[80dvh] flex flex-col overflow-hidden z-10">
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700">
           <div className="flex items-center space-x-3">
             <div className="bg-white shadow-md rounded-lg">
