@@ -1,26 +1,26 @@
-"use client";
+"use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ChevronRightIcon } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardHeader } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
+import { ChevronRightIcon } from "lucide-react"
+import Link from "next/link"
+import React from "react"
 
 interface ResumeCardProps {
-  logoUrl: string;
-  altText: string;
-  title: string;
-  subtitle?: string;
-  href?: string;
-  badges?: readonly string[];
-  period: string;
-  description?: string;
+  // logoUrl: string;
+  altText: string
+  title: string
+  subtitle?: string
+  href?: string
+  badges?: readonly string[]
+  period: string
+  description?: string
 }
 export const ResumeCard = ({
-  logoUrl,
+  // logoUrl,
   altText,
   title,
   subtitle,
@@ -29,14 +29,14 @@ export const ResumeCard = ({
   period,
   description,
 }: ResumeCardProps) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (description) {
-      e.preventDefault();
-      setIsExpanded(!isExpanded);
+      e.preventDefault()
+      setIsExpanded(!isExpanded)
     }
-  };
+  }
 
   return (
     <Link
@@ -48,7 +48,7 @@ export const ResumeCard = ({
         <div className="flex-none">
           <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
             <AvatarImage
-              src={logoUrl}
+              // src={logoUrl}
               alt={altText}
               className="object-contain"
             />
@@ -106,5 +106,5 @@ export const ResumeCard = ({
         </div>
       </Card>
     </Link>
-  );
-};
+  )
+}
