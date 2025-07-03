@@ -213,7 +213,7 @@ export const DATA = {
         dates: "",
         location: "São Paulo, Brazil",
         description:
-          "Founder of CRZ, specialized in web development, social media, paid traffic, and design. Active in the technology market since 2021, focusing on website and software development.",
+          "Founder of CRZ, graduated in Systems Analysis and Development from FIAP, specialized in web development, social media, paid traffic, and design. Active in the technology market since 2021, focusing on website and software development.",
         image: "/me.avif",
       },
     ],
@@ -470,7 +470,7 @@ export const DATA = {
         dates: "",
         location: "São Paulo, Brasil",
         description:
-          "Fundador da CRZ, especializado em desenvolvimento web, redes sociais, tráfego pago e design. Atua no mercado de tecnologia desde 2021, com foco em desenvolvimento de sites e softwares.",
+          "Fundador da CRZ, formado em Análise e Desenvolvimento de Sistemas pela FIAP, especializado em desenvolvimento web, redes sociais, tráfego pago e design. Atua no mercado de tecnologia desde 2021, com foco em desenvolvimento de sites e softwares.",
         image: "/me.avif",
       },
     ],

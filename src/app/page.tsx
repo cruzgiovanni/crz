@@ -16,6 +16,7 @@ import { useTheme } from "next-themes"
 import { useLanguage } from "../../languageContext"
 import CalendlyModal from "@/components/calendly-modal"
 import { BorderBeam } from "@/components/magicui/border-beam"
+import { ResumeCard } from "@/components/resume-card"
 // import { useEffect } from "react"
 // import Lenis from "lenis"
 
@@ -91,6 +92,36 @@ export default function Page() {
             {currentData.summary}
           </Markdown>
         </BlurFade>
+      </section>
+
+      <section id="work">
+        <div className="flex min-h-0 flex-col gap-y-3">
+          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+            <h2 className="text-xl font-bold">
+              {language === "pt"
+                ? "Alguns de nossos parceiros que confiam em nós"
+                : "Some of our partners that trust us"}
+            </h2>{" "}
+          </BlurFade>
+          {currentData.work.map((work, id) => (
+            <BlurFade
+              key={work.company}
+              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+            >
+              <ResumeCard
+                key={work.company}
+                logoUrl={work.logoUrl}
+                altText={work.company}
+                title={work.company}
+                subtitle={work.title}
+                href={work.href}
+                badges={work.badges}
+                period={`${work.start} - ${work.end ?? "Present"}`}
+                description={work.description}
+              />
+            </BlurFade>
+          ))}
+        </div>
       </section>
 
       {/* Skills Section */}
