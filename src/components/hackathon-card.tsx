@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Icons } from "@/components/icons"
 import Link from "next/link"
+import Image from "next/image"
 
 interface Props {
   title: string
@@ -43,7 +43,7 @@ export function HackathonCard({
         )}
         <h2 className="font-semibold leading-none flex items-center gap-1">
           {title}
-          <Icons.verified className="h-4 w-4 text-blue-500" />
+          <Image src="/verified.svg" alt="verified" width={18} height={18} />
         </h2>
         {location && (
           <p className="text-sm text-muted-foreground">{location}</p>
