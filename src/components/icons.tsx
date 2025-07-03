@@ -222,4 +222,20 @@ export const Icons = {
       />
     </svg>
   ),
+  verified: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <polygon
+        points="12,2 15,4 19,4.5 20,8 22,12 20,16 19,19.5 15,20 12,22 9,20 5,19.5 4,16 2,12 4,8 5,4.5 9,4"
+        fill="#42A5F5"
+      />
+      <polyline
+        points="8,13 11,16 16,10.5"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
 }

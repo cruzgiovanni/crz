@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { Icons } from "@/components/icons"
 import Link from "next/link"
 
 interface Props {
@@ -40,7 +41,10 @@ export function HackathonCard({
         {dates && (
           <time className="text-xs text-muted-foreground">{dates}</time>
         )}
-        <h2 className="font-semibold leading-none">{title}</h2>
+        <h2 className="font-semibold leading-none flex items-center gap-1">
+          {title}
+          <Icons.verified className="h-4 w-4 text-blue-500" />
+        </h2>
         {location && (
           <p className="text-sm text-muted-foreground">{location}</p>
         )}
