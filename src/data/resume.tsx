@@ -521,6 +521,11 @@ export const DATA = {
     ],
   },
 
+  calendly: {
+    pt: "https://calendly.com/crzweb/15min?hide_gdpr_banner=1",
+    en: "https://calendly.com/iamgiovannicruz/15min?hide_gdpr_banner=1",
+  },
+
   name: "CRZ",
   initials: "CRZ",
   url: "https://crzweb.vercel.app/",

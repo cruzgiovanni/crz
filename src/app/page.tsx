@@ -270,7 +270,7 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 17}>
             <div className="flex justify-center mt-8">
               <CalendlyModal
-                url="https://calendly.com/iamgiovannicruz?hide_gdpr_banner=1"
+                url={language === "pt" ? DATA.calendly.pt : DATA.calendly.en}
                 triggerText={
                   language === "pt" ? "Agendar Conversa" : "Schedule a Chat"
                 }
