@@ -27,6 +27,14 @@ export const metadata: Metadata = {
     siteName: `${DATA.name}`,
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "https://opengraph.b-cdn.net/production/images/4f2d23d2-08e8-42d1-9f70-a915dd9ff5ff.png?token=QvvhyqeSdO-cIyIvZBZSNIU7OFy1m9X7_NQr8mz5BdM&height=1080&width=1080&expires=33287917845",
+        width: 1080,
+        height: 1080,
+        alt: `${DATA.name} - Desenvolvimento Web e Software`,
+      },
+    ],
   },
   robots: {
     index: true,
@@ -42,6 +50,9 @@ export const metadata: Metadata = {
   twitter: {
     title: `${DATA.name}`,
     card: "summary_large_image",
+    images: [
+      "https://opengraph.b-cdn.net/production/images/4f2d23d2-08e8-42d1-9f70-a915dd9ff5ff.png?token=QvvhyqeSdO-cIyIvZBZSNIU7OFy1m9X7_NQr8mz5BdM&height=1080&width=1080&expires=33287917845",
+    ],
   },
   verification: {
     google: "",
@@ -68,8 +79,6 @@ export default function RootLayout({
               <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
             </LanguageProvider>
           </ThemeProvider>
-
-          
         </body>
       </ReactLenis>
     </html>
