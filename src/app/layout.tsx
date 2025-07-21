@@ -7,6 +7,7 @@ import { Inter as FontSans } from "next/font/google"
 import "./globals.css"
 import { LanguageProvider } from "../../languageContext"
 import { ReactLenis } from "@/lib/lenis"
+import { Analytics } from "@vercel/analytics/next"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -106,7 +107,10 @@ export default function RootLayout({
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
             <LanguageProvider>
-              <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+              <TooltipProvider delayDuration={0}>
+                <Analytics />
+                {children}
+              </TooltipProvider>
             </LanguageProvider>
           </ThemeProvider>
         </body>
