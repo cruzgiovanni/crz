@@ -248,7 +248,7 @@ export default function Page() {
                   rel="noopener noreferrer"
                 >
                   Instagram
-                </Link>{" "}
+                </Link>
                 {currentData.sections[5].text_2}{" "}
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
@@ -257,8 +257,13 @@ export default function Page() {
                   rel="noopener noreferrer"
                 >
                   LinkedIn
-                </Link>
-                {""}, {currentData.sections[5].text_3}
+                </Link>{" "}
+                {language === "pt"
+                  ? `ou por email (${DATA.contact.email}) e ${currentData.sections[5].text_3}`
+                  : `${currentData.sections[5].text_3.replace(
+                      "or by email",
+                      `or by email (${DATA.contact.email})`
+                    )}`}
               </p>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed font-medium">
                 {currentData.sections[5].text_4}
@@ -299,6 +304,14 @@ export default function Page() {
       <section id="footer" style={{ marginTop: "-10px" }}>
         <BlurFade delay={BLUR_FADE_DELAY * 18}>
           <MarqueeDemo />
+        </BlurFade>
+
+        <BlurFade delay={BLUR_FADE_DELAY * 19}>
+          <div className="flex flex-col items-center justify-center space-y-2 py-8">
+            <p className="text-sm text-muted-foreground italic">
+              Ad Majorem Dei Gloriam
+            </p>
+          </div>
         </BlurFade>
       </section>
     </main>

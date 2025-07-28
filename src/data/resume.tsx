@@ -29,9 +29,9 @@ export const DATA = {
         tittle: "Let's talk?",
         text_1:
           "Whether you're a recruiter looking for talent or a client seeking innovative digital solutions, I'd love to hear from you! Reach out to me on",
-        text_2: "or on",
+        text_2: ", on",
         text_3:
-          "and I'll respond quickly. Let's discuss opportunities and build something amazing together!",
+          "or by email and I'll respond quickly. Let's discuss opportunities and build something amazing together!",
         text_4:
           "Or schedule a meeting directly below to discuss your project or opportunity:",
       },
@@ -94,7 +94,51 @@ export const DATA = {
 
     projects: [
       {
-        title: "Livro SaaS",
+        title: "Solution Card",
+        href: "https://solucaocard.com.br/",
+        dates: "07/2025",
+        active: true,
+        description:
+          "Development of a beautiful page for a revolutionary digital health platform that connects patients to quality health services in Hortolândia, Brazil. Combining modern technology with intuitive design, it offers health cards and personalized plans that transform the medical experience.",
+        technologies: [
+          "Next.js",
+          "Tailwind CSS",
+          "React",
+          "Typescript",
+          "Framer Motion",
+          "SEO",
+          "Vercel",
+        ],
+        links: [
+          {
+            type: "Website",
+            href: "https://solucaocard.com.br/",
+            icon: <Icons.globe className="size-3" />,
+          },
+        ],
+        image: "/sc.avif",
+        video: "",
+      },
+      // {
+      //   title: "Facchinni Lawers",
+      //   href: "https://facchiniadvogados.com.br/",
+      //   dates: "02/2024",
+      //   active: false,
+      //   description:
+      //     "Development of a modern and responsive landing page for the law firm Facchini Advogados.",
+      //   technologies: ["HTML", "CSS", "JavaScript", "SEO"],
+      //   links: [
+      //     {
+      //       type: "Website",
+      //       href: "https://facchiniadvogados.com.br/",
+      //       icon: <Icons.globe className="size-3" />,
+      //     },
+      //   ],
+      //   image: "/advscreen.avif",
+      //   video: "",
+      // },
+      {
+        title: "Book SaaS",
         href: "https://github.com/euCRUZ/livroSaas",
         dates: "02/2025",
         active: true,
@@ -127,7 +171,7 @@ export const DATA = {
         video: "",
       },
       {
-        title: "FSW Delivery",
+        title: "Delivery FSW",
         href: "https://github.com/euCRUZ/fsw-delivery",
         dates: "02/2025",
         active: true,
@@ -185,24 +229,6 @@ export const DATA = {
           // },
         ],
         image: "/pivascreen.avif",
-        video: "",
-      },
-      {
-        title: "Facchinni Lawers",
-        href: "https://facchiniadvogados.com.br/",
-        dates: "02/2024",
-        active: true,
-        description:
-          "Development of a modern and responsive landing page for the law firm Facchini Advogados.",
-        technologies: ["HTML", "CSS", "JavaScript", "SEO"],
-        links: [
-          {
-            type: "Website",
-            href: "https://facchiniadvogados.com.br/",
-            icon: <Icons.globe className="size-3" />,
-          },
-        ],
-        image: "/advscreen.avif",
         video: "",
       },
     ],
@@ -290,9 +316,9 @@ export const DATA = {
         tittle: "Vamos conversar?",
         text_1:
           "Seja você um recrutador em busca de talentos ou um cliente procurando soluções digitais inovadoras, adoraria ouvir de você! Entre em contato comigo pelo",
-        text_2: "ou no",
+        text_2: ",",
         text_3:
-          "e responderei rapidamente. Vamos discutir oportunidades e construir algo incrível juntos!",
+          "responderei rapidamente. Vamos discutir oportunidades e construir algo incrível juntos!",
         text_4:
           "Ou agende uma reunião diretamente abaixo para discutir seu projeto ou oportunidade:",
       },
@@ -355,6 +381,33 @@ export const DATA = {
 
     projects: [
       {
+        title: "Solução Card",
+        href: "https://solucaocard.com.br/",
+        dates: "07/2025",
+        active: true,
+        description:
+          "Desenvolvimento de uma linda página para plataforma revolucionária de saúde digital que conecta pacientes a serviços de saúde de qualidade em Hortolândia. Combinando tecnologia moderna com design intuitivo, oferece cartões de saúde e planos personalizados que transformam a experiência médica.",
+        technologies: [
+          "Next.js",
+          "Tailwind CSS",
+          "React",
+          "Typescript",
+          "Framer Motion",
+          "SEO",
+          "Vercel",
+        ],
+        links: [
+          {
+            type: "Website",
+            href: "https://solucaocard.com.br/",
+            icon: <Icons.globe className="size-3" />,
+          },
+        ],
+        image: "/sc.avif",
+        video: "",
+      },
+
+      {
         title: "Livro SaaS",
         href: "https://github.com/euCRUZ/livroSaas",
         dates: "02/2025",
@@ -387,6 +440,7 @@ export const DATA = {
         image: "/livrosaas.avif",
         video: "",
       },
+
       {
         title: "FSW Delivery",
         href: "https://github.com/euCRUZ/fsw-delivery",
@@ -419,6 +473,7 @@ export const DATA = {
         image: "/fsw.svg",
         video: "",
       },
+
       {
         title: "Piva Seguros",
         href: "https://github.com/emiliobiasi/pivaseguros",
@@ -441,25 +496,6 @@ export const DATA = {
           },
         ],
         image: "/pivascreen.avif",
-        video: "",
-      },
-
-      {
-        title: "Facchini Advogados",
-        href: "https://facchiniadvogados.com.br/",
-        dates: "02/2024",
-        active: true,
-        description:
-          "Desenvolvimento de uma landing page moderna e responsiva para o escritório de advocacia Facchini Advogados.",
-        technologies: ["HTML", "CSS", "JavaScript", "SEO"],
-        links: [
-          {
-            type: "Website",
-            href: "https://facchiniadvogados.com.br/",
-            icon: <Icons.globe className="size-3" />,
-          },
-        ],
-        image: "/advscreen.avif",
         video: "",
       },
     ],
@@ -585,7 +621,7 @@ export const DATA = {
   ],
 
   contact: {
-    email: "",
+    email: "crzwebdigital@gmail.com",
     social: {
       Instagram: {
         name: "Instagram",
@@ -619,7 +655,7 @@ export const DATA = {
       },
       email: {
         name: "Email",
-        url: "",
+        url: "mailto:crzwebdigital@gmail.com",
         icon: Icons.email,
         navbar: false,
       },
