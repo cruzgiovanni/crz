@@ -139,7 +139,7 @@ export const DATA = {
       // },
       {
         title: "Book SaaS",
-        href: "https://github.com/euCRUZ/livroSaas",
+        href: "https://github.com/cruzgiovanni/livroSaas",
         dates: "02/2025",
         active: true,
         description:
@@ -158,7 +158,7 @@ export const DATA = {
         links: [
           {
             type: "GitHub",
-            href: "https://github.com/euCRUZ/livroSaas",
+            href: "https://github.com/cruzgiovanni/livroSaas",
             icon: <Icons.github className="size-3" />,
           },
           {
@@ -172,7 +172,7 @@ export const DATA = {
       },
       {
         title: "Delivery FSW",
-        href: "https://github.com/euCRUZ/fsw-delivery",
+        href: "https://github.com/cruzgiovanni/fsw-delivery",
         dates: "02/2025",
         active: true,
         description:
@@ -190,7 +190,7 @@ export const DATA = {
         links: [
           {
             type: "GitHub",
-            href: "https://github.com/euCRUZ/fsw-delivery",
+            href: "https://github.com/cruzgiovanni/fsw-delivery",
             icon: <Icons.github className="size-3" />,
           },
           {
@@ -409,7 +409,7 @@ export const DATA = {
 
       {
         title: "Livro SaaS",
-        href: "https://github.com/euCRUZ/livroSaas",
+        href: "https://github.com/cruzgiovanni/livroSaas",
         dates: "02/2025",
         active: true,
         description:
@@ -428,7 +428,7 @@ export const DATA = {
         links: [
           {
             type: "GitHub",
-            href: "https://github.com/euCRUZ/livroSaas",
+            href: "https://github.com/cruzgiovanni/livroSaas",
             icon: <Icons.github className="size-3" />,
           },
           {
@@ -443,7 +443,7 @@ export const DATA = {
 
       {
         title: "FSW Delivery",
-        href: "https://github.com/euCRUZ/fsw-delivery",
+        href: "https://github.com/cruzgiovanni/fsw-delivery",
         dates: "02/2025",
         active: true,
         description:
@@ -461,7 +461,7 @@ export const DATA = {
         links: [
           {
             type: "GitHub",
-            href: "https://github.com/euCRUZ/fsw-delivery",
+            href: "https://github.com/cruzgiovanni/fsw-delivery",
             icon: <Icons.github className="size-3" />,
           },
           {
@@ -649,7 +649,7 @@ export const DATA = {
       },
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/euCRUZ",
+        url: "https://github.com/cruzgiovanni",
         icon: Icons.github,
         navbar: true,
       },
