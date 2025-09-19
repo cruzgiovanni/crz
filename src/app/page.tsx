@@ -17,6 +17,7 @@ import { useLanguage } from "../../languageContext"
 import CalendlyModal from "@/components/calendly-modal"
 import { BorderBeam } from "@/components/magicui/border-beam"
 import { ResumeCard } from "@/components/resume-card"
+import { Icons } from "@/components/icons"
 // import { useEffect } from "react"
 // import Lenis from "lenis"
 
@@ -185,6 +186,55 @@ export default function Page() {
                   image={project.image}
                   video={project.video}
                   links={project.links}
+                  hideImage
+                  icon={(() => {
+                    // Prefer explicit domain icon if provided
+                    const type = (project as any).iconType as
+                      | "health"
+                      | "book"
+                      | "delivery"
+                      | "shield"
+                      | "store"
+                      | undefined
+                    if (type && Icons[type])
+                      return Icons[type]({ className: "size-10" })
+
+                    // Fallback: infer by title/description keywords
+                    const title = project.title.toLowerCase()
+                    const desc = (project.description || "").toLowerCase()
+                    if (title.includes("card") || desc.includes("health"))
+                      return <Icons.health className="size-10" />
+                    if (title.includes("book") || desc.includes("book"))
+                      return <Icons.book className="size-10" />
+                    if (title.includes("delivery") || desc.includes("delivery"))
+                      return <Icons.delivery className="size-10" />
+                    if (
+                      title.includes("seguro") ||
+                      title.includes("insurance") ||
+                      desc.includes("insurance")
+                    )
+                      return <Icons.shield className="size-10" />
+
+                    // Last resort: tech-based
+                    const tech = (project.technologies || []).map((t) =>
+                      t.toLowerCase()
+                    )
+                    if (tech.some((t) => t.includes("next")))
+                      return <Icons.nextjs className="size-10" />
+                    if (tech.some((t) => t.includes("react")))
+                      return <Icons.react className="size-10" />
+                    if (
+                      tech.some(
+                        (t) => t.includes("typescript") || t.includes("ts")
+                      )
+                    )
+                      return <Icons.typescript className="size-10" />
+                    if (tech.some((t) => t.includes("tailwind")))
+                      return <Icons.tailwindcss className="size-10" />
+                    if (tech.some((t) => t.includes("framer")))
+                      return <Icons.framermotion className="size-10" />
+                    return <Icons.globe className="size-10" />
+                  })()}
                 />
               </BlurFade>
             ))}

@@ -26,6 +26,8 @@ interface Props {
     href: string
   }[]
   className?: string
+  hideImage?: boolean
+  icon?: React.ReactNode
 }
 
 export function ProjectCard({
@@ -39,6 +41,8 @@ export function ProjectCard({
   video,
   links,
   className,
+  hideImage,
+  icon,
 }: Props) {
   return (
     <Card
@@ -62,7 +66,7 @@ export function ProjectCard({
             className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
           />
         )}
-        {image && (
+        {image && !hideImage && (
           <Image
             src={image}
             alt={title}
@@ -70,6 +74,11 @@ export function ProjectCard({
             height={300}
             className="h-40 w-full overflow-hidden object-cover object-top"
           />
+        )}
+        {!video && (hideImage || !image) && icon && (
+          <div className="h-40 w-full flex items-center justify-center bg-muted/20 text-foreground/70">
+            {icon}
+          </div>
         )}
       </Link>
       <CardHeader className="px-2">

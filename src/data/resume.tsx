@@ -98,6 +98,7 @@ export const DATA = {
         href: "https://solucaocard.com.br/",
         dates: "07/2025",
         active: true,
+        iconType: "health",
         description:
           "Development of a beautiful page for a revolutionary digital health platform that connects patients to quality health services in Hortolândia, Brazil. Combining modern technology with intuitive design, it offers health cards and personalized plans that transform the medical experience.",
         technologies: [
@@ -142,6 +143,7 @@ export const DATA = {
         href: "https://github.com/cruzgiovanni/livroSaas",
         dates: "02/2025",
         active: true,
+        iconType: "book",
         description:
           "SaaS system with authentication (NextAuth), Prisma DB, and Stripe subscriptions. Only logged-in users with active plans can access protected routes.",
         technologies: [
@@ -175,6 +177,7 @@ export const DATA = {
         href: "https://github.com/cruzgiovanni/fsw-delivery",
         dates: "02/2025",
         active: true,
+        iconType: "delivery",
         description:
           "Delivery system where users select products, add to cart, and track order status in real time.",
         technologies: [
@@ -207,6 +210,7 @@ export const DATA = {
         href: "https://github.com/emiliobiasi/pivaseguros",
         dates: "11/2024",
         active: true,
+        iconType: "shield",
         description:
           "Development of a complete platform where clients register data for desired insurance, and through private management, the company can view and manage their clients' insurance, analyzing graphs and generating reports.",
         technologies: [
@@ -385,6 +389,7 @@ export const DATA = {
         href: "https://solucaocard.com.br/",
         dates: "07/2025",
         active: true,
+        iconType: "health",
         description:
           "Desenvolvimento de uma linda página para plataforma revolucionária de saúde digital que conecta pacientes a serviços de saúde de qualidade em Hortolândia. Combinando tecnologia moderna com design intuitivo, oferece cartões de saúde e planos personalizados que transformam a experiência médica.",
         technologies: [
@@ -412,6 +417,7 @@ export const DATA = {
         href: "https://github.com/cruzgiovanni/livroSaas",
         dates: "02/2025",
         active: true,
+        iconType: "book",
         description:
           "Sistema SaaS com autenticação via NextAuth, banco de dados com Prisma e pagamentos recorrentes usando Stripe. Apenas usuários logados e assinantes ativos têm acesso às rotas protegidas (Assinaturas fictícias para testes).",
         technologies: [
@@ -446,6 +452,7 @@ export const DATA = {
         href: "https://github.com/cruzgiovanni/fsw-delivery",
         dates: "02/2025",
         active: true,
+        iconType: "delivery",
         description:
           "Sistema de delivery onde o usuário escolhe produtos, adiciona à sacola e acompanha o status do pedido em tempo real.",
         technologies: [
@@ -479,6 +486,7 @@ export const DATA = {
         href: "https://github.com/emiliobiasi/pivaseguros",
         dates: "11/2024",
         active: true,
+        iconType: "shield",
         description:
           "Desenvolvimento de uma plataforma completa onde os clientes cadastram dados para o seguro desejado e, por meio de um gerenciamento privado, a empresa pode visualizar e administrar os seguros de seus clientes, analisando gráficos e gerando relatórios.",
         technologies: [

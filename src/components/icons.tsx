@@ -1,4 +1,14 @@
-import { GlobeIcon, MailIcon, InstagramIcon, Phone } from "lucide-react"
+import {
+  GlobeIcon,
+  MailIcon,
+  InstagramIcon,
+  Phone,
+  BookOpen,
+  Truck,
+  Shield,
+  ShoppingBag,
+  HeartPulse,
+} from "lucide-react"
 
 export type IconProps = React.HTMLAttributes<SVGElement>
 
@@ -7,6 +17,12 @@ export const Icons = {
   email: (props: IconProps) => <MailIcon {...props} />,
   phone: (props: IconProps) => <Phone {...props} />,
   instagram: (props: IconProps) => <InstagramIcon {...props} />,
+  // Domain-specific icons for projects
+  health: (props: IconProps) => <HeartPulse className="size-10" {...props} />,
+  book: (props: IconProps) => <BookOpen className="size-10" {...props} />,
+  delivery: (props: IconProps) => <Truck className="size-10" {...props} />,
+  shield: (props: IconProps) => <Shield className="size-10" {...props} />,
+  store: (props: IconProps) => <ShoppingBag className="size-10" {...props} />,
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>
