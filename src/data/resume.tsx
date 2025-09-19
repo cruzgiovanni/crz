@@ -27,13 +27,10 @@ export const DATA = {
       {
         section: "Contact",
         tittle: "Let's talk?",
-        text_1:
-          "Whether you're a recruiter looking for talent or a client seeking innovative digital solutions, I'd love to hear from you! Reach out to me on",
-        text_2: ", on",
-        text_3:
-          "or by email and I'll respond quickly. Let's discuss opportunities and build something amazing together!",
-        text_4:
-          "Or schedule a meeting directly below to discuss your project or opportunity:",
+        text_1: "Contact me on",
+        text_2: "or on",
+        text_3: "or by email and I’ll reply shortly.",
+        text_4: "Prefer a call? Schedule a meeting below:",
       },
     ],
 
@@ -243,7 +240,7 @@ export const DATA = {
         dates: "",
         location: "São Paulo, Brazil",
         description:
-          "Founder of CRZ, graduated in Systems Analysis and Development from FIAP, specialized in web development, social media, paid traffic, and design. Active in the technology market since 2021, focusing on website and software development.",
+          "Founder of CRZ, graduated in Systems Analysis and Development from FIAP, specialized in web development. Active in the technology market since 2021, focusing on website and software development.",
         image: "/me.avif",
       },
     ],
@@ -318,13 +315,10 @@ export const DATA = {
       {
         section: "Contato",
         tittle: "Vamos conversar?",
-        text_1:
-          "Seja você um recrutador em busca de talentos ou um cliente procurando soluções digitais inovadoras, adoraria ouvir de você! Entre em contato comigo pelo",
-        text_2: ",",
-        text_3:
-          "responderei rapidamente. Vamos discutir oportunidades e construir algo incrível juntos!",
-        text_4:
-          "Ou agende uma reunião diretamente abaixo para discutir seu projeto ou oportunidade:",
+        text_1: "Fale comigo no",
+        text_2: "ou no",
+        text_3: "responderei em breve.",
+        text_4: "Prefere uma conversa? Agende uma reunião abaixo:",
       },
     ],
 

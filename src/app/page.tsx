@@ -13,11 +13,19 @@ import Markdown from "react-markdown"
 import IconCloud from "@/components/ui/icon-cloud"
 import { MarqueeDemo } from "@/components/marquee-demo"
 import { useTheme } from "next-themes"
+import { useState } from "react"
 import { useLanguage } from "../../languageContext"
 import CalendlyModal from "@/components/calendly-modal"
 import { BorderBeam } from "@/components/magicui/border-beam"
 import { ResumeCard } from "@/components/resume-card"
 import { Icons } from "@/components/icons"
+import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 // import { useEffect } from "react"
 // import Lenis from "lenis"
 
@@ -25,6 +33,7 @@ const BLUR_FADE_DELAY = 0.04
 
 export default function Page() {
   const { theme } = useTheme()
+  const [copiedEmail, setCopiedEmail] = useState(false)
 
   const { language } = useLanguage()
   const currentData = DATA[language]
@@ -95,7 +104,8 @@ export default function Page() {
         </BlurFade>
       </section>
 
-      <section id="work">
+      {/* Partners Feedbacks */}
+      {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">
@@ -123,7 +133,7 @@ export default function Page() {
             </BlurFade>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Skills Section */}
       <section id="skills">
@@ -289,34 +299,99 @@ export default function Page() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl pb-2">
                 {currentData.sections[5].tittle}
               </h2>
-              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {currentData.sections[5].text_1}{" "}
+              <p className="mx-auto max-w-[600px] text-muted-foreground text-xs flex items-center justify-center gap-2">
+                {language === "pt"
+                  ? "Também disponível via "
+                  : "Also available via "}
                 <Link
                   href={DATA.contact.social.InstagramDM.url}
-                  className="text-blue-500 hover:underline"
+                  className="underline hover:text-foreground"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Instagram
                 </Link>
-                {currentData.sections[5].text_2}{" "}
+                {" · "}
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
-                  className="text-blue-500 hover:underline"
+                  className="underline hover:text-foreground"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   LinkedIn
-                </Link>{" "}
-                {language === "pt"
-                  ? `ou por email (${DATA.contact.email}) e ${currentData.sections[5].text_3}`
-                  : `${currentData.sections[5].text_3.replace(
-                      "or by email",
-                      `or by email (${DATA.contact.email})`
-                    )}`}
-              </p>
-              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed font-medium">
-                {currentData.sections[5].text_4}
+                </Link>
+                {" · "}
+                <a
+                  href={`mailto:${DATA.contact.email}`}
+                  className="underline hover:text-foreground"
+                >
+                  Email
+                </a>
+                <span className="text-muted-foreground">·</span>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        type="button"
+                        size="icon"
+                        variant="ghost"
+                        className="h-7 w-7"
+                        aria-label={
+                          language === "pt" ? "Copiar email" : "Copy email"
+                        }
+                        onClick={async () => {
+                          try {
+                            await navigator.clipboard.writeText(
+                              DATA.contact.email
+                            )
+                            setCopiedEmail(true)
+                            setTimeout(() => setCopiedEmail(false), 1500)
+                          } catch (e) {
+                            // no-op fallback
+                          }
+                        }}
+                      >
+                        {copiedEmail ? (
+                          // Check icon via unicode to avoid adding new icon
+                          <span className="text-green-500" aria-hidden>
+                            ✓
+                          </span>
+                        ) : (
+                          // Clipboard icon look using simple SVG
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4"
+                          >
+                            <rect
+                              x="9"
+                              y="9"
+                              width="13"
+                              height="13"
+                              rx="2"
+                              ry="2"
+                            ></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                          </svg>
+                        )}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {copiedEmail
+                        ? language === "pt"
+                          ? "Copiado"
+                          : "Copied"
+                        : language === "pt"
+                        ? "Copiar email"
+                        : "Copy email"}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </p>
             </div>
           </BlurFade>
@@ -327,9 +402,11 @@ export default function Page() {
               <CalendlyModal
                 url={language === "pt" ? DATA.calendly.pt : DATA.calendly.en}
                 triggerText={
-                  language === "pt" ? "Agendar Conversa" : "Schedule a Chat"
+                  language === "pt"
+                    ? "Marcar uma conversa"
+                    : "Schedule a meeting"
                 }
-                triggerClassName="relative overflow-hidden bg-background text-foreground border-2 border-neutral-900 hover:border-zinc-700  hover:bg-accent hover:text-accent-foreground font-semibold px-8 py-3 rounded-md transition-all duration-300 transform hover:scale-105"
+                triggerClassName="relative overflow-hidden bg-background text-foreground border border-neutral-800 hover:border-zinc-700 hover:bg-accent hover:text-accent-foreground font-medium px-5 py-2 rounded-md text-sm transition-all duration-300"
               >
                 <BorderBeam
                   size={60}
