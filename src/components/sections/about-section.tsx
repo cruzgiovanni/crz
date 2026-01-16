@@ -1,6 +1,7 @@
 'use client'
 
 import { useReveal } from '@/hooks/use-reveal'
+import { aboutSection } from '@/data/info'
 
 export function AboutSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -21,14 +22,16 @@ export function AboutSection() {
             >
               <div className="mb-4 flex items-center gap-3 md:mb-6">
                 <div className="h-8 w-px bg-linear-to-b from-primary to-transparent md:h-12" />
-                <p className="font-mono text-[10px] uppercase tracking-widest text-primary md:text-xs">About me</p>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-primary md:text-xs">
+                  {aboutSection.label}
+                </p>
               </div>
               <h2 className="mb-4 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-6 md:text-5xl lg:text-6xl">
-                Crafting
+                {aboutSection.title.line1}
                 <br />
-                <span className="text-primary">digital</span>
+                <span className="text-primary">{aboutSection.title.line2}</span>
                 <br />
-                experiences
+                {aboutSection.title.line3}
               </h2>
             </div>
 
@@ -40,7 +43,7 @@ export function AboutSection() {
             >
               <div className="flex items-center gap-3">
                 <div className="h-px w-8 bg-accent/50 md:w-12" />
-                <p className="font-mono text-[10px] text-foreground/50 md:text-xs">São Paulo, Brazil</p>
+                <p className="font-mono text-[10px] text-foreground/50 md:text-xs">{aboutSection.location}</p>
               </div>
             </div>
           </div>
@@ -58,13 +61,11 @@ export function AboutSection() {
                   "
                 </span>
                 <p className="pl-3 text-sm leading-relaxed text-foreground/80 md:pl-4 md:text-lg">
-                  Software Engineer with a degree in Systems Analysis from FIAP, specialized in web development and
-                  backend systems.
+                  {aboutSection.paragraphs[0]}
                 </p>
               </div>
               <p className="pl-3 text-sm leading-relaxed text-foreground/60 md:pl-4 md:text-lg">
-                Working in the tech industry since 2021, focused on building custom software solutions and scalable
-                applications.
+                {aboutSection.paragraphs[1]}
               </p>
             </div>
 
@@ -74,10 +75,7 @@ export function AboutSection() {
               }`}
               style={{ transitionDelay: '450ms' }}
             >
-              {[
-                { value: '4+', label: 'Years in tech', accent: true },
-                { value: '10+', label: 'Projects delivered', accent: false },
-              ].map((stat, i) => (
+              {aboutSection.stats.map((stat, i) => (
                 <div key={i} className="group">
                   <div
                     className={`mb-1.5 font-sans text-4xl font-light transition-transform duration-300 group-hover:translate-x-1 md:mb-2 md:text-6xl ${

@@ -4,6 +4,7 @@ import { Mail, MapPin } from 'lucide-react'
 import { useReveal } from '@/hooks/use-reveal'
 import { useState, type FormEvent } from 'react'
 import { MagneticButton } from '@/components/magnetic-button'
+import { contactSection } from '@/data/info'
 
 export function ContactSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -43,14 +44,14 @@ export function ContactSection() {
               }`}
             >
               <h2 className="mb-2 font-sans text-3xl font-light leading-[1.05] tracking-tight text-foreground md:mb-3 md:text-7xl lg:text-8xl">
-                Let's talk
+                {contactSection.title}
               </h2>
-              <p className="font-mono text-[10px] text-foreground/50 md:text-sm">/ Get in touch</p>
+              <p className="font-mono text-[10px] text-foreground/50 md:text-sm">{contactSection.subtitle}</p>
             </div>
 
             <div className="space-y-3 md:space-y-6">
               <a
-                href="mailto:giovanni@crz.dev"
+                href={`mailto:${contactSection.email.value}`}
                 className={`group block transition-all duration-700 ${
                   isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'
                 }`}
@@ -58,10 +59,12 @@ export function ContactSection() {
               >
                 <div className="mb-0.5 flex items-center gap-2 md:mb-1">
                   <Mail className="h-3 w-3 text-foreground/50" />
-                  <span className="font-mono text-[10px] text-foreground/50 md:text-xs">Email</span>
+                  <span className="font-mono text-[10px] text-foreground/50 md:text-xs">
+                    {contactSection.email.label}
+                  </span>
                 </div>
                 <p className="text-sm text-foreground transition-colors group-hover:text-foreground/70 md:text-xl">
-                  giovanni@crz.dev
+                  {contactSection.email.value}
                 </p>
               </a>
 
@@ -73,9 +76,11 @@ export function ContactSection() {
               >
                 <div className="mb-0.5 flex items-center gap-2 md:mb-1">
                   <MapPin className="h-3 w-3 text-foreground/50" />
-                  <span className="font-mono text-[10px] text-foreground/50 md:text-xs">Location</span>
+                  <span className="font-mono text-[10px] text-foreground/50 md:text-xs">
+                    {contactSection.location.label}
+                  </span>
                 </div>
-                <p className="text-sm text-foreground md:text-xl">São Paulo, Brazil</p>
+                <p className="text-sm text-foreground md:text-xl">{contactSection.location.value}</p>
               </div>
 
               <div
@@ -84,7 +89,7 @@ export function ContactSection() {
                 }`}
                 style={{ transitionDelay: '500ms' }}
               >
-                {['LinkedIn', 'GitHub'].map((social) => (
+                {contactSection.socials.map((social) => (
                   <a
                     key={social}
                     href="#"
@@ -101,7 +106,7 @@ export function ContactSection() {
                 }`}
                 style={{ transitionDelay: '600ms' }}
               >
-                <p className="font-mono text-[10px] text-foreground/30 md:text-xs">© 2026</p>
+                <p className="font-mono text-[10px] text-foreground/30 md:text-xs">{contactSection.copyright}</p>
               </div>
             </div>
           </div>
@@ -115,7 +120,9 @@ export function ContactSection() {
                 }`}
                 style={{ transitionDelay: '200ms' }}
               >
-                <label className="mb-1 block font-mono text-[10px] text-foreground/50 md:mb-2 md:text-xs">Name</label>
+                <label className="mb-1 block font-mono text-[10px] text-foreground/50 md:mb-2 md:text-xs">
+                  {contactSection.form.name.label}
+                </label>
                 <input
                   type="text"
                   value={formData.name}
@@ -123,7 +130,7 @@ export function ContactSection() {
                   required
                   className="w-full border-b border-foreground/20 bg-transparent py-1.5 text-sm caret-primary placeholder:text-foreground/30 focus:border-primary/50 focus:outline-none md:py-2 md:text-base"
                   style={{ color: '#cdd6f4' }}
-                  placeholder="Your name"
+                  placeholder={contactSection.form.name.placeholder}
                 />
               </div>
 
@@ -133,7 +140,9 @@ export function ContactSection() {
                 }`}
                 style={{ transitionDelay: '350ms' }}
               >
-                <label className="mb-1 block font-mono text-[10px] text-foreground/50 md:mb-2 md:text-xs">Email</label>
+                <label className="mb-1 block font-mono text-[10px] text-foreground/50 md:mb-2 md:text-xs">
+                  {contactSection.form.email.label}
+                </label>
                 <input
                   type="email"
                   value={formData.email}
@@ -141,7 +150,7 @@ export function ContactSection() {
                   required
                   className="w-full border-b border-foreground/20 bg-transparent py-1.5 text-sm caret-primary placeholder:text-foreground/30 focus:border-primary/50 focus:outline-none md:py-2 md:text-base"
                   style={{ color: '#cdd6f4' }}
-                  placeholder="your@email.com"
+                  placeholder={contactSection.form.email.placeholder}
                 />
               </div>
 
@@ -152,7 +161,7 @@ export function ContactSection() {
                 style={{ transitionDelay: '500ms' }}
               >
                 <label className="mb-1 block font-mono text-[10px] text-foreground/50 md:mb-2 md:text-xs">
-                  Message
+                  {contactSection.form.message.label}
                 </label>
                 <textarea
                   rows={2}
@@ -161,7 +170,7 @@ export function ContactSection() {
                   required
                   className="w-full resize-none border-b border-foreground/20 bg-transparent py-1.5 text-sm caret-primary placeholder:text-foreground/30 focus:border-primary/50 focus:outline-none md:py-2 md:text-base"
                   style={{ color: '#cdd6f4' }}
-                  placeholder="Tell me about your project..."
+                  placeholder={contactSection.form.message.placeholder}
                 />
               </div>
 
@@ -177,11 +186,11 @@ export function ContactSection() {
                   className="w-full disabled:opacity-50"
                   onClick={isSubmitting ? undefined : undefined}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? contactSection.form.submittingButton : contactSection.form.submitButton}
                 </MagneticButton>
                 {submitSuccess && (
                   <p className="mt-2 text-center font-mono text-xs text-foreground/70 md:mt-3 md:text-sm">
-                    Message sent successfully!
+                    {contactSection.form.successMessage}
                   </p>
                 )}
               </div>

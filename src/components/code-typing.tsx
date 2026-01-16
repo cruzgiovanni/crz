@@ -101,7 +101,7 @@ export function CodeTyping() {
               <div className="w-3 h-3 rounded-full bg-[#f9e2af]" />
               <div className="w-3 h-3 rounded-full bg-[#a6e3a1]" />
             </div>
-            <span className="ml-2 font-mono text-xs text-[#6c7086]">giovanni.ts</span>
+            <span className="ml-2 font-mono text-xs text-[#6c7086]">giovanni-cruz.ts</span>
           </div>
 
           {/* Code content */}

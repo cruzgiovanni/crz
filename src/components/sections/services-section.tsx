@@ -1,6 +1,7 @@
 'use client'
 
 import { useReveal } from '@/hooks/use-reveal'
+import { skillsSection, skillCategories, techTags } from '@/data/info'
 
 export function ServicesSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -17,34 +18,13 @@ export function ServicesSection() {
           }`}
         >
           <h2 className="mb-2 font-sans text-4xl font-light tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Core Skills
+            {skillsSection.title}
           </h2>
-          <p className="font-mono text-xs text-foreground/50 md:text-sm">/ Technologies I work with</p>
+          <p className="font-mono text-xs text-foreground/50 md:text-sm">{skillsSection.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-12 lg:gap-16">
-          {[
-            {
-              title: 'Backend',
-              description: 'TypeScript, Bun, Node.js, ORMs, PostgreSQL, MongoDB, BaaS Platforms',
-              direction: 'top',
-            },
-            {
-              title: 'Frontend',
-              description: 'React, Next.js, TypeScript, Tailwind CSS, Framer Motion',
-              direction: 'right',
-            },
-            {
-              title: 'Blockchain',
-              description: 'Solidity, Hardhat, Ethereum',
-              direction: 'left',
-            },
-            {
-              title: 'DevOps',
-              description: 'Docker, CI/CD, AWS, Vercel, Linux',
-              direction: 'bottom',
-            },
-          ].map((service, i) => (
+          {skillCategories.map((service, i) => (
             <ServiceCard key={i} service={service} index={i} isVisible={isVisible} />
           ))}
         </div>
@@ -55,29 +35,7 @@ export function ServicesSection() {
           }`}
           style={{ transitionDelay: '600ms' }}
         >
-          {[
-            'TypeScript',
-            'Bun',
-            'Node.js',
-            'PostgreSQL',
-            'MongoDB',
-            'Prisma',
-            'Drizzle',
-            'Supabase',
-            'Firebase',
-            'React',
-            'Next.js',
-            'Tailwind CSS',
-            'Framer Motion',
-            'Solidity',
-            'Hardhat',
-            'Ethereum',
-            'Docker',
-            'AWS',
-            'Vercel',
-            'Linux',
-            'Git',
-          ].map((tech) => (
+          {techTags.map((tech) => (
             <span
               key={tech}
               className="rounded-full border border-foreground/15 bg-foreground/5 px-2.5 py-1 font-mono text-[10px] text-foreground/70 md:px-3 md:text-xs"
@@ -96,7 +54,7 @@ function ServiceCard({
   index,
   isVisible,
 }: {
-  service: { title: string; description: string; direction: string }
+  service: { title: string; description: string; direction: 'top' | 'right' | 'left' | 'bottom' }
   index: number
   isVisible: boolean
 }) {
