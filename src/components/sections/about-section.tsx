@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useReveal } from '@/hooks/use-reveal'
-import { aboutSection } from '@/data/info'
+import { useReveal } from "@/hooks/use-reveal"
+import { aboutSection } from "@/data/info"
 
 export function AboutSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -17,7 +17,9 @@ export function AboutSection() {
           <div className="md:col-span-5">
             <div
               className={`transition-all duration-700 ${
-                isVisible ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "-translate-y-12 opacity-0"
               }`}
             >
               <div className="mb-4 flex items-center gap-3 md:mb-6">
@@ -26,7 +28,7 @@ export function AboutSection() {
                   {aboutSection.label}
                 </p>
               </div>
-              <h2 className="mb-4 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-6 md:text-5xl lg:text-6xl">
+              <h2 className="mb-4 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-6 md:text-5xl lg:text-6xl text-shadow-sm">
                 {aboutSection.title.line1}
                 <br />
                 <span className="text-primary">{aboutSection.title.line2}</span>
@@ -37,13 +39,17 @@ export function AboutSection() {
 
             <div
               className={`transition-all duration-700 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
               }`}
-              style={{ transitionDelay: '200ms' }}
+              style={{ transitionDelay: "200ms" }}
             >
               <div className="flex items-center gap-3">
                 <div className="h-px w-8 bg-accent/50 md:w-12" />
-                <p className="font-mono text-[10px] text-foreground/50 md:text-xs">{aboutSection.location}</p>
+                <p className="font-mono text-[10px] text-foreground/50 md:text-xs">
+                  {aboutSection.location}
+                </p>
               </div>
             </div>
           </div>
@@ -52,9 +58,11 @@ export function AboutSection() {
           <div className="md:col-span-7">
             <div
               className={`space-y-4 transition-all duration-700 md:space-y-6 ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "translate-x-12 opacity-0"
               }`}
-              style={{ transitionDelay: '300ms' }}
+              style={{ transitionDelay: "300ms" }}
             >
               <div className="relative">
                 <span className="absolute -left-2 -top-2 font-serif text-4xl text-primary/20 md:-left-4 md:-top-4 md:text-6xl">
@@ -71,22 +79,28 @@ export function AboutSection() {
 
             <div
               className={`mt-8 grid grid-cols-2 gap-6 border-t border-foreground/10 pt-8 transition-all duration-700 md:mt-12 md:gap-8 md:pt-12 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-12 opacity-0"
               }`}
-              style={{ transitionDelay: '450ms' }}
+              style={{ transitionDelay: "450ms" }}
             >
               {aboutSection.stats.map((stat, i) => (
                 <div key={i} className="group">
                   <div
                     className={`mb-1.5 font-sans text-4xl font-light transition-transform duration-300 group-hover:translate-x-1 md:mb-2 md:text-6xl ${
-                      stat.accent ? 'text-primary' : 'text-foreground'
+                      stat.accent ? "text-primary" : "text-foreground"
                     }`}
                   >
                     {stat.value}
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className={`h-px w-3 md:w-4 ${stat.accent ? 'bg-primary/50' : 'bg-accent/50'}`} />
-                    <span className="font-mono text-[10px] text-foreground/50 md:text-xs">{stat.label}</span>
+                    <div
+                      className={`h-px w-3 md:w-4 ${stat.accent ? "bg-primary/50" : "bg-accent/50"}`}
+                    />
+                    <span className="font-mono text-[10px] text-foreground/50 md:text-xs">
+                      {stat.label}
+                    </span>
                   </div>
                 </div>
               ))}
