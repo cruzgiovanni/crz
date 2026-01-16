@@ -8,9 +8,11 @@ const _geist = Geist({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Shaders Landing Page',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Giovanni Cruz',
+  description: 'Giovanni Cruz',
+  generator: 'Next.js',
+  keywords: ['Giovanni', 'Cruz', 'Developer', 'Engineer', 'Software', 'Engineer'],
+  applicationName: 'Giovanni Cruz',
 }
 
 export default function RootLayout({
