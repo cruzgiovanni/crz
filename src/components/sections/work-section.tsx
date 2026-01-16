@@ -54,6 +54,9 @@ function ProjectCard({
     year: string
     tech: string
     direction: "left" | "right"
+    repo?: string
+    demo?: string
+    type?: "experience" | "project"
   }
   index: number
   isVisible: boolean
@@ -81,9 +84,25 @@ function ProjectCard({
             <span className="font-mono text-xs text-foreground/30 transition-colors group-hover:text-foreground/50">
               {project.number}
             </span>
-            <h3 className="font-sans text-xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-1">
-              {project.title}
-            </h3>
+            {project.repo || project.demo ? (
+              <a
+                href={project.repo || project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 transition-opacity duration-300 hover:opacity-70"
+              >
+                <h3 className="font-sans text-xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-1">
+                  {project.title}
+                </h3>
+                <span className="text-foreground/40 text-sm group-hover:text-foreground/60 transition-colors">
+                  ↗
+                </span>
+              </a>
+            ) : (
+              <h3 className="font-sans text-xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-1">
+                {project.title}
+              </h3>
+            )}
           </div>
           <span className="font-mono text-[10px] text-foreground/30">
             {project.year}
@@ -112,9 +131,25 @@ function ProjectCard({
             {project.number}
           </span>
           <div>
-            <h3 className="mb-1 font-sans text-2xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-2 lg:text-3xl">
-              {project.title}
-            </h3>
+            {project.repo || project.demo ? (
+              <a
+                href={project.repo || project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-baseline gap-3 transition-opacity duration-300 hover:opacity-70 w-fit"
+              >
+                <h3 className="font-sans text-2xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-2 lg:text-3xl">
+                  {project.title}
+                </h3>
+                <span className="text-foreground/40 text-lg group-hover:text-foreground/60 transition-colors leading-none">
+                  ↗
+                </span>
+              </a>
+            ) : (
+              <h3 className="font-sans text-2xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-2 lg:text-3xl">
+                {project.title}
+              </h3>
+            )}
             <p className="font-mono text-sm text-foreground/50">
               {project.category}
             </p>

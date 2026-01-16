@@ -130,8 +130,8 @@ export default function Home() {
         if (!scrollContainerRef.current) return
 
         scrollContainerRef.current.scrollBy({
-          left: e.deltaY,
-          behavior: "instant",
+          left: e.deltaY * 0.5,
+          behavior: "smooth",
         })
 
         const sectionWidth = scrollContainerRef.current.offsetWidth
