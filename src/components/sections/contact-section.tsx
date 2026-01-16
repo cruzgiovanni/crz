@@ -30,6 +30,8 @@ export function ContactSection() {
     setTimeout(() => setSubmitSuccess(false), 5000)
   }
 
+  const year = new Date().getFullYear()
+
   return (
     <section
       ref={ref}
@@ -84,29 +86,12 @@ export function ContactSection() {
               </div>
 
               <div
-                className={`flex gap-3 pt-1 transition-all duration-700 md:pt-4 ${
-                  isVisible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
-                }`}
-                style={{ transitionDelay: '500ms' }}
-              >
-                {contactSection.socials.map((social) => (
-                  <a
-                    key={social}
-                    href="#"
-                    className="font-mono text-[10px] text-foreground/50 transition-all hover:text-foreground md:text-xs"
-                  >
-                    {social}
-                  </a>
-                ))}
-              </div>
-
-              <div
                 className={`pt-2 transition-all duration-700 md:pt-4 ${
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                 }`}
                 style={{ transitionDelay: '600ms' }}
               >
-                <p className="font-mono text-[10px] text-foreground/30 md:text-xs">{contactSection.copyright}</p>
+                <p className="font-mono text-[10px] text-foreground/30 md:text-xs">@ {year}</p>
               </div>
             </div>
           </div>

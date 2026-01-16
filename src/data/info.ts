@@ -1,21 +1,23 @@
-// =============================================================================
-// HERO SECTION
-// =============================================================================
+import { siteConfig } from './config'
+
 export const hero = {
   badge: 'Software Engineer',
   name: 'Giovanni Cruz',
-  description: 'Building robust digital solutions with modern technology and clean architecture.',
+  description:
+    'I turn mass of JSON into systems that scale, and mass of chaos into clean APIs. Backend-focused, full-stack capable.',
   cta: {
     keyword: 'await',
     object: 'portfolio',
     method: 'explore',
   },
   scrollHint: 'Scroll to explore',
+  graphite: {
+    crossedOutWord: 'Googling',
+    graphitedWord: 'Engineering',
+    continuationText: 'solutions',
+  },
 }
 
-// =============================================================================
-// PROJECTS SECTION
-// =============================================================================
 export const projectsSection = {
   title: 'Projects',
   subtitle: '/ Check out my latest work',
@@ -56,9 +58,6 @@ export const projects = [
   },
 ]
 
-// =============================================================================
-// SKILLS SECTION
-// =============================================================================
 export const skillsSection = {
   title: 'Core Skills',
   subtitle: '/ Technologies I work with',
@@ -111,9 +110,6 @@ export const techTags = [
   'Git',
 ]
 
-// =============================================================================
-// ABOUT SECTION
-// =============================================================================
 export const aboutSection = {
   label: 'About me',
   title: {
@@ -132,19 +128,16 @@ export const aboutSection = {
   ],
 }
 
-// =============================================================================
-// CONTACT SECTION
-// =============================================================================
 export const contactSection = {
   title: "Let's talk",
   subtitle: '/ Get in touch',
   email: {
     label: 'Email',
-    value: 'giovanni@crz.dev',
+    value: siteConfig.email,
   },
   location: {
     label: 'Location',
-    value: 'São Paulo, Brazil',
+    value: siteConfig.location,
   },
   socials: ['LinkedIn', 'GitHub'],
   copyright: '© 2025',
@@ -159,7 +152,7 @@ export const contactSection = {
     },
     message: {
       label: 'Message',
-      placeholder: 'Tell me about your project...',
+      placeholder: 'What can I help you with?',
     },
     submitButton: 'Send Message',
     submittingButton: 'Sending...',
@@ -167,7 +160,4 @@ export const contactSection = {
   },
 }
 
-// =============================================================================
-// NAVIGATION
-// =============================================================================
 export const navItems = ['Home', 'Work', 'Skills', 'About', 'Contact']

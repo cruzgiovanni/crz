@@ -1,14 +1,13 @@
 export const siteConfig = {
-  // Availability status - set to true when open for new opportunities
   isAvailable: true,
 
   // Social links
   socials: {
-    github: 'https://github.com/giovannicruz97',
-    linkedin: 'https://linkedin.com/in/giovannicruz97',
+    github: 'https://github.com/cruzgiovanni',
+    linkedin: 'https://linkedin.com/in/eugiovannicruz',
   },
 
   // Contact
-  email: 'giovanni@crz.dev',
+  email: 'crzwebdigital@gmail.com',
   location: 'São Paulo, Brazil',
 }

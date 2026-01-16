@@ -7,8 +7,7 @@ import { WorkSection } from '@/components/sections/work-section'
 import { ServicesSection } from '@/components/sections/services-section'
 import { AboutSection } from '@/components/sections/about-section'
 import { ContactSection } from '@/components/sections/contact-section'
-import { MagneticButton } from '@/components/magnetic-button'
-import { CodeTyping } from '@/components/code-typing'
+import { GraphiteWrite } from '@/components/graphite-write'
 import { siteConfig } from '@/data/config'
 import { hero, navItems } from '@/data/info'
 import { Github, Linkedin } from 'lucide-react'
@@ -385,48 +384,46 @@ export default function Home() {
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
       >
         <section className="relative flex min-h-screen w-screen shrink-0 snap-start snap-always flex-col justify-end px-5 pb-12 pt-20 md:px-12 md:pb-24 md:pt-24">
-          {/* Main content wrapper with code typing */}
-          <div className="flex w-full flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-[#cba6f7]/30 bg-[#cba6f7]/10 px-3 py-1 backdrop-blur-md duration-700 md:mb-4 md:px-4 md:py-1.5">
-                <p className="font-mono text-[10px] text-[#cba6f7] md:text-xs">{hero.badge}</p>
-              </div>
-              <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-sans text-4xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 sm:text-5xl md:mb-6 md:text-7xl lg:text-8xl">
-                <span className="text-balance">
-                  {hero.name}
-                  <span
-                    className="ml-1 inline-block w-0.75 bg-primary animate-blink md:ml-2 md:w-1"
-                    style={{ height: '0.85em', verticalAlign: 'baseline' }}
-                  />
-                </span>
-              </h1>
-              <p className="mb-6 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:mb-8 md:text-xl">
-                <span className="text-pretty">{hero.description}</span>
-              </p>
+          {/* Status Beacon - bottom right on desktop */}
+          <div className="absolute bottom-24 right-12 hidden lg:block lg:right-16">
+            <GraphiteWrite />
+          </div>
 
-              {/* Code-style call to action */}
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-                <button
-                  onClick={() => scrollToSection(1)}
-                  className="group flex items-center gap-2 transition-all duration-300 hover:gap-3"
-                >
-                  <span className="font-mono text-sm md:text-base">
-                    <span className="text-primary">{hero.cta.keyword}</span>{' '}
-                    <span className="text-foreground/90">{hero.cta.object}</span>
-                    <span className="text-foreground/40">.</span>
-                    <span className="text-accent transition-colors group-hover:text-accent/80">{hero.cta.method}</span>
-                    <span className="text-foreground/40">()</span>
-                  </span>
-                  <span className="text-foreground/40 transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </button>
-              </div>
+          {/* Main content */}
+          <div className="w-full max-w-3xl">
+            <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-[#cba6f7]/30 bg-[#cba6f7]/10 px-3 py-1 backdrop-blur-md duration-700 md:mb-4 md:px-4 md:py-1.5">
+              <p className="font-mono text-[10px] text-[#cba6f7] md:text-xs">{hero.badge}</p>
             </div>
+            <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-sans text-4xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 sm:text-5xl md:mb-6 md:text-7xl lg:text-8xl">
+              <span className="text-balance">
+                {hero.name}
+                <span
+                  className="ml-1 inline-block w-0.75 bg-primary animate-blink md:ml-2 md:w-1"
+                  style={{ height: '0.85em', verticalAlign: 'baseline' }}
+                />
+              </span>
+            </h1>
+            <p className="mb-6 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:mb-8 md:text-xl">
+              <span className="text-pretty">{hero.description}</span>
+            </p>
 
-            {/* Code typing animation - hidden on small mobile */}
-            <div className="hidden sm:block">
-              <CodeTyping />
+            {/* Code-style call to action */}
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+              <button
+                onClick={() => scrollToSection(1)}
+                className="group flex items-center gap-2 transition-all duration-300 hover:gap-3"
+              >
+                <span className="font-mono text-sm md:text-base">
+                  <span className="text-primary">{hero.cta.keyword}</span>{' '}
+                  <span className="text-foreground/90">{hero.cta.object}</span>
+                  <span className="text-foreground/40">.</span>
+                  <span className="text-accent transition-colors group-hover:text-accent/80">{hero.cta.method}</span>
+                  <span className="text-foreground/40">()</span>
+                </span>
+                <span className="text-foreground/40 transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </button>
             </div>
           </div>
 
