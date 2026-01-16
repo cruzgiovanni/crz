@@ -1,6 +1,4 @@
 export const siteConfig = {
-  isAvailable: true,
-
   // Social links
   socials: {
     github: 'https://github.com/cruzgiovanni',

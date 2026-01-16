@@ -229,31 +229,24 @@ export default function Home() {
 
       {/* Navbar */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-5 py-4 transition-opacity duration-700 md:px-12 md:py-6 ${
+        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-5 py-3 transition-opacity duration-700 md:px-12 md:py-6 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => scrollToSection(0)}
-            className="flex items-center gap-2 transition-transform hover:scale-105"
-          >
-            <span className="h-px w-3 bg-[#cba6f7]/60 md:w-4" />
-            <span className="font-sans text-lg font-medium tracking-tight text-foreground md:text-xl">
-              giovanni cruz
+          {/* Mobile grafite - substitui $ crz - apenas na home */}
+          <div className="md:hidden w-24 ml-1 mt-3">
+            <div className={currentSection === 0 ? 'opacity-100' : 'opacity-0'}>
+              <GraphiteWrite />
+            </div>
+          </div>
+
+          {/* Desktop logo */}
+          <button onClick={() => scrollToSection(0)} className="hidden md:flex items-center gap-2 transition-transform">
+            <span className="font-mono text-lg font-medium tracking-tight text-foreground/80 md:text-xl">
+              <span className="text-[#cba6f7]">$</span> crz
             </span>
           </button>
-
-          {/* Available badge - desktop only */}
-          {siteConfig.isAvailable && (
-            <div className="hidden items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 md:flex">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="font-mono text-xs text-emerald-400">Available</span>
-            </div>
-          )}
         </div>
 
         {/* Desktop nav */}
@@ -279,7 +272,7 @@ export default function Home() {
         {/* Mobile menu button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="relative flex h-8 w-8 flex-col items-center justify-center md:hidden"
+          className="relative flex h-8 w-8 flex-col items-center justify-center md:hidden -mr-2"
           aria-label="Toggle menu"
         >
           <span
@@ -300,17 +293,17 @@ export default function Home() {
             href={siteConfig.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex h-9 w-9 items-center justify-center rounded-full border border-lavender/20 bg-lavender/5 transition-all duration-300 hover:border-lavender/40 hover:bg-lavender/10"
+            className="group flex h-9 w-9 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/10"
           >
-            <Github className="h-4 w-4 text-lavender/70 transition-colors duration-300 group-hover:text-lavender" />
+            <Github className="h-4 w-4 text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70" />
           </a>
           <a
             href={siteConfig.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex h-9 w-9 items-center justify-center rounded-full border border-blue/20 bg-blue/5 transition-all duration-300 hover:border-blue/40 hover:bg-blue/10"
+            className="group flex h-9 w-9 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/10"
           >
-            <Linkedin className="h-4 w-4 text-blue/70 transition-colors duration-300 group-hover:text-blue" />
+            <Linkedin className="h-4 w-4 text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70" />
           </a>
         </div>
       </nav>
@@ -383,18 +376,18 @@ export default function Home() {
         }`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x mandatory' }}
       >
-        <section className="relative flex min-h-screen w-screen shrink-0 snap-start snap-always flex-col justify-end px-5 pb-12 pt-20 md:px-12 md:pb-24 md:pt-24">
-          {/* Status Beacon - bottom right on desktop */}
+        <section className="relative flex min-h-screen w-screen shrink-0 snap-start snap-always flex-col justify-end px-5 pb-14 pt-28 md:px-12 md:pb-24 md:pt-24">
+          {/* Grafite desktop - canto inferior direito */}
           <div className="absolute bottom-24 right-12 hidden lg:block lg:right-16">
             <GraphiteWrite />
           </div>
 
           {/* Main content */}
           <div className="w-full max-w-3xl">
-            <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-[#cba6f7]/30 bg-[#cba6f7]/10 px-3 py-1 backdrop-blur-md duration-700 md:mb-4 md:px-4 md:py-1.5">
-              <p className="font-mono text-[10px] text-[#cba6f7] md:text-xs">{hero.badge}</p>
+            <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-[#cba6f7]/50 bg-[#cba6f7]/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mb-4 md:px-5 md:py-2">
+              <p className="font-mono text-xs text-[#cba6f7] md:text-sm">{hero.badge}</p>
             </div>
-            <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-sans text-4xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 sm:text-5xl md:mb-6 md:text-7xl lg:text-8xl">
+            <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-sans text-5xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 sm:text-6xl md:mb-6 md:text-8xl lg:text-9xl">
               <span className="text-balance">
                 {hero.name}
                 <span
@@ -403,17 +396,17 @@ export default function Home() {
                 />
               </span>
             </h1>
-            <p className="mb-6 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:mb-8 md:text-xl">
+            <p className="mb-4 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:mb-8 md:text-xl">
               <span className="text-pretty">{hero.description}</span>
             </p>
 
-            {/* Code-style call to action */}
+            {/* Code-style call to action - mobile e desktop */}
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
               <button
                 onClick={() => scrollToSection(1)}
                 className="group flex items-center gap-2 transition-all duration-300 hover:gap-3"
               >
-                <span className="font-mono text-sm md:text-base">
+                <span className="font-mono text-sm md:text-lg">
                   <span className="text-primary">{hero.cta.keyword}</span>{' '}
                   <span className="text-foreground/90">{hero.cta.object}</span>
                   <span className="text-foreground/40">.</span>
@@ -424,15 +417,6 @@ export default function Home() {
                   →
                 </span>
               </button>
-            </div>
-          </div>
-
-          <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-in fade-in duration-1000 delay-500 md:block">
-            <div className="flex items-center gap-2">
-              <p className="font-mono text-xs text-foreground/50">{hero.scrollHint}</p>
-              <div className="flex h-6 w-10 items-center justify-center rounded-full border border-[#cba6f7]/20 bg-[#cba6f7]/10 backdrop-blur-md">
-                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#cba6f7]/80" />
-              </div>
             </div>
           </div>
         </section>

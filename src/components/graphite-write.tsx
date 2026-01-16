@@ -13,9 +13,9 @@ export function GraphiteWrite() {
 
   return (
     <div
-      className={`transition-all duration-1000 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+      className={`transition-all duration-1000 ml-1 mt-3 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
     >
-      <div className="flex items-center gap-2 text-sm md:text-base">
+      <div className="flex items-center gap-2 text-base md:text-lg">
         <div className="relative inline-block">
           <span
             className="absolute -top-6 left-1/2 -translate-x-1/2 -rotate-6 whitespace-nowrap text-xl text-[#cba6f7] md:-top-8 md:text-2xl font-bold"
