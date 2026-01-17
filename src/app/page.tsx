@@ -452,9 +452,9 @@ export default function Home() {
           </div>
         </section>
 
-        <WorkSection />
         <AboutSection />
         <ServicesSection />
+        <WorkSection />
         <ContactSection />
       </div>
 
