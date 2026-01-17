@@ -1,7 +1,8 @@
 "use client"
 
+import { MapPin } from "lucide-react"
 import { useReveal } from "@/hooks/use-reveal"
-import { aboutSection } from "@/data/info"
+import { aboutSection, contactSection } from "@/data/info"
 
 export function AboutSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -38,19 +39,22 @@ export function AboutSection() {
             </div>
 
             <div
-              className={`transition-all duration-700 ${
+              className={`mt-8 transition-all duration-700 md:mt-12 ${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-8 opacity-0"
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              <div className="flex items-center gap-3">
-                <div className="h-px w-8 bg-accent/50 md:w-12" />
-                <p className="font-mono text-[10px] text-foreground/50 md:text-xs">
-                  {aboutSection.location}
-                </p>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-3 w-3 text-foreground/50" />
+                <span className="font-mono text-[10px] text-foreground/50 md:text-xs">
+                  {contactSection.location.label}
+                </span>
               </div>
+              <p className="mt-1 text-sm text-foreground/70 md:mt-2 md:text-foreground/70">
+                {contactSection.location.value}
+              </p>
             </div>
           </div>
 
@@ -72,7 +76,7 @@ export function AboutSection() {
                   {aboutSection.paragraphs[0]}
                 </p>
               </div>
-              <p className="pl-3 text-sm leading-relaxed text-foreground/60 md:pl-4 md:text-lg">
+              <p className="pl-3 text-sm leading-relaxed text-foreground/80 md:pl-4 md:text-lg">
                 {aboutSection.paragraphs[1]}
               </p>
             </div>

@@ -122,18 +122,17 @@ export const techTags = [
 export const aboutSection = {
   label: "About me",
   title: {
-    line1: "Crafting",
-    line2: "digital",
-    line3: "experiences",
+    line1: "Architecting",
+    line2: "robust",
+    line3: "solutions",
   },
-  location: "São Paulo, Brazil",
   paragraphs: [
-    "Software Engineer with a degree in Systems Analysis from FIAP, specialized in web development and backend systems.",
-    "Working in the tech industry since 2021, focused on building custom software solutions and scalable applications.",
+    "Software Engineer with a degree in Analysis and Systems Development from FIAP. I bring experience solving real problems through technology. Not just shipping code, but addressing pain points and delivering measurable results.",
+    "I code on faith and old blues from the 70s.",
   ],
   stats: [
-    { value: "4+", label: "Years in tech", accent: true },
-    { value: "10+", label: "Projects delivered", accent: false },
+    { value: "3+", label: "Years in tech", accent: true },
+    { value: "Curious", label: "by nature", accent: false },
   ],
 }
 
