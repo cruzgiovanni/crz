@@ -80,7 +80,7 @@ export const skillCategories = [
   },
   {
     title: "Frontend",
-    description: "React, Next.js, TypeScript, Tailwind CSS",
+    description: "React, Next.js, Tailwind CSS",
     direction: "right" as const,
   },
   {
@@ -90,7 +90,7 @@ export const skillCategories = [
   },
   {
     title: "DevOps",
-    description: "Docker, CI/CD, AWS, Linux",
+    description: "Docker, Github Actions, AWS, Linux",
     direction: "bottom" as const,
   },
 ]
