@@ -168,4 +168,4 @@ export const contactSection = {
   },
 }
 
-export const navItems = ["Home", "Work", "Skills", "About", "Contact"]
+export const navItems = ["Home", "Work", "About", "Skills", "Contact"]
