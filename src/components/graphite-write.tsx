@@ -18,10 +18,10 @@ export function GraphiteWrite() {
       <div className="flex items-center gap-2 text-base md:text-lg">
         <div className="relative inline-block">
           <span
-            className="absolute -top-6 left-1/2 -translate-x-1/2 -rotate-6 whitespace-nowrap text-xl text-[#cba6f7] md:-top-8 md:text-2xl font-bold"
+            className="absolute -top-6 left-1/2 -translate-x-1/2 -rotate-6 whitespace-nowrap text-xl text-[#cba6f7] md:-top-8 md:text-2xl font-black"
             style={{
               fontFamily: 'FirstTimeWriting, cursive',
-              textShadow: '0 0 20px rgba(203, 166, 247, 0.5)',
+              textShadow: '0 0 20px rgba(203, 166, 247, 0.3)',
             }}
           >
             {hero.graphite.graphitedWord}

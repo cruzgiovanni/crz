@@ -246,20 +246,15 @@ export default function Home() {
         <div className="flex items-center gap-4">
           {/* Mobile grafite - substitui $ crz - apenas na home */}
           <div className="md:hidden w-24 ml-1 mt-3">
-            <div className={currentSection === 0 ? "opacity-100" : "opacity-0"}>
+            {currentSection === 0 && (
+              <div className={currentSection === 0 ? "opacity-100" : "opacity-0"}>
               <GraphiteWrite />
             </div>
+            )}
+            
           </div>
 
-          {/* Desktop logo */}
-          <button
-            onClick={() => scrollToSection(0)}
-            className="hidden md:flex items-center gap-2 transition-transform"
-          >
-            <span className="font-mono text-lg font-medium tracking-tight text-foreground/80 md:text-xl">
-              <span className="text-[#cba6f7]">$</span> crz
-            </span>
-          </button>
+       
         </div>
 
         {/* Desktop nav */}
