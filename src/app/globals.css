@@ -225,6 +225,28 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+@keyframes pulse-border {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.03;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.05;
+    transform: scale(1.02);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -251,5 +273,23 @@
   button {
     transform: translateZ(0);
     backface-visibility: hidden;
+  }
+
+  /* Hide scrollbar for technologies container */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: rgba(203, 166, 247, 0.2);
+    border-radius: 2px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: rgba(203, 166, 247, 0.4);
   }
 }

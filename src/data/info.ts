@@ -68,29 +68,36 @@ export const projects = [
 
 export const skillsSection = {
   title: "Core Skills",
-  subtitle: "/ Technologies I work with",
+  subtitle: "/ What I build with",
 }
 
 export const skillCategories = [
   {
     title: "Backend",
-    description:
-      "TypeScript, Bun, Node.js, ORMs, PostgreSQL, MongoDB, BaaS Platforms",
+    description: "Building scalable APIs and server-side systems",
+    technologies: ["TypeScript", "Bun", "Node.js", "PostgreSQL", "MongoDB", "ORMs", "BaaS Platforms", "Express.js", "ElysiaJS"],
+    color: "#89b4fa",
     direction: "top" as const,
   },
   {
     title: "Frontend",
-    description: "React, Next.js, Tailwind CSS",
+    description: "Crafting intuitive interfaces and user experiences",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
+    color: "#94e2d5",
     direction: "right" as const,
   },
   {
     title: "Blockchain",
-    description: "Solidity, Hardhat, Ethereum",
+    description: "Developing smart contracts and Web3 solutions",
+    technologies: ["Solidity", "Hardhat", "Ethereum"],
+    color: "#fab387",
     direction: "left" as const,
   },
   {
     title: "DevOps",
-    description: "Docker, Github Actions, AWS, Linux",
+    description: "Deploying and maintaining production systems",
+    technologies: ["Docker", "Github Actions", "AWS", "Linux", "Git"],
+    color: "#f5c2e7",
     direction: "bottom" as const,
   },
 ]
