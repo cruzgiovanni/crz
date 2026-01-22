@@ -546,7 +546,7 @@ function ShutdownScreen({ onPowerOn }: { onPowerOn: () => void }) {
   )
 }
 
-export function ServicesSection() {
+export function TerminalSection() {
   const { ref, isVisible } = useReveal(0.3)
   const [bootStage, setBootStage] = useState(0)
   const [bootText, setBootText] = useState<string[]>([])
@@ -952,13 +952,15 @@ export function ServicesSection() {
 
             {/* Marquee */}
             <div
-              className="mt-5 p-2 text-xs md:text-sm"
+              className="mt-5 p-2 text-xs md:text-sm overflow-hidden"
               style={{
                 background: '#000080',
                 color: '#ffff00',
               }}
             >
-              <marquee>Welcome to my portfolio! Feel free to reach out for collaborations or opportunities!</marquee>
+              <div className="marquee">
+                Welcome to my portfolio! Feel free to reach out for collaborations or opportunities!
+              </div>
             </div>
           </div>
         )

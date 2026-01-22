@@ -1,8 +1,7 @@
 'use client'
 
 import { Shader, ChromaFlow, Swirl } from 'shaders/react'
-import { GrainOverlay } from '@/components/grain-overlay'
-import { ServicesSection } from '@/components/sections/services-section'
+import { TerminalSection } from '@/components/sections/terminal-section'
 import { ContactSection } from '@/components/sections/contact-section'
 import { GraphiteWrite } from '@/components/graphite-write'
 import { siteConfig } from '@/data/config'
@@ -184,19 +183,8 @@ export default function Home() {
     }
   }, [currentSection])
 
-  // Listen for shutdown event from PC
-  useEffect(() => {
-    const handleShutdown = () => {
-      scrollToSection(0)
-    }
-    window.addEventListener('shutdownPC', handleShutdown)
-    return () => window.removeEventListener('shutdownPC', handleShutdown)
-  }, [])
-
   return (
     <main className="relative h-screen w-full overflow-hidden bg-background">
-      <GrainOverlay />
-
       <div
         ref={shaderContainerRef}
         className={`fixed inset-0 z-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -418,7 +406,7 @@ export default function Home() {
           </div>
         </section>
 
-        <ServicesSection />
+        <TerminalSection />
         <ContactSection />
       </div>
 

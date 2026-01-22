@@ -292,3 +292,18 @@
     background: rgba(203, 166, 247, 0.4);
   }
 }
+
+.marquee {
+  white-space: nowrap;
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
