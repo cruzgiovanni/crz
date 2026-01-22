@@ -33,7 +33,9 @@ export function ReadmeContent() {
             <br />
             Cruz
           </h2>
-          <p className="text-sm md:text-base text-[#888888] mt-2">Portfolio &apos;25</p>
+          <p className="text-sm md:text-base text-[#888888] mt-2">
+            Portfolio &apos;{new Date().getFullYear().toString().slice(-2)}
+          </p>
         </div>
 
         {/* Nav Links */}

@@ -171,7 +171,7 @@ export default function Home() {
 
       {/* Navbar */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-5 py-3 transition-opacity duration-700 md:px-12 md:py-6 ${
+        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-5 py-3 transition-opacity duration-700 md:px-12 md:py-3 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -186,7 +186,7 @@ export default function Home() {
         </div>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 md:flex ">
           {navItems.map((item, index) => (
             <button
               key={item}
@@ -206,7 +206,7 @@ export default function Home() {
         </div>
 
         {/* Desktop social links */}
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 md:flex ">
           <a
             href={siteConfig.socials.github}
             target="_blank"
@@ -342,7 +342,7 @@ export default function Home() {
 
       {/* Mobile section indicators */}
       <div
-        className={`fixed bottom-6 left-1/2 z-30 flex -translate-x-1/2 gap-2 transition-opacity duration-500 md:hidden ${
+        className={`fixed bottom-4 left-1/2 z-30 flex -translate-x-1/2 gap-2 transition-opacity duration-500 md:hidden ${
           isLoaded && !isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
         }`}
       >

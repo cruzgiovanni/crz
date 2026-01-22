@@ -3,6 +3,9 @@
 import { useReveal } from '@/hooks/use-reveal'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { ReadmeContent } from '@/components/terminal/apps/readme-content'
+import readmeIcon from '../../../public/assets/readmeIcon.avif'
+import start from '../../../public/assets/start.png'
+import Image from 'next/image'
 
 // Types
 interface WindowState {
@@ -647,7 +650,6 @@ export function TerminalSection() {
     return () => clearInterval(interval)
   }, [])
 
-  // Conteúdo do ReadMe
   const getWindowContent = useCallback((id: string) => {
     if (id !== 'readme') return null
     return <ReadmeContent />
@@ -870,7 +872,8 @@ export function TerminalSection() {
                         active={startMenuOpen}
                         className="flex items-center gap-1.5 font-bold px-2 h-6 md:h-6.5 cursor-pointer hover:bg-gray-300"
                       >
-                        <span className="text-sm md:text-base">🪟</span>
+                        {/*<span className="text-sm md:text-base">🪟</span>*/}
+                        <Image src={start} alt="Start" className="w-4 h-4 md:w-5 md:h-5" />
                         <span className="hidden sm:inline text-xs md:text-sm">Start</span>
                       </Win98Button>
 
@@ -890,7 +893,7 @@ export function TerminalSection() {
                           .map((win) => (
                             <Win98Button
                               key={win.id}
-                              onClick={() => (win.isMinimized ? restoreWindow(win.id) : focusWindow(win.id))}
+                              onClick={() => (win.isMinimized ? restoreWindow(win.id) : minimizeWindow(win.id))}
                               active={!win.isMinimized}
                               className="flex items-center gap-1.5 min-w-0 max-w-25 md:max-w-37.5 px-2 h-6 md:h-6.5 cursor-pointer hover:bg-gray-300"
                             >
