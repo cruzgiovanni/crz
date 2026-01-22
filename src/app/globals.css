@@ -9,6 +9,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Millennium';
+  src: url('/fonts/Millennium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Millennium';
+  src: url('/fonts/Millennium-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

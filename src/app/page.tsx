@@ -1,15 +1,13 @@
 'use client'
 
-import { Shader, ChromaFlow, Swirl } from 'shaders/react'
-import { TerminalSection } from '@/components/sections/terminal-section'
-import { ContactSection } from '@/components/sections/contact-section'
+import { TerminalSection } from '@/components/terminal/terminal-section'
 import { GraphiteWrite } from '@/components/graphite-write'
 import { siteConfig } from '@/data/config'
 import { hero, navItems } from '@/data/info'
 import { Github, Linkedin } from 'lucide-react'
 import { useRef, useEffect, useState } from 'react'
 
-const TOTAL_SECTIONS = 3
+const TOTAL_SECTIONS = navItems.length
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -18,38 +16,12 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const touchStartY = useRef(0)
   const touchStartX = useRef(0)
-  const shaderContainerRef = useRef<HTMLDivElement>(null)
+  const backgroundRef = useRef<HTMLDivElement>(null)
   const scrollThrottleRef = useRef<number | null>(null)
   const isScrollingRef = useRef(false)
 
   useEffect(() => {
-    const checkShaderReady = () => {
-      if (shaderContainerRef.current) {
-        const canvas = shaderContainerRef.current.querySelector('canvas')
-        if (canvas && canvas.width > 0 && canvas.height > 0) {
-          setIsLoaded(true)
-          return true
-        }
-      }
-      return false
-    }
-
-    if (checkShaderReady()) return
-
-    const intervalId = setInterval(() => {
-      if (checkShaderReady()) {
-        clearInterval(intervalId)
-      }
-    }, 100)
-
-    const fallbackTimer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 1500)
-
-    return () => {
-      clearInterval(intervalId)
-      clearTimeout(fallbackTimer)
-    }
+    setIsLoaded(true)
   }, [])
 
   const scrollToSection = (index: number) => {
@@ -186,38 +158,15 @@ export default function Home() {
   return (
     <main className="relative h-screen w-full overflow-hidden bg-background">
       <div
-        ref={shaderContainerRef}
+        ref={backgroundRef}
         className={`fixed inset-0 z-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ contain: 'strict' }}
       >
-        <Shader className="h-full w-full">
-          <Swirl
-            colorA="#cba6f7"
-            colorB="#181825"
-            speed={0.5}
-            detail={0.9}
-            blend={45}
-            coarseX={35}
-            coarseY={35}
-            mediumX={45}
-            mediumY={45}
-            fineX={50}
-            fineY={50}
-          />
-          <ChromaFlow
-            baseColor="#16161e"
-            upColor="#cba6f7"
-            downColor="#11111b"
-            leftColor="#94e2d5"
-            rightColor="#89b4fa"
-            intensity={0.75}
-            radius={2.0}
-            momentum={20}
-            maskType="alpha"
-            opacity={0.9}
-          />
-        </Shader>
-        <div className="absolute inset-0 bg-[#11111b]/40" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: '#191919',
+          }}
+        />
       </div>
 
       {/* Navbar */}
@@ -255,24 +204,6 @@ export default function Home() {
             </button>
           ))}
         </div>
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="relative flex h-8 w-8 flex-col items-center justify-center md:hidden -mr-2"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`absolute h-px w-4 bg-foreground transition-all duration-500 ease-out ${
-              isMobileMenuOpen ? 'rotate-45 bg-primary' : '-translate-y-1'
-            }`}
-          />
-          <span
-            className={`absolute h-px w-4 bg-foreground transition-all duration-500 ease-out ${
-              isMobileMenuOpen ? '-rotate-45 bg-primary' : 'translate-y-1'
-            }`}
-          />
-        </button>
 
         {/* Desktop social links */}
         <div className="hidden items-center gap-2 md:flex">
@@ -407,7 +338,6 @@ export default function Home() {
         </section>
 
         <TerminalSection />
-        <ContactSection />
       </div>
 
       {/* Mobile section indicators */}

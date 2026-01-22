@@ -10,7 +10,6 @@ export const hero = {
     object: 'portfolio',
     method: 'explore',
   },
-  scrollHint: 'Scroll to explore',
   graphite: {
     crossedOutWord: 'Googling',
     graphitedWord: 'Engineering',
@@ -155,24 +154,6 @@ export const contactSection = {
     value: siteConfig.location,
   },
   socials: ['LinkedIn', 'GitHub'],
-  copyright: '© 2025',
-  form: {
-    name: {
-      label: 'Name',
-      placeholder: 'Your name',
-    },
-    email: {
-      label: 'Email',
-      placeholder: 'your@email.com',
-    },
-    message: {
-      label: 'Message',
-      placeholder: 'What can I help you with?',
-    },
-    submitButton: 'Send Message',
-    submittingButton: 'Sending...',
-    successMessage: 'Message sent successfully!',
-  },
 }
 
-export const navItems = ['Home', 'Terminal', 'Contact']
+export const navItems = ['Home', 'Terminal']

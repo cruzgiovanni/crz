@@ -1,10 +1,8 @@
 'use client'
 
 import { useReveal } from '@/hooks/use-reveal'
-import { skillCategories, aboutSection, projects, hero, contactSection } from '@/data/info'
-import { siteConfig } from '@/data/config'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import Image from 'next/image'
+import { ReadmeContent } from '@/components/terminal/apps/readme-content'
 
 // Types
 interface WindowState {
@@ -320,7 +318,7 @@ function Window98({
       {/* Content Area */}
       <div
         ref={contentRef}
-        className="flex-1 overflow-y-auto overflow-x-hidden m-[3px]"
+        className="flex-1 m-[3px] flex flex-col min-h-0"
         style={{
           background: '#ffffff',
           borderTop: '2px solid #808080',
@@ -329,7 +327,7 @@ function Window98({
           borderRight: '2px solid #dfdfdf',
         }}
       >
-        <div className="p-3 md:p-4">{win.content}</div>
+        <div className="flex-1 min-h-0 overflow-hidden">{win.content}</div>
       </div>
 
       {/* Status Bar */}
@@ -445,12 +443,7 @@ function StartMenu({
 }) {
   if (!isOpen) return null
 
-  const menuItems = [
-    { id: 'about', icon: '📄', label: 'about.txt' },
-    { id: 'skills', icon: '📁', label: 'Skills' },
-    { id: 'projects', icon: '📁', label: 'Projects' },
-    { id: 'contact', icon: '🌐', label: 'Contact' },
-  ]
+  const menuItems = [{ id: 'readme', icon: '📄', label: 'ReadMe' }]
 
   return (
     <>
@@ -561,52 +554,16 @@ export function TerminalSection() {
   // Windows Default Configuration
   const [windows, setWindows] = useState<WindowState[]>([
     {
-      id: 'about',
-      title: 'about.txt - Notepad',
+      id: 'readme',
+      title: 'ReadMe - Notepad',
       icon: '📄',
       content: null,
       isOpen: false,
       isMinimized: false,
       isMaximized: false,
       zIndex: 100,
-      position: { x: 30, y: 20 },
-      size: { width: 620, height: 500 },
-    },
-    {
-      id: 'skills',
-      title: 'Skills',
-      icon: '📁',
-      content: null,
-      isOpen: false,
-      isMinimized: false,
-      isMaximized: false,
-      zIndex: 100,
-      position: { x: 60, y: 35 },
-      size: { width: 480, height: 400 },
-    },
-    {
-      id: 'projects',
-      title: 'Projects',
-      icon: '📁',
-      content: null,
-      isOpen: false,
-      isMinimized: false,
-      isMaximized: false,
-      zIndex: 100,
-      position: { x: 90, y: 50 },
-      size: { width: 540, height: 440 },
-    },
-    {
-      id: 'contact',
-      title: 'Contact - Internet Explorer',
-      icon: '🌐',
-      content: null,
-      isOpen: false,
-      isMinimized: false,
-      isMaximized: false,
-      zIndex: 100,
-      position: { x: 45, y: 30 },
-      size: { width: 500, height: 420 },
+      position: { x: 30, y: 10 },
+      size: { width: 580, height: 420 },
     },
   ])
 
@@ -690,284 +647,10 @@ export function TerminalSection() {
     return () => clearInterval(interval)
   }, [])
 
-  // Files and Folders windows
+  // Conteúdo do ReadMe
   const getWindowContent = useCallback((id: string) => {
-    switch (id) {
-      case 'about':
-        return (
-          <div
-            className="font-mono text-sm md:text-base text-black leading-relaxed"
-            style={{ fontFamily: 'Courier New, monospace' }}
-          >
-            {/* Photo and header */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-5 pb-4 border-b-2 border-[#c0c0c0]">
-              <div
-                className="w-24 h-24 md:w-28 md:h-28 shrink-0 mx-auto sm:mx-0"
-                style={{
-                  borderTop: '2px solid #808080',
-                  borderLeft: '2px solid #808080',
-                  borderBottom: '2px solid #dfdfdf',
-                  borderRight: '2px solid #dfdfdf',
-                  padding: '2px',
-                  background: '#c0c0c0',
-                }}
-              >
-                <Image
-                  src="/me.avif"
-                  alt="Giovanni Cruz"
-                  width={112}
-                  height={112}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="text-center sm:text-left">
-                <h1 className="text-lg md:text-xl font-bold text-[#000080] mb-1">{hero.name}</h1>
-                <p className="text-xs md:text-sm text-[#404040] mb-3">{hero.badge}</p>
-                <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                  {aboutSection.stats.map((stat, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-1 text-[11px] md:text-xs"
-                      style={{
-                        background: stat.accent ? '#000080' : '#c0c0c0',
-                        color: stat.accent ? '#fff' : '#000',
-                        border: '1px solid #808080',
-                      }}
-                    >
-                      {stat.value} {stat.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Bio text */}
-            <div className="space-y-4 text-xs md:text-sm text-[#000000]">
-              {aboutSection.paragraphs.map((p, i) => (
-                <p key={i} className="leading-relaxed">
-                  {p}
-                </p>
-              ))}
-            </div>
-
-            {/* Quote */}
-            <div
-              className="mt-5 p-3 text-xs md:text-sm italic text-[#000000]"
-              style={{
-                background: '#ffffcc',
-                borderTop: '2px solid #808080',
-                borderLeft: '2px solid #808080',
-                borderBottom: '2px solid #dfdfdf',
-                borderRight: '2px solid #dfdfdf',
-              }}
-            >
-              &quot;{hero.description}&quot;
-            </div>
-          </div>
-        )
-
-      case 'skills':
-        return (
-          <div className="space-y-3" style={{ fontFamily: 'Tahoma, sans-serif' }}>
-            {skillCategories.map((category) => (
-              <div
-                key={category.title}
-                className="p-3"
-                style={{
-                  background: '#fff',
-                  borderTop: '2px solid #808080',
-                  borderLeft: '2px solid #808080',
-                  borderBottom: '2px solid #dfdfdf',
-                  borderRight: '2px solid #dfdfdf',
-                }}
-              >
-                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#c0c0c0]">
-                  <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: category.color }} />
-                  <span className="font-bold text-sm md:text-base text-[#000080]">{category.title}</span>
-                </div>
-                <p className="text-xs md:text-sm text-[#404040] mb-3">{category.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {category.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 text-[11px] md:text-xs text-[#000000]"
-                      style={{
-                        background: '#e8e8e8',
-                        borderTop: '1px solid #dfdfdf',
-                        borderLeft: '1px solid #dfdfdf',
-                        borderBottom: '1px solid #808080',
-                        borderRight: '1px solid #808080',
-                      }}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )
-
-      case 'projects':
-        return (
-          <div className="space-y-2" style={{ fontFamily: 'Tahoma, sans-serif' }}>
-            {projects.map((project) => (
-              <div
-                key={project.title}
-                className="flex items-start gap-3 p-3 hover:bg-[#000080] group cursor-pointer text-[#000000] hover:text-white transition-colors"
-                style={{
-                  borderTop: '1px solid #dfdfdf',
-                  borderLeft: '1px solid #dfdfdf',
-                  borderBottom: '1px solid #808080',
-                  borderRight: '1px solid #808080',
-                }}
-              >
-                <span className="text-xl shrink-0">📄</span>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-bold text-sm md:text-base text-[#000080] group-hover:text-white truncate">
-                      {project.title}
-                    </span>
-                    <span className="text-[11px] md:text-xs text-[#606060] group-hover:text-[#c0c0c0] shrink-0">
-                      {project.year}
-                    </span>
-                  </div>
-                  <p className="text-xs md:text-sm text-[#404040] group-hover:text-[#c0c0c0]">{project.category}</p>
-                  <p className="text-[11px] md:text-xs text-[#606060] group-hover:text-[#a0a0a0] mt-1">
-                    {project.tech}
-                  </p>
-                  <div className="flex gap-3 mt-2">
-                    {project.repo && (
-                      <a
-                        href={project.repo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-[#0000ff] group-hover:text-[#00ffff] underline"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        [Source]
-                      </a>
-                    )}
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-[#0000ff] group-hover:text-[#00ffff] underline"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        [Demo]
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )
-
-      case 'contact':
-        return (
-          <div style={{ fontFamily: 'Tahoma, sans-serif' }}>
-            {/* IE Address bar */}
-            <div
-              className="flex items-center gap-2 p-1.5 mb-4"
-              style={{
-                background: '#c0c0c0',
-                borderTop: '2px solid #808080',
-                borderLeft: '2px solid #808080',
-                borderBottom: '2px solid #dfdfdf',
-                borderRight: '2px solid #dfdfdf',
-              }}
-            >
-              <span className="text-xs md:text-sm px-1 text-[#000000]">Address</span>
-              <div
-                className="flex-1 px-2 py-1 text-xs md:text-sm truncate text-[#000000]"
-                style={{
-                  background: '#fff',
-                  border: '1px solid #808080',
-                }}
-              >
-                http://www.giovannicruz.dev/contact
-              </div>
-              <Win98Button className="text-xs px-2 py-1">Go</Win98Button>
-            </div>
-
-            <div className="space-y-4">
-              {/* Email */}
-              <div
-                className="p-3"
-                style={{
-                  background: '#ffffcc',
-                  borderTop: '2px solid #808080',
-                  borderLeft: '2px solid #808080',
-                  borderBottom: '2px solid #dfdfdf',
-                  borderRight: '2px solid #dfdfdf',
-                }}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">📧</span>
-                  <span className="text-xs md:text-sm text-[#606060]">{contactSection.email.label}</span>
-                </div>
-                <a
-                  href={`mailto:${contactSection.email.value}`}
-                  className="text-sm md:text-base text-[#0000ff] hover:text-[#ff0000] underline"
-                >
-                  {contactSection.email.value}
-                </a>
-              </div>
-
-              {/* Location */}
-              <div
-                className="p-3"
-                style={{
-                  background: '#fff',
-                  borderTop: '2px solid #808080',
-                  borderLeft: '2px solid #808080',
-                  borderBottom: '2px solid #dfdfdf',
-                  borderRight: '2px solid #dfdfdf',
-                }}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">📍</span>
-                  <span className="text-xs md:text-sm text-[#606060]">{contactSection.location.label}</span>
-                </div>
-                <span className="text-sm md:text-base text-[#000000]">{contactSection.location.value}</span>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-3">
-                <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer">
-                  <Win98Button className="flex items-center gap-2 text-xs md:text-sm">
-                    <span>🐱</span> GitHub
-                  </Win98Button>
-                </a>
-                <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer">
-                  <Win98Button className="flex items-center gap-2 text-xs md:text-sm">
-                    <span>💼</span> LinkedIn
-                  </Win98Button>
-                </a>
-              </div>
-            </div>
-
-            {/* Marquee */}
-            <div
-              className="mt-5 p-2 text-xs md:text-sm overflow-hidden"
-              style={{
-                background: '#000080',
-                color: '#ffff00',
-              }}
-            >
-              <div className="marquee">
-                Welcome to my portfolio! Feel free to reach out for collaborations or opportunities!
-              </div>
-            </div>
-          </div>
-        )
-
-      default:
-        return null
-    }
+    if (id !== 'readme') return null
+    return <ReadmeContent />
   }, [])
 
   // Window handlers
@@ -1039,12 +722,7 @@ export function TerminalSection() {
   }, [])
 
   // Desktop icons
-  const desktopIcons = [
-    { id: 'about', icon: '📄', label: 'about.txt' },
-    { id: 'skills', icon: '📁', label: 'Skills' },
-    { id: 'projects', icon: '📁', label: 'Projects' },
-    { id: 'contact', icon: '🌐', label: 'Contact' },
-  ]
+  const desktopIcons = [{ id: 'readme', icon: '📄', label: 'ReadMe' }]
 
   return (
     <section
@@ -1109,11 +787,11 @@ export function TerminalSection() {
                 {/* Boot Stage 1: Desktop */}
                 {!isShutdown && bootStage === 1 && (
                   <div className="absolute inset-0 flex flex-col animate-in fade-in duration-500">
-                    {/* Desktop Area with teal gradient */}
+                    {/* Desktop Area - Windows 98 teal */}
                     <div
                       className="flex-1 relative p-3 md:p-4 overflow-hidden"
                       style={{
-                        background: 'linear-gradient(180deg, #008080 0%, #006666 50%, #005555 100%)',
+                        background: 'linear-gradient(180deg, #7ab8b8 0%, #5a9a9a 100%)',
                       }}
                       onClick={() => {
                         setSelectedIcon(null)
