@@ -1,17 +1,16 @@
-"use client"
+'use client'
 
-import { Shader, ChromaFlow, Swirl } from "shaders/react"
-import { CustomCursor } from "@/components/custom-cursor"
-import { GrainOverlay } from "@/components/grain-overlay"
-import { WorkSection } from "@/components/sections/work-section"
-import { ServicesSection } from "@/components/sections/services-section"
-import { AboutSection } from "@/components/sections/about-section"
-import { ContactSection } from "@/components/sections/contact-section"
-import { GraphiteWrite } from "@/components/graphite-write"
-import { siteConfig } from "@/data/config"
-import { hero, navItems } from "@/data/info"
-import { Github, Linkedin } from "lucide-react"
-import { useRef, useEffect, useState } from "react"
+import { Shader, ChromaFlow, Swirl } from 'shaders/react'
+import { GrainOverlay } from '@/components/grain-overlay'
+import { ServicesSection } from '@/components/sections/services-section'
+import { ContactSection } from '@/components/sections/contact-section'
+import { GraphiteWrite } from '@/components/graphite-write'
+import { siteConfig } from '@/data/config'
+import { hero, navItems } from '@/data/info'
+import { Github, Linkedin } from 'lucide-react'
+import { useRef, useEffect, useState } from 'react'
+
+const TOTAL_SECTIONS = 3
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -27,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     const checkShaderReady = () => {
       if (shaderContainerRef.current) {
-        const canvas = shaderContainerRef.current.querySelector("canvas")
+        const canvas = shaderContainerRef.current.querySelector('canvas')
         if (canvas && canvas.width > 0 && canvas.height > 0) {
           setIsLoaded(true)
           return true
@@ -60,12 +59,11 @@ export default function Home() {
       const sectionWidth = scrollContainerRef.current.offsetWidth
       scrollContainerRef.current.scrollTo({
         left: sectionWidth * index,
-        behavior: "smooth",
+        behavior: 'smooth',
       })
       setCurrentSection(index)
       setIsMobileMenuOpen(false)
 
-      // Reset scrolling flag after animation
       setTimeout(() => {
         isScrollingRef.current = false
       }, 600)
@@ -92,9 +90,8 @@ export default function Home() {
       const deltaY = touchStartY.current - touchEndY
       const deltaX = touchStartX.current - touchEndX
 
-      // Prioritize vertical swipe for section navigation
       if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 60) {
-        if (deltaY > 0 && currentSection < 4) {
+        if (deltaY > 0 && currentSection < TOTAL_SECTIONS - 1) {
           scrollToSection(currentSection + 1)
         } else if (deltaY < 0 && currentSection > 0) {
           scrollToSection(currentSection - 1)
@@ -104,20 +101,16 @@ export default function Home() {
 
     const container = scrollContainerRef.current
     if (container) {
-      container.addEventListener("touchstart", handleTouchStart, {
-        passive: true,
-      })
-      container.addEventListener("touchmove", handleTouchMove, {
-        passive: false,
-      })
-      container.addEventListener("touchend", handleTouchEnd, { passive: true })
+      container.addEventListener('touchstart', handleTouchStart, { passive: true })
+      container.addEventListener('touchmove', handleTouchMove, { passive: false })
+      container.addEventListener('touchend', handleTouchEnd, { passive: true })
     }
 
     return () => {
       if (container) {
-        container.removeEventListener("touchstart", handleTouchStart)
-        container.removeEventListener("touchmove", handleTouchMove)
-        container.removeEventListener("touchend", handleTouchEnd)
+        container.removeEventListener('touchstart', handleTouchStart)
+        container.removeEventListener('touchmove', handleTouchMove)
+        container.removeEventListener('touchend', handleTouchEnd)
       }
     }
   }, [currentSection])
@@ -131,13 +124,11 @@ export default function Home() {
 
         scrollContainerRef.current.scrollBy({
           left: e.deltaY * 0.5,
-          behavior: "smooth",
+          behavior: 'smooth',
         })
 
         const sectionWidth = scrollContainerRef.current.offsetWidth
-        const newSection = Math.round(
-          scrollContainerRef.current.scrollLeft / sectionWidth,
-        )
+        const newSection = Math.round(scrollContainerRef.current.scrollLeft / sectionWidth)
         if (newSection !== currentSection) {
           setCurrentSection(newSection)
         }
@@ -146,12 +137,12 @@ export default function Home() {
 
     const container = scrollContainerRef.current
     if (container) {
-      container.addEventListener("wheel", handleWheel, { passive: false })
+      container.addEventListener('wheel', handleWheel, { passive: false })
     }
 
     return () => {
       if (container) {
-        container.removeEventListener("wheel", handleWheel)
+        container.removeEventListener('wheel', handleWheel)
       }
     }
   }, [currentSection])
@@ -170,11 +161,7 @@ export default function Home() {
         const scrollLeft = scrollContainerRef.current.scrollLeft
         const newSection = Math.round(scrollLeft / sectionWidth)
 
-        if (
-          newSection !== currentSection &&
-          newSection >= 0 &&
-          newSection <= 4
-        ) {
+        if (newSection !== currentSection && newSection >= 0 && newSection < TOTAL_SECTIONS) {
           setCurrentSection(newSection)
         }
 
@@ -184,12 +171,12 @@ export default function Home() {
 
     const container = scrollContainerRef.current
     if (container) {
-      container.addEventListener("scroll", handleScroll, { passive: true })
+      container.addEventListener('scroll', handleScroll, { passive: true })
     }
 
     return () => {
       if (container) {
-        container.removeEventListener("scroll", handleScroll)
+        container.removeEventListener('scroll', handleScroll)
       }
       if (scrollThrottleRef.current) {
         cancelAnimationFrame(scrollThrottleRef.current)
@@ -197,15 +184,23 @@ export default function Home() {
     }
   }, [currentSection])
 
+  // Listen for shutdown event from PC
+  useEffect(() => {
+    const handleShutdown = () => {
+      scrollToSection(0)
+    }
+    window.addEventListener('shutdownPC', handleShutdown)
+    return () => window.removeEventListener('shutdownPC', handleShutdown)
+  }, [])
+
   return (
     <main className="relative h-screen w-full overflow-hidden bg-background">
-      <CustomCursor />
       <GrainOverlay />
 
       <div
         ref={shaderContainerRef}
-        className={`fixed inset-0 z-0 transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-        style={{ contain: "strict" }}
+        className={`fixed inset-0 z-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ contain: 'strict' }}
       >
         <Shader className="h-full w-full">
           <Swirl
@@ -240,21 +235,17 @@ export default function Home() {
       {/* Navbar */}
       <nav
         className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-5 py-3 transition-opacity duration-700 md:px-12 md:py-6 ${
-          isLoaded ? "opacity-100" : "opacity-0"
+          isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <div className="flex items-center gap-4">
-          {/* Mobile grafite - substitui $ crz - apenas na home */}
           <div className="md:hidden w-24 ml-1 mt-3">
             {currentSection === 0 && (
-              <div className={currentSection === 0 ? "opacity-100" : "opacity-0"}>
-              <GraphiteWrite />
-            </div>
+              <div className={currentSection === 0 ? 'opacity-100' : 'opacity-0'}>
+                <GraphiteWrite />
+              </div>
             )}
-            
           </div>
-
-       
         </div>
 
         {/* Desktop nav */}
@@ -264,15 +255,13 @@ export default function Home() {
               key={item}
               onClick={() => scrollToSection(index)}
               className={`group relative font-sans text-sm font-medium transition-colors ${
-                currentSection === index
-                  ? "text-foreground"
-                  : "text-foreground/60 hover:text-foreground"
+                currentSection === index ? 'text-foreground' : 'text-foreground/60 hover:text-foreground'
               }`}
             >
               {item}
               <span
-                className={`absolute -bottom-1 left-0 h-px bg-[#cba6f7] transition-all duration-300 ${
-                  currentSection === index ? "w-full" : "w-0 group-hover:w-full"
+                className={`absolute -bottom-1 left-0 h-px bg-primary transition-all duration-300 ${
+                  currentSection === index ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}
               />
             </button>
@@ -287,12 +276,12 @@ export default function Home() {
         >
           <span
             className={`absolute h-px w-4 bg-foreground transition-all duration-500 ease-out ${
-              isMobileMenuOpen ? "rotate-45 bg-primary" : "-translate-y-1"
+              isMobileMenuOpen ? 'rotate-45 bg-primary' : '-translate-y-1'
             }`}
           />
           <span
             className={`absolute h-px w-4 bg-foreground transition-all duration-500 ease-out ${
-              isMobileMenuOpen ? "-rotate-45 bg-primary" : "translate-y-1"
+              isMobileMenuOpen ? '-rotate-45 bg-primary' : 'translate-y-1'
             }`}
           />
         </button>
@@ -318,40 +307,32 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Mobile menu overlay - smooth unified transition */}
+      {/* Mobile menu overlay */}
       <div
         className={`fixed inset-0 z-40 transition-all duration-700 ease-out md:hidden ${
-          isMobileMenuOpen ? "visible" : "invisible"
+          isMobileMenuOpen ? 'visible' : 'invisible'
         }`}
       >
-        {/* Backdrop blur layer */}
         <div
           className={`absolute inset-0 bg-crust/98 backdrop-blur-xl transition-opacity duration-700 ${
-            isMobileMenuOpen ? "opacity-100" : "opacity-0"
+            isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
         />
 
-        {/* Content */}
         <div className="relative flex h-full flex-col items-center justify-center">
           {navItems.map((item, index) => (
             <button
               key={item}
               onClick={() => scrollToSection(index)}
               className={`overflow-hidden py-3 font-sans text-3xl font-light transition-colors duration-300 ${
-                currentSection === index
-                  ? "text-primary"
-                  : "text-foreground/60 hover:text-foreground"
+                currentSection === index ? 'text-primary' : 'text-foreground/60 hover:text-foreground'
               }`}
             >
               <span
                 className="block transition-all duration-700 ease-out"
                 style={{
-                  transitionDelay: isMobileMenuOpen
-                    ? `${100 + index * 60}ms`
-                    : "0ms",
-                  transform: isMobileMenuOpen
-                    ? "translateY(0)"
-                    : "translateY(100%)",
+                  transitionDelay: isMobileMenuOpen ? `${100 + index * 60}ms` : '0ms',
+                  transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(100%)',
                   opacity: isMobileMenuOpen ? 1 : 0,
                 }}
               >
@@ -360,28 +341,24 @@ export default function Home() {
             </button>
           ))}
 
-          {/* Subtle line separator */}
           <div
             className="my-6 h-px w-12 bg-foreground/10 transition-all duration-700"
             style={{
-              transitionDelay: isMobileMenuOpen ? "400ms" : "0ms",
-              transform: isMobileMenuOpen ? "scaleX(1)" : "scaleX(0)",
+              transitionDelay: isMobileMenuOpen ? '400ms' : '0ms',
+              transform: isMobileMenuOpen ? 'scaleX(1)' : 'scaleX(0)',
               opacity: isMobileMenuOpen ? 1 : 0,
             }}
           />
 
-          {/* Current section indicator */}
           <p
             className="font-mono text-xs text-foreground/30 transition-all duration-700"
             style={{
-              transitionDelay: isMobileMenuOpen ? "450ms" : "0ms",
-              transform: isMobileMenuOpen
-                ? "translateY(0)"
-                : "translateY(20px)",
+              transitionDelay: isMobileMenuOpen ? '450ms' : '0ms',
+              transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)',
               opacity: isMobileMenuOpen ? 1 : 0,
             }}
           >
-            {String(currentSection + 1).padStart(2, "0")} / 05
+            {String(currentSection + 1).padStart(2, '0')} / 0{TOTAL_SECTIONS}
           </p>
         </div>
       </div>
@@ -390,33 +367,30 @@ export default function Home() {
         ref={scrollContainerRef}
         data-scroll-container
         className={`relative z-10 flex h-screen overflow-x-auto overflow-y-hidden transition-opacity duration-700 ${
-          isLoaded ? "opacity-100" : "opacity-0"
+          isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          scrollSnapType: "x mandatory",
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          scrollSnapType: 'x mandatory',
         }}
       >
+        {/* Home Section */}
         <section className="relative flex min-h-screen w-screen shrink-0 snap-start snap-always flex-col justify-end px-5 pb-14 pt-28 md:px-12 md:pb-24 md:pt-24">
-          {/* Grafite desktop - canto inferior direito */}
           <div className="absolute bottom-24 right-12 hidden lg:block lg:right-16">
             <GraphiteWrite />
           </div>
 
-          {/* Main content */}
           <div className="w-full max-w-3xl">
-            <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-[#cba6f7]/50 bg-[#cba6f7]/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mb-4 md:px-5 md:py-2">
-              <p className="font-mono text-xs text-[#cba6f7] md:text-sm">
-                {hero.badge}
-              </p>
+            <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-primary/50 bg-primary/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mb-4 md:px-5 md:py-2">
+              <p className="font-mono text-xs text-primary md:text-sm">{hero.badge}</p>
             </div>
             <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-sans text-5xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 sm:text-6xl md:mb-6 md:text-8xl lg:text-9xl text-shadow-sm">
               <span className="text-balance">
                 {hero.name}
                 <span
                   className="ml-1 inline-block w-0.75 bg-primary animate-blink md:ml-2 md:w-1"
-                  style={{ height: "0.85em", verticalAlign: "baseline" }}
+                  style={{ height: '0.85em', verticalAlign: 'baseline' }}
                 />
               </span>
             </h1>
@@ -424,19 +398,16 @@ export default function Home() {
               <span className="text-pretty">{hero.description}</span>
             </p>
 
-            {/* Code-style call to action - mobile e desktop */}
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
               <button
                 onClick={() => scrollToSection(1)}
                 className="group flex items-center gap-2 transition-all duration-300 hover:gap-3"
               >
                 <span className="font-mono text-sm md:text-lg">
-                  <span className="text-primary">{hero.cta.keyword}</span>{" "}
+                  <span className="text-primary">{hero.cta.keyword}</span>{' '}
                   <span className="text-foreground/90">{hero.cta.object}</span>
                   <span className="text-foreground/40">.</span>
-                  <span className="text-accent transition-colors group-hover:text-accent/80">
-                    {hero.cta.method}
-                  </span>
+                  <span className="text-accent transition-colors group-hover:text-accent/80">{hero.cta.method}</span>
                   <span className="text-foreground/40">()</span>
                 </span>
                 <span className="text-foreground/40 transition-transform duration-300 group-hover:translate-x-1">
@@ -447,16 +418,14 @@ export default function Home() {
           </div>
         </section>
 
-        <AboutSection />
         <ServicesSection />
-        <WorkSection />
         <ContactSection />
       </div>
 
       {/* Mobile section indicators */}
       <div
         className={`fixed bottom-6 left-1/2 z-30 flex -translate-x-1/2 gap-2 transition-opacity duration-500 md:hidden ${
-          isLoaded && !isMobileMenuOpen ? "opacity-100" : "opacity-0"
+          isLoaded && !isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
         }`}
       >
         {navItems.map((_, index) => (
@@ -464,9 +433,7 @@ export default function Home() {
             key={index}
             onClick={() => scrollToSection(index)}
             className={`h-1.5 rounded-full transition-all duration-300 ${
-              currentSection === index
-                ? "w-6 bg-primary"
-                : "w-1.5 bg-foreground/30"
+              currentSection === index ? 'w-6 bg-primary' : 'w-1.5 bg-foreground/30'
             }`}
           />
         ))}

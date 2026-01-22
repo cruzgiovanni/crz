@@ -28,7 +28,7 @@ export const projects = [
     number: '01',
     title: 'Piva Insurances',
     category: 'Insurance Management Platform',
-    year: '11/2024 - 12/2025',
+    year: '11/2024 - 01/2026',
     tech: 'React • Pocketbase • Shadcn UI',
     direction: 'left' as const,
     repo: 'https://github.com/emiliobiasi/pivaseguros',
@@ -65,11 +65,6 @@ export const projects = [
     type: 'project' as const,
   },
 ]
-
-export const skillsSection = {
-  title: 'Core Skills',
-  subtitle: '/ What I build with',
-}
 
 export const skillCategories = [
   {
@@ -143,7 +138,7 @@ export const aboutSection = {
     'I code on faith and old blues from the 70s.',
   ],
   stats: [
-    { value: '3+', label: 'Years in tech', accent: true },
+    { value: `${new Date().getFullYear() - 2023}+`, label: 'Years in tech', accent: true },
     { value: 'Curious', label: 'by nature', accent: false },
   ],
 }
@@ -180,4 +175,4 @@ export const contactSection = {
   },
 }
 
-export const navItems = ['Home', 'About', 'Skills', 'Work', 'Contact']
+export const navItems = ['Home', 'Terminal', 'Contact']

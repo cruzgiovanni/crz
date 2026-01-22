@@ -1,9 +1,9 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @font-face {
-  font-family: "FirstTimeWriting";
-  src: url("/fonts/FirstTimeWriting!.ttf") format("truetype");
+  font-family: 'FirstTimeWriting';
+  src: url('/fonts/FirstTimeWriting!.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -114,9 +114,9 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --font-caveat: var(--font-caveat), "Caveat", cursive;
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-caveat: var(--font-caveat), 'Caveat', cursive;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -250,7 +250,6 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    cursor: none;
   }
   body {
     @apply bg-background text-foreground;
