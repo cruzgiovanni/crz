@@ -143,11 +143,11 @@ export function ReadmeContent() {
               >
                 Quick Facts
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="space-y-3 md:space-y-4">
                 {aboutSection.stats.map((stat, i) => (
-                  <div key={i} className="text-center p-4 bg-[#f8f8f8] border border-[#e0e0e0]">
-                    <p className="text-2xl md:text-3xl font-bold text-[#000066]">{stat.value}</p>
-                    <p className="text-sm md:text-base text-[#666666]">{stat.label}</p>
+                  <div key={i} className="p-3 md:p-4 bg-[#f8f8f8] border border-[#e0e0e0]">
+                    <span className="text-xl md:text-3xl font-bold text-[#000066]">{stat.value}</span>
+                    <span className="text-xs md:text-base text-[#666666] ml-2">{stat.label}</span>
                   </div>
                 ))}
               </div>

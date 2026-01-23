@@ -1,6 +1,6 @@
 'use client'
 
-import { TerminalSection } from '@/components/terminal/terminal-section'
+import { DesktopSection } from '@/components/desktop/desktop-section'
 import { GraphiteWrite } from '@/components/graphite-write'
 import { siteConfig } from '@/data/config'
 import { hero, navItems } from '@/data/info'
@@ -337,7 +337,7 @@ export default function Home() {
           </div>
         </section>
 
-        <TerminalSection />
+        <DesktopSection />
       </div>
 
       {/* Mobile section indicators */}
