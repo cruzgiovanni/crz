@@ -9,8 +9,14 @@ interface Track {
   src: string
 }
 
+type RepeatMode = 'off' | 'one' | 'all'
+
 const playlist: Track[] = [
-  { id: 1, title: 'Hung Up On My Baby', artist: 'Isaac Hayes', src: '/musics/hung-up-on-my-baby.mp3' },
+  { id: 1, title: 'Baker Street', artist: 'Gerry Rafferty', src: '/musics/baker-street.mp3' },
+  { id: 2, title: 'Upside Down', artist: 'Diana Ross', src: '/musics/upside-down.mp3' },
+  { id: 3, title: 'Easy Days', artist: 'The Pointer Sisters', src: '/musics/easy-days.mp3' },
+  { id: 4, title: 'Show me Love', artist: 'Robin S', src: '/musics/show-me-love.mp3' },
+  { id: 5, title: 'Hung Up On My Baby', artist: 'Isaac Hayes', src: '/musics/hung-up-on-my-baby.mp3' },
 ]
 
 export function MusicPlayerContent() {
@@ -19,6 +25,7 @@ export function MusicPlayerContent() {
   const [volume, setVolume] = useState(75)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
+  const [repeatMode, setRepeatMode] = useState<RepeatMode>('all')
   const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
@@ -50,8 +57,46 @@ export function MusicPlayerContent() {
   }
 
   const handleEnded = () => {
-    setIsPlaying(false)
-    setCurrentTime(0)
+    if (repeatMode === 'one') {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0
+        audioRef.current.play().catch(() => setIsPlaying(false))
+      }
+    } else if (repeatMode === 'all') {
+      const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id)
+      const nextIndex = (currentIndex + 1) % playlist.length
+      setCurrentTrack(playlist[nextIndex])
+      setCurrentTime(0)
+    } else {
+      const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id)
+      if (currentIndex < playlist.length - 1) {
+        setCurrentTrack(playlist[currentIndex + 1])
+        setCurrentTime(0)
+      } else {
+        setIsPlaying(false)
+        setCurrentTime(0)
+      }
+    }
+  }
+
+  const cycleRepeatMode = () => {
+    setRepeatMode((prev) => {
+      if (prev === 'off') return 'all'
+      if (prev === 'all') return 'one'
+      return 'off'
+    })
+  }
+
+  const getRepeatIcon = () => {
+    if (repeatMode === 'one') return '🔂'
+    if (repeatMode === 'all') return '🔁'
+    return '➡️'
+  }
+
+  const getRepeatLabel = () => {
+    if (repeatMode === 'one') return 'Repeat 1'
+    if (repeatMode === 'all') return 'Repeat All'
+    return 'Play Once'
   }
 
   const handleTrackSelect = (track: Track) => {
@@ -152,6 +197,7 @@ export function MusicPlayerContent() {
         <ControlButton label="⏹" onClick={handleStop} />
         <ControlButton label={isPlaying ? '⏸' : '▶'} onClick={() => setIsPlaying(!isPlaying)} primary />
         <ControlButton label="⏭" onClick={handleNext} />
+        <ControlButton label={getRepeatIcon()} onClick={cycleRepeatMode} active={repeatMode !== 'off'} />
       </div>
 
       {/* Volume */}
@@ -209,24 +255,38 @@ export function MusicPlayerContent() {
       {/* Status bar */}
       <div className="px-3 py-1 text-xs border-t border-[#888888] shrink-0" style={{ background: '#c0c0c0' }}>
         <span className="text-[#333333]">
-          {isPlaying ? '▶ Playing' : '⏹ Stopped'} | Volume: {volume}%
+          {isPlaying ? '▶ Playing' : '⏹ Stopped'} | {getRepeatLabel()} | Vol: {volume}%
         </span>
       </div>
     </div>
   )
 }
 
-function ControlButton({ label, onClick, primary = false }: { label: string; onClick: () => void; primary?: boolean }) {
+function ControlButton({
+  label,
+  onClick,
+  primary = false,
+  active = false,
+}: {
+  label: string
+  onClick: () => void
+  primary?: boolean
+  active?: boolean
+}) {
   return (
     <button
       onClick={onClick}
       className="w-8 h-8 flex items-center justify-center text-sm cursor-pointer active:translate-y-[1px] text-black"
       style={{
-        background: primary
-          ? 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)'
-          : 'linear-gradient(180deg, #eeeeee 0%, #aaaaaa 100%)',
+        background: active
+          ? 'linear-gradient(180deg, #aaaaaa 0%, #888888 100%)'
+          : primary
+            ? 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)'
+            : 'linear-gradient(180deg, #eeeeee 0%, #aaaaaa 100%)',
         border: '1px solid #000000',
-        boxShadow: 'inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff',
+        boxShadow: active
+          ? 'inset 1px 1px 0 #666666, inset -1px -1px 0 #cccccc'
+          : 'inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff',
       }}
     >
       {label}

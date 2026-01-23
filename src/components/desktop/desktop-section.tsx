@@ -726,7 +726,7 @@ export function DesktopSection() {
       isMaximized: false,
       zIndex: 100,
       position: { x: 30, y: 30 },
-      size: { width: 560, height: 400 },
+      size: { width: 680, height: 520 },
     },
     {
       id: 'terminal',
@@ -750,7 +750,7 @@ export function DesktopSection() {
       isMaximized: false,
       zIndex: 100,
       position: { x: 90, y: 90 },
-      size: { width: 400, height: 300 },
+      size: { width: 340, height: 480 },
     },
     {
       id: 'trash',
@@ -803,9 +803,9 @@ export function DesktopSection() {
         if (!container) return
 
         const rect = container.getBoundingClientRect()
-        // ReadMe window size: 560x400
-        const winWidth = 560
-        const winHeight = 400
+        // ReadMe window size: 680x520
+        const winWidth = 680
+        const winHeight = 520
         const centerX = Math.max(0, (rect.width - winWidth) / 2)
         const centerY = Math.max(0, (rect.height - winHeight) / 2 - 10)
 
