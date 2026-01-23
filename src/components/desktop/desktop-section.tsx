@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { ReadmeContent } from '@/components/desktop/apps/readme-content'
 import { TerminalContent } from '@/components/desktop/apps/terminal-content'
 import { MusicPlayerContent } from '@/components/desktop/apps/music-player-content'
+import { TrashContent } from '@/components/desktop/apps/trash-content'
 import Image from 'next/image'
 import finderIcon from '../../../public/mac-icons/finder.png'
 import readmeIcon from '../../../public/mac-icons/readme.png'
@@ -751,6 +752,18 @@ export function DesktopSection() {
       position: { x: 90, y: 90 },
       size: { width: 400, height: 300 },
     },
+    {
+      id: 'trash',
+      title: 'Trash',
+      icon: '🗑️',
+      content: null,
+      isOpen: false,
+      isMinimized: false,
+      isMaximized: false,
+      zIndex: 100,
+      position: { x: 120, y: 120 },
+      size: { width: 450, height: 320 },
+    },
   ])
 
   // Check mobile
@@ -836,6 +849,8 @@ export function DesktopSection() {
         return <TerminalContent />
       case 'music-player':
         return <MusicPlayerContent />
+      case 'trash':
+        return <TrashContent />
       default:
         return null
     }
@@ -1093,7 +1108,7 @@ export function DesktopSection() {
                           label="Trash"
                           selected={selectedIcon === 'trash'}
                           onSelect={() => setSelectedIcon('trash')}
-                          onDoubleClick={() => {}}
+                          onDoubleClick={() => openWindow('trash')}
                         />
                       </div>
 

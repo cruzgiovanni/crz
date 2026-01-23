@@ -56,7 +56,12 @@ export function ReadmeContent() {
       </aside>
 
       {/* ========== MAIN CONTENT ========== */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-8 py-6 md:py-8 bg-white">
+      <main
+        className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-8 py-6 md:py-8 bg-white"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+        style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }}
+      >
         {/* ========== HOME PAGE ========== */}
         {currentPage === 'home' && (
           <div className="animate-in fade-in duration-300">

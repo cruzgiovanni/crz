@@ -1,22 +1,101 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 interface Track {
   id: number
   title: string
   artist: string
-  duration: string
+  src: string
 }
 
 const playlist: Track[] = [
-  { id: 1, title: 'Loading...', artist: 'Cruz OS', duration: '0:00' },
+  { id: 1, title: 'Hung Up On My Baby', artist: 'Isaac Hayes', src: '/musics/hung-up-on-my-baby.mp3' },
 ]
 
 export function MusicPlayerContent() {
   const [currentTrack, setCurrentTrack] = useState<Track>(playlist[0])
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(75)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100
+    }
+  }, [volume])
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play().catch(() => setIsPlaying(false))
+      } else {
+        audioRef.current.pause()
+      }
+    }
+  }, [isPlaying, currentTrack])
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime)
+    }
+  }
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration)
+    }
+  }
+
+  const handleEnded = () => {
+    setIsPlaying(false)
+    setCurrentTime(0)
+  }
+
+  const handleTrackSelect = (track: Track) => {
+    setCurrentTrack(track)
+    setCurrentTime(0)
+    setIsPlaying(true)
+  }
+
+  const handlePrevious = () => {
+    const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id)
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : playlist.length - 1
+    handleTrackSelect(playlist[prevIndex])
+  }
+
+  const handleNext = () => {
+    const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id)
+    const nextIndex = currentIndex < playlist.length - 1 ? currentIndex + 1 : 0
+    handleTrackSelect(playlist[nextIndex])
+  }
+
+  const handleStop = () => {
+    setIsPlaying(false)
+    setCurrentTime(0)
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0
+    }
+  }
+
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (audioRef.current && duration > 0) {
+      const rect = e.currentTarget.getBoundingClientRect()
+      const percent = (e.clientX - rect.left) / rect.width
+      audioRef.current.currentTime = percent * duration
+    }
+  }
+
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return '0:00'
+    const minutes = Math.floor(time / 60)
+    const seconds = Math.floor(time % 60)
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+  }
+
+  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0
 
   return (
     <div
@@ -26,6 +105,14 @@ export function MusicPlayerContent() {
         fontFamily: 'Chicago, Geneva, sans-serif',
       }}
     >
+      <audio
+        ref={audioRef}
+        src={currentTrack.src}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
+      />
+
       {/* Display */}
       <div
         className="mx-3 mt-3 p-3 text-center"
@@ -39,33 +126,32 @@ export function MusicPlayerContent() {
         <div className="text-xs text-[#888888] mb-1">NOW PLAYING</div>
         <div className="text-sm truncate">{currentTrack.title}</div>
         <div className="text-xs text-[#00aa00] truncate">{currentTrack.artist}</div>
-        <div className="text-xs mt-2 text-[#888888]">{currentTrack.duration}</div>
+        <div className="text-xs mt-2 text-[#888888]">
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </div>
       </div>
 
       {/* Progress bar */}
       <div className="mx-3 mt-3">
         <div
-          className="h-2 w-full"
+          className="h-2 w-full cursor-pointer"
           style={{
             background: '#ffffff',
             border: '1px solid #000000',
             boxShadow: 'inset 1px 1px 0 #888888',
           }}
+          onClick={handleProgressClick}
         >
-          <div className="h-full bg-[#000080]" style={{ width: '0%' }} />
+          <div className="h-full bg-[#000080]" style={{ width: `${progressPercent}%` }} />
         </div>
       </div>
 
       {/* Controls */}
       <div className="flex items-center justify-center gap-2 mt-4 px-3">
-        <ControlButton label="⏮" onClick={() => {}} />
-        <ControlButton label="⏹" onClick={() => setIsPlaying(false)} />
-        <ControlButton
-          label={isPlaying ? '⏸' : '▶'}
-          onClick={() => setIsPlaying(!isPlaying)}
-          primary
-        />
-        <ControlButton label="⏭" onClick={() => {}} />
+        <ControlButton label="⏮" onClick={handlePrevious} />
+        <ControlButton label="⏹" onClick={handleStop} />
+        <ControlButton label={isPlaying ? '⏸' : '▶'} onClick={() => setIsPlaying(!isPlaying)} primary />
+        <ControlButton label="⏭" onClick={handleNext} />
       </div>
 
       {/* Volume */}
@@ -87,11 +173,15 @@ export function MusicPlayerContent() {
       </div>
 
       {/* Playlist */}
-      <div className="flex-1 mx-3 mt-4 mb-3 overflow-auto">
-        <div
-          className="text-xs font-bold mb-1 px-1"
-          style={{ color: '#000000' }}
-        >
+      <main
+        className="flex-1 mx-3 mt-4 mb-3 min-h-0"
+        style={{
+          overflow: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehavior: 'contain',
+        }}
+      >
+        <div className="text-xs font-bold mb-1 px-1" style={{ color: '#000000' }}>
           PLAYLIST
         </div>
         <div
@@ -104,26 +194,21 @@ export function MusicPlayerContent() {
           {playlist.map((track) => (
             <div
               key={track.id}
-              onClick={() => setCurrentTrack(track)}
+              onClick={() => handleTrackSelect(track)}
               className={`px-2 py-1 text-xs cursor-pointer flex justify-between ${
-                currentTrack.id === track.id
-                  ? 'bg-[#000080] text-white'
-                  : 'hover:bg-[#cccccc]'
+                currentTrack.id === track.id ? 'bg-[#000080] text-white' : 'text-black hover:bg-[#cccccc]'
               }`}
             >
               <span className="truncate">{track.title}</span>
-              <span className="text-[#888888] ml-2">{track.duration}</span>
+              <span className={currentTrack.id === track.id ? 'text-white/70' : 'text-[#888888]'}>{track.artist}</span>
             </div>
           ))}
         </div>
-      </div>
+      </main>
 
       {/* Status bar */}
-      <div
-        className="px-3 py-1 text-xs border-t border-[#888888]"
-        style={{ background: '#c0c0c0' }}
-      >
-        <span className="text-[#666666]">
+      <div className="px-3 py-1 text-xs border-t border-[#888888] shrink-0" style={{ background: '#c0c0c0' }}>
+        <span className="text-[#333333]">
           {isPlaying ? '▶ Playing' : '⏹ Stopped'} | Volume: {volume}%
         </span>
       </div>
@@ -131,19 +216,11 @@ export function MusicPlayerContent() {
   )
 }
 
-function ControlButton({
-  label,
-  onClick,
-  primary = false,
-}: {
-  label: string
-  onClick: () => void
-  primary?: boolean
-}) {
+function ControlButton({ label, onClick, primary = false }: { label: string; onClick: () => void; primary?: boolean }) {
   return (
     <button
       onClick={onClick}
-      className="w-8 h-8 flex items-center justify-center text-sm cursor-pointer active:translate-y-[1px]"
+      className="w-8 h-8 flex items-center justify-center text-sm cursor-pointer active:translate-y-[1px] text-black"
       style={{
         background: primary
           ? 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)'

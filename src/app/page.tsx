@@ -304,7 +304,7 @@ export default function Home() {
             <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-primary/50 bg-primary/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mb-4 md:px-5 md:py-2">
               <p className="font-mono text-xs text-primary md:text-sm">{hero.badge}</p>
             </div>
-            <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-sans text-5xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 sm:text-6xl md:mb-6 md:text-8xl lg:text-9xl text-shadow-sm">
+            <h1 className="mb-4 font-sans text-5xl font-light leading-[1.1] tracking-tight text-foreground sm:text-6xl md:mb-6 md:text-8xl lg:text-9xl text-shadow-sm">
               <span className="text-balance">
                 {hero.name}
                 <span
