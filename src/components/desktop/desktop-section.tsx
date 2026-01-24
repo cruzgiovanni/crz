@@ -7,12 +7,14 @@ import { TerminalContent } from '@/components/desktop/apps/terminal-content'
 import { MusicPlayerContent } from '@/components/desktop/apps/music-player-content'
 import { TrashContent } from '@/components/desktop/apps/trash-content'
 import { AboutContent } from '@/components/desktop/apps/about-content'
+import { PongContent } from '@/components/desktop/apps/pong-content'
 import Image from 'next/image'
 import finderIcon from '../../../public/mac-icons/finder.png'
 import readmeIcon from '../../../public/mac-icons/readme.png'
 import trashIcon from '../../../public/mac-icons/trash.png'
 import terminalIcon from '../../../public/mac-icons/terminal.png'
 import musicPlayerIcon from '../../../public/mac-icons/music-player.png'
+import pongIcon from '../../../public/mac-icons/ping-pong.png'
 
 interface WindowState {
   id: string
@@ -34,6 +36,7 @@ const DEFAULT_WINDOW_SIZES: Record<string, { width: number; height: number }> = 
   'music-player': { width: 320, height: 380 },
   trash: { width: 450, height: 320 },
   about: { width: 400, height: 320 },
+  pong: { width: 280, height: 320 },
 }
 
 // Sound utilities
@@ -763,6 +766,18 @@ function MacIcon({ src, alt }: { src: typeof readmeIcon; alt: string }) {
   )
 }
 
+function EmojiIcon({ emoji, label }: { emoji: string; label: string }) {
+  return (
+    <div
+      className="w-[32px] h-[32px] md:w-[48px] md:h-[48px] flex items-center justify-center text-2xl md:text-4xl"
+      role="img"
+      aria-label={label}
+    >
+      {emoji}
+    </div>
+  )
+}
+
 export function DesktopSection() {
   const { ref, isVisible } = useReveal(0.3)
   const [bootStage, setBootStage] = useState<'off' | 'happy' | 'loading' | 'desktop'>('off')
@@ -836,6 +851,18 @@ export function DesktopSection() {
       zIndex: 100,
       position: { x: 50, y: 40 },
       size: { width: 400, height: 320 },
+    },
+    {
+      id: 'pong',
+      title: 'Pong',
+      icon: '🏓',
+      content: null,
+      isOpen: false,
+      isMinimized: false,
+      isMaximized: false,
+      zIndex: 100,
+      position: { x: 80, y: 50 },
+      size: { width: 280, height: 320 },
     },
   ])
 
@@ -926,6 +953,8 @@ export function DesktopSection() {
         return <TrashContent />
       case 'about':
         return <AboutContent />
+      case 'pong':
+        return <PongContent />
       default:
         return null
     }
@@ -1002,6 +1031,7 @@ export function DesktopSection() {
     { id: 'readme', icon: <MacIcon src={readmeIcon} alt="ReadMe" />, label: 'ReadMe' },
     { id: 'terminal', icon: <MacIcon src={terminalIcon} alt="Terminal" />, label: 'Terminal' },
     { id: 'music-player', icon: <MacIcon src={musicPlayerIcon} alt="Music Player" />, label: 'Music Player' },
+    { id: 'pong', icon: <MacIcon src={pongIcon} alt="Pong" />, label: 'Pong' },
   ]
 
   const currentYear = new Date().getFullYear()
@@ -1175,7 +1205,7 @@ export function DesktopSection() {
                           </div>
 
                           {/* Desktop Icons - top right */}
-                          <div className="absolute top-[8px] right-[8px] md:top-[12px] md:right-[12px] flex flex-col gap-[4px]">
+                          <div className="absolute top-[8px] right-[8px] md:top-[12px] md:right-[12px] flex flex-col gap-2 md:gap-4">
                             {desktopIcons.map((icon, i) => (
                               <div
                                 key={icon.id}

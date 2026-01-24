@@ -18,11 +18,6 @@ export const hero = {
   },
 }
 
-export const projectsSection = {
-  title: 'Work',
-  subtitle: '/ Professional experience and selected projects',
-}
-
 export const projects = [
   {
     number: '01',
@@ -105,30 +100,6 @@ export const skillCategories = [
     color: '#f5c2e7',
     direction: 'bottom' as const,
   },
-]
-
-export const techTags = [
-  'TypeScript',
-  'Bun',
-  'Node.js',
-  'PostgreSQL',
-  'MongoDB',
-  'Prisma',
-  'Drizzle',
-  'Supabase',
-  'Firebase',
-  'Express.js',
-  'ElysiaJS',
-  'React',
-  'Next.js',
-  'Tailwind CSS',
-  'Solidity',
-  'Hardhat',
-  'Ethereum',
-  'Docker',
-  'AWS',
-  'Linux',
-  'Git',
 ]
 
 export const aboutSection = {

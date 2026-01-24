@@ -252,9 +252,7 @@ export function MusicPlayerContent() {
 
       {/* Status bar */}
       <div className="px-3 py-1 text-xs border-t border-[#888888] shrink-0" style={{ background: '#c0c0c0' }}>
-        <span className="text-[#333333]">
-          {isPlaying ? '▶ Playing' : '⏹ Stopped'} | {getRepeatLabel()} | Vol: {volume}%
-        </span>
+        <span className="text-[#666666] italic">Audio files not included</span>
       </div>
     </div>
   )
