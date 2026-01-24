@@ -6,23 +6,22 @@ interface Track {
   id: number
   title: string
   artist: string
-  src: string
 }
 
 type RepeatMode = 'off' | 'one' | 'all'
 
 const playlist: Track[] = [
-  { id: 1, title: 'Baker Street', artist: 'Gerry Rafferty', src: '/musics/baker-street.mp3' },
-  { id: 2, title: 'Upside Down', artist: 'Diana Ross', src: '/musics/upside-down.mp3' },
-  { id: 3, title: 'Easy Days', artist: 'The Pointer Sisters', src: '/musics/easy-days.mp3' },
-  { id: 4, title: 'Show me Love', artist: 'Robin S', src: '/musics/show-me-love.mp3' },
-  { id: 5, title: 'Hung Up On My Baby', artist: 'Isaac Hayes', src: '/musics/hung-up-on-my-baby.mp3' },
+  { id: 1, title: 'Baker Street', artist: 'Gerry Rafferty' },
+  { id: 2, title: 'Upside Down', artist: 'Diana Ross' },
+  { id: 3, title: 'Easy Days', artist: 'The Pointer Sisters' },
+  { id: 4, title: 'Show me Love', artist: 'Robin S' },
+  { id: 5, title: 'Hung Up On My Baby', artist: 'Isaac Hayes' },
 ]
 
 export function MusicPlayerContent() {
   const [currentTrack, setCurrentTrack] = useState<Track>(playlist[0])
   const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(75)
+  const [volume, setVolume] = useState(100)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [repeatMode, setRepeatMode] = useState<RepeatMode>('all')
@@ -152,7 +151,6 @@ export function MusicPlayerContent() {
     >
       <audio
         ref={audioRef}
-        src={currentTrack.src}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}

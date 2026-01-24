@@ -3,17 +3,18 @@ import { siteConfig } from './config'
 export const hero = {
   badge: 'Software Engineer',
   name: 'Giovanni Cruz',
-  description:
-    'I turn mass of JSON into systems that scale, and mass of chaos into clean APIs. Backend-focused, full-stack capable.',
+  intro: 'Writing code that reads like prose and performs like a machine. Precise. Intentional. Uncluttered.',
+  description: 'I design systems with a strong sense of structure and restraint.',
+  paragraph: 'Less noise. More intention.',
   cta: {
     keyword: 'await',
     object: 'portfolio',
     method: 'explore',
   },
   graphite: {
-    crossedOutWord: 'Googling',
-    graphitedWord: 'Engineering',
-    continuationText: 'solutions',
+    crossedOutWord: 'Overengineered',
+    graphitedWord: 'Essential',
+    continuationText: 'logic',
   },
 }
 
@@ -133,12 +134,15 @@ export const techTags = [
 export const aboutSection = {
   label: 'About me',
   paragraphs: [
-    'Software Engineer with a degree in Analysis and Systems Development from FIAP. I bring experience solving real problems through technology. Not just shipping code, but addressing pain points and delivering measurable results.',
-    'I code on faith and old blues from the 70s.',
+    'I’m a Software Engineer drawn to systems and aesthetics that age well. ',
+    'In code, that means structure, restraint, and clarity.',
+    'Outside of it, the same principles apply.',
+    'Software. Habits. Style.',
   ],
+  signature: '// I code on faith and old blues from the 70s.',
   stats: [
-    { value: `${new Date().getFullYear() - 2023}+`, label: 'Years in tech', accent: true },
-    { value: 'Curious', label: 'by nature', accent: false },
+    { value: `${new Date().getFullYear() - 2023}+`, label: 'in software development', accent: true },
+    { value: 'Curious', label: 'by nature', accent: true },
   ],
 }
 

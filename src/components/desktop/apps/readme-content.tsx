@@ -96,15 +96,7 @@ export function ReadmeContent() {
             </p>
 
             <p className="text-xs sm:text-sm md:text-lg text-[#333333] leading-relaxed mb-4 sm:mb-6 text-justify">
-              Thank you for taking the time to check out my portfolio. I really hope you enjoy exploring it as much as I
-              enjoyed building it. If you have any questions or comments, feel free to contact me using the links below
-              or shoot me an email at{' '}
-              <a
-                href={`mailto:${contactSection.email.value}`}
-                className="text-[#000066] underline hover:text-[#0000cc] break-all"
-              >
-                {contactSection.email.value}
-              </a>
+              {hero.paragraph}
             </p>
 
             <div className="clear-both" />
@@ -134,10 +126,13 @@ export function ReadmeContent() {
               </div>
             </div>
 
-            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-lg text-[#1a1a1a] leading-relaxed text-justify">
+            <div className=" space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-lg  leading-relaxed text-justify">
               {aboutSection.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+                <p className="text-[#1a1a1a]" key={i}>
+                  {p}
+                </p>
               ))}
+              <div className="text-[#1a1a1a]/60 italic">{aboutSection.signature}</div>
             </div>
 
             <div className="clear-both" />
@@ -152,9 +147,11 @@ export function ReadmeContent() {
               </h2>
               <div className="space-y-2 sm:space-y-3 md:space-y-4">
                 {aboutSection.stats.map((stat, i) => (
-                  <div key={i} className="p-2 sm:p-3 md:p-4 bg-[#f8f8f8] border border-[#e0e0e0]">
-                    <span className="text-lg sm:text-xl md:text-3xl font-bold text-[#000066]">{stat.value}</span>
-                    <span className="text-xs sm:text-sm md:text-base text-[#666666] ml-2">{stat.label}</span>
+                  <div key={i} className="p-2 sm:p-3 md:p-4 bg-[#f8f8f8] border border-[#e0e0e0] ">
+                    <span className="text-lg sm:text-xl md:text-2xl font-bold text-[#000066]">{stat.value}</span>
+                    <span className=" text-xs sm:text-sm md:text-base text-[#666666] ml-2">
+                      {stat.label}
+                    </span>
                   </div>
                 ))}
               </div>

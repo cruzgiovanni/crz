@@ -314,7 +314,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="mb-4 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:mb-8 md:text-xl">
-              <span className="text-pretty">{hero.description}</span>
+              <span className="text-pretty">{hero.intro}</span>
             </p>
 
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">

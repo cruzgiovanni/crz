@@ -516,7 +516,7 @@ function MacMenuBar({
           {menuItems.map((item) => (
             <span
               key={item}
-              className="text-[11px] md:text-[12px] text-black cursor-default  px-[8px] md:px-[10px] py-[1px]"
+              className="text-[11px] md:text-[12px] text-black cursor-default hidden md:inline px-[8px] md:px-[10px] py-[1px]"
               style={pixelFontStyle}
             >
               {item}
@@ -1065,7 +1065,7 @@ export function DesktopSection() {
                             setAppleMenuOpen(false)
                           }}
                         >
-                          {/* Wallpaper Background - Mac OS X Aqua Blue style */}
+                          {/* Wallpaper Background  */}
                           <div
                             className="absolute inset-0 overflow-hidden"
                             style={{
