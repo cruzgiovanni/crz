@@ -14,10 +14,24 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: 'Giovanni Cruz',
-  description: 'Giovanni Cruz',
+  description: 'Giovanni Cruz - Portfolio',
   generator: 'Next.js',
   keywords: ['Giovanni', 'Cruz', 'Developer', 'Engineer', 'Software', 'Engineer'],
   applicationName: 'Giovanni Cruz',
+  openGraph: {
+    type: 'website',
+    url: 'https://giovannicruz.dev',
+    title: 'Giovanni Cruz',
+    description: 'Giovanni Cruz',
+    images: [
+      {
+        url: 'https://opengraph.b-cdn.net/production/images/4f2d23d2-08e8-42d1-9f70-a915dd9ff5ff.png?token=QvvhyqeSdO-cIyIvZBZSNIU7OFy1m9X7_NQr8mz5BdM&height=1080&width=1080&expires=33287917845',
+        width: 1080,
+        height: 1080,
+        alt: 'Giovanni Cruz',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -28,8 +42,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={playfair.variable}>
       <body className="font-sans antialiased">
-        {children}
         <Analytics />
+        {children}
       </body>
     </html>
   )

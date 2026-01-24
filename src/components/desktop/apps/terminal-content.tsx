@@ -244,11 +244,13 @@ ${link ? `Link: ${link}` : ''}`
       {history.map((entry, index) => (
         <div key={index} className="mb-2">
           <div className="flex">
-            <span className="text-[#00aaff]">guest@cruz-os</span>
-            <span className="text-white">:</span>
-            <span className="text-[#aa00ff]">~</span>
-            <span className="text-white">$&nbsp;</span>
-            <span className="text-[#00ff00]">{entry.command}</span>
+            <span className="shrink-0 whitespace-nowrap">
+              <span className="text-[#00aaff] hidden xs:inline">guest@cruz-os</span>
+              <span className="text-white hidden xs:inline">:</span>
+              <span className="text-[#aa00ff] hidden xs:inline">~</span>
+              <span className="text-white">$&nbsp;</span>
+            </span>
+            <span className="text-[#00ff00] break-all">{entry.command}</span>
           </div>
           {entry.isContact
             ? renderContactOutput()
@@ -258,17 +260,19 @@ ${link ? `Link: ${link}` : ''}`
 
       {/* Current input line */}
       <div className="flex items-center">
-        <span className="text-[#00aaff]">guest@cruz-os</span>
-        <span className="text-white">:</span>
-        <span className="text-[#aa00ff]">~</span>
-        <span className="text-white">$&nbsp;</span>
+        <span className="shrink-0 whitespace-nowrap">
+          <span className="text-[#00aaff] hidden xs:inline">guest@cruz-os</span>
+          <span className="text-white hidden xs:inline">:</span>
+          <span className="text-[#aa00ff] hidden xs:inline">~</span>
+          <span className="text-white">$&nbsp;</span>
+        </span>
         <input
           ref={inputRef}
           type="text"
           value={currentInput}
           onChange={(e) => setCurrentInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent text-[#00ff00] outline-none border-none caret-[#00ff00]"
+          className="flex-1 min-w-0 bg-transparent text-[#00ff00] outline-none border-none caret-[#00ff00]"
           autoFocus
           spellCheck={false}
         />

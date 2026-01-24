@@ -27,6 +27,15 @@ interface WindowState {
   size: { width: number; height: number }
 }
 
+// Default window sizes - used to reset on close
+const DEFAULT_WINDOW_SIZES: Record<string, { width: number; height: number }> = {
+  readme: { width: 620, height: 420 },
+  terminal: { width: 500, height: 350 },
+  'music-player': { width: 320, height: 380 },
+  trash: { width: 450, height: 320 },
+  about: { width: 400, height: 320 },
+}
+
 // Sound utilities
 const playClickSound = () => {
   if (typeof window !== 'undefined') {
@@ -940,7 +949,18 @@ export function DesktopSection() {
   )
 
   const closeWindow = useCallback((id: string) => {
-    setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, isOpen: false, isMaximized: false } : w)))
+    setWindows((prev) =>
+      prev.map((w) =>
+        w.id === id
+          ? {
+              ...w,
+              isOpen: false,
+              isMaximized: false,
+              size: DEFAULT_WINDOW_SIZES[id] || w.size,
+            }
+          : w,
+      ),
+    )
   }, [])
 
   const minimizeWindow = useCallback((id: string) => {

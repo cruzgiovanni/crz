@@ -130,6 +130,9 @@
 }
 
 @theme inline {
+  /* Custom breakpoint for extra small screens */
+  --breakpoint-xs: 400px;
+
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --font-caveat: var(--font-caveat), 'Caveat', cursive;

@@ -22,7 +22,7 @@ export function ReadmeContent() {
   return (
     <div className="flex h-full min-h-full" style={{ fontFamily: "'Millennium', monospace" }}>
       {/* ========== SIDEBAR ========== */}
-      <aside className="w-28 sm:w-36 md:w-48 shrink-0 flex flex-col pt-4 sm:pt-6 md:pt-8 px-2 sm:px-3 md:px-5 border-r border-[#c0c0c0] bg-white">
+      <aside className="w-20 xs:w-24 sm:w-36 md:w-48 shrink-0 flex flex-col pt-4 sm:pt-6 md:pt-8 px-1.5 xs:px-2 sm:px-3 md:px-5 border-r border-[#c0c0c0] bg-white">
         {/* Logo/Name */}
         <div className="mb-6 sm:mb-8 md:mb-10">
           <h2
@@ -149,9 +149,7 @@ export function ReadmeContent() {
                 {aboutSection.stats.map((stat, i) => (
                   <div key={i} className="p-2 sm:p-3 md:p-4 bg-[#f8f8f8] border border-[#e0e0e0] ">
                     <span className="text-lg sm:text-xl md:text-2xl font-bold text-[#000066]">{stat.value}</span>
-                    <span className=" text-xs sm:text-sm md:text-base text-[#666666] ml-2">
-                      {stat.label}
-                    </span>
+                    <span className=" text-xs sm:text-sm md:text-base text-[#666666] ml-2">{stat.label}</span>
                   </div>
                 ))}
               </div>
