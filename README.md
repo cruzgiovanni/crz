@@ -16,16 +16,8 @@ Then start the development server:
 pnpm dev
 ```
 
-Or if you prefer using npm:
-
-```bash
-npm install
-npm run dev
-```
-
 # Features
 
-- Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)
 - Built using Next.js 14, React, Typescript, Shadcn/UI, TailwindCSS, Framer Motion, Magic UI
 - Responsive for different devices
 - Optimized for Next.js and Vercel
