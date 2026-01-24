@@ -7,11 +7,14 @@ export function AboutContent() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <div
+    <main
       className="h-full p-4 select-none"
       style={{
         background: '#ffffff',
         fontFamily: 'Chicago, Charcoal, Geneva, sans-serif',
+        overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        overscrollBehavior: 'contain',
       }}
     >
       {/* Header with icon and system name */}
@@ -117,6 +120,6 @@ export function AboutContent() {
       <div className="mt-4 text-center">
         <p className="text-[10px] text-[#555555]">Cruztosh Classic - Giovanni Cruz</p>
       </div>
-    </div>
+    </main>
   )
 }
