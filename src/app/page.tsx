@@ -14,11 +14,22 @@ export default function Home() {
   const [currentSection, setCurrentSection] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const touchStartY = useRef(0)
   const touchStartX = useRef(0)
   const backgroundRef = useRef<HTMLDivElement>(null)
   const scrollThrottleRef = useRef<number | null>(null)
   const isScrollingRef = useRef(false)
+
+  // Detect mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     setIsLoaded(true)
@@ -41,7 +52,10 @@ export default function Home() {
     }
   }
 
+  // Touch handlers - only for desktop
   useEffect(() => {
+    if (isMobile) return
+
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY.current = e.touches[0].clientY
       touchStartX.current = e.touches[0].clientX
@@ -84,9 +98,12 @@ export default function Home() {
         container.removeEventListener('touchend', handleTouchEnd)
       }
     }
-  }, [currentSection])
+  }, [currentSection, isMobile])
 
+  // Wheel handler - only for desktop
   useEffect(() => {
+    if (isMobile) return
+
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault()
@@ -116,9 +133,12 @@ export default function Home() {
         container.removeEventListener('wheel', handleWheel)
       }
     }
-  }, [currentSection])
+  }, [currentSection, isMobile])
 
+  // Scroll handler - only for desktop
   useEffect(() => {
+    if (isMobile) return
+
     const handleScroll = () => {
       if (scrollThrottleRef.current) return
 
@@ -153,8 +173,28 @@ export default function Home() {
         cancelAnimationFrame(scrollThrottleRef.current)
       }
     }
-  }, [currentSection])
+  }, [currentSection, isMobile])
 
+  // Mobile: render only the Macintosh
+  if (isMobile) {
+    return (
+      <main className="relative w-full overflow-hidden bg-background" style={{ height: '100dvh' }}>
+        <div
+          className={`absolute inset-0 z-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          style={{ background: '#191919' }}
+        />
+        <div
+          className={`relative z-10 h-full w-full transition-opacity duration-700 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <DesktopSection isMobileFullscreen />
+        </div>
+      </main>
+    )
+  }
+
+  // Desktop: render both pages with horizontal scroll
   return (
     <main className="relative h-screen w-full overflow-hidden bg-background">
       <div
@@ -169,24 +209,16 @@ export default function Home() {
         />
       </div>
 
-      {/* Navbar */}
+      {/* Navbar - Desktop only */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-5 py-3 transition-opacity duration-700 md:px-12 md:py-3 ${
+        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-12 py-3 transition-opacity duration-700 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="flex items-center gap-4">
-          <div className="md:hidden w-24 ml-1 mt-3">
-            {currentSection === 0 && (
-              <div className={currentSection === 0 ? 'opacity-100' : 'opacity-0'}>
-                <GraphiteWrite />
-              </div>
-            )}
-          </div>
-        </div>
+        <div className="flex items-center gap-4" />
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex ">
+        <div className="flex items-center gap-8">
           {navItems.map((item, index) => (
             <button
               key={item}
@@ -206,7 +238,7 @@ export default function Home() {
         </div>
 
         {/* Desktop social links */}
-        <div className="hidden items-center gap-2 md:flex ">
+        <div className="flex items-center gap-2">
           <a
             href={siteConfig.socials.github}
             target="_blank"
@@ -226,62 +258,6 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-700 ease-out md:hidden ${
-          isMobileMenuOpen ? 'visible' : 'invisible'
-        }`}
-      >
-        <div
-          className={`absolute inset-0 bg-crust/98 backdrop-blur-xl transition-opacity duration-700 ${
-            isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
-
-        <div className="relative flex h-full flex-col items-center justify-center">
-          {navItems.map((item, index) => (
-            <button
-              key={item}
-              onClick={() => scrollToSection(index)}
-              className={`overflow-hidden py-3 font-sans text-3xl font-light transition-colors duration-300 ${
-                currentSection === index ? 'text-primary' : 'text-foreground/60 hover:text-foreground'
-              }`}
-            >
-              <span
-                className="block transition-all duration-700 ease-out"
-                style={{
-                  transitionDelay: isMobileMenuOpen ? `${100 + index * 60}ms` : '0ms',
-                  transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(100%)',
-                  opacity: isMobileMenuOpen ? 1 : 0,
-                }}
-              >
-                {item}
-              </span>
-            </button>
-          ))}
-
-          <div
-            className="my-6 h-px w-12 bg-foreground/10 transition-all duration-700"
-            style={{
-              transitionDelay: isMobileMenuOpen ? '400ms' : '0ms',
-              transform: isMobileMenuOpen ? 'scaleX(1)' : 'scaleX(0)',
-              opacity: isMobileMenuOpen ? 1 : 0,
-            }}
-          />
-
-          <p
-            className="font-mono text-xs text-foreground/30 transition-all duration-700"
-            style={{
-              transitionDelay: isMobileMenuOpen ? '450ms' : '0ms',
-              transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)',
-              opacity: isMobileMenuOpen ? 1 : 0,
-            }}
-          >
-            {String(currentSection + 1).padStart(2, '0')} / 0{TOTAL_SECTIONS}
-          </p>
-        </div>
-      </div>
-
       <div
         ref={scrollContainerRef}
         data-scroll-container
@@ -295,25 +271,25 @@ export default function Home() {
         }}
       >
         {/* Home Section */}
-        <section className="relative flex min-h-screen w-screen shrink-0 snap-start snap-always flex-col justify-end px-5 pb-14 pt-28 md:px-12 md:pb-24 md:pt-24">
+        <section className="relative flex min-h-screen w-screen shrink-0 snap-start snap-always flex-col justify-end px-12 pb-24 pt-24">
           <div className="absolute bottom-24 right-12 hidden lg:block lg:right-16">
             <GraphiteWrite />
           </div>
 
           <div className="w-full max-w-3xl">
-            <div className="mb-3 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-primary/50 bg-primary/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mb-4 md:px-5 md:py-2">
-              <p className="font-mono text-xs text-primary md:text-sm">{hero.badge}</p>
+            <div className="mb-4 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-primary/50 bg-primary/15 px-5 py-2 backdrop-blur-md duration-700">
+              <p className="font-mono text-sm text-primary">{hero.badge}</p>
             </div>
-            <h1 className="mb-4 font-sans text-5xl font-light leading-[1.1] tracking-tight text-foreground sm:text-6xl md:mb-6 md:text-8xl lg:text-9xl text-shadow-sm">
+            <h1 className="mb-6 font-sans text-5xl font-light leading-[1.1] tracking-tight text-foreground sm:text-6xl md:text-8xl lg:text-9xl text-shadow-sm">
               <span className="text-balance">
                 {hero.name}
                 <span
-                  className="ml-1 inline-block w-0.75 bg-primary animate-blink md:ml-2 md:w-1"
+                  className="ml-2 inline-block w-1 bg-primary animate-blink"
                   style={{ height: '0.85em', verticalAlign: 'baseline' }}
                 />
               </span>
             </h1>
-            <p className="mb-4 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:mb-8 md:text-xl">
+            <p className="mb-8 max-w-xl animate-in fade-in slide-in-from-bottom-4 leading-relaxed text-foreground/70 duration-1000 delay-200 md:text-xl">
               <span className="text-pretty">{hero.intro}</span>
             </p>
 
@@ -322,7 +298,7 @@ export default function Home() {
                 onClick={() => scrollToSection(1)}
                 className="group flex items-center gap-2 transition-all duration-300 hover:gap-3"
               >
-                <span className="font-mono text-sm md:text-lg">
+                <span className="font-mono text-lg">
                   <span className="text-primary">{hero.cta.keyword}</span>{' '}
                   <span className="text-foreground/90">{hero.cta.object}</span>
                   <span className="text-foreground/40">.</span>
@@ -338,23 +314,6 @@ export default function Home() {
         </section>
 
         <DesktopSection />
-      </div>
-
-      {/* Mobile section indicators */}
-      <div
-        className={`fixed bottom-4 left-1/2 z-30 flex -translate-x-1/2 gap-2 transition-opacity duration-500 md:hidden ${
-          isLoaded && !isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        {navItems.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToSection(index)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              currentSection === index ? 'w-6 bg-primary' : 'w-1.5 bg-foreground/30'
-            }`}
-          />
-        ))}
       </div>
 
       <style jsx global>{`

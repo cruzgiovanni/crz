@@ -100,6 +100,15 @@ export function ReadmeContent() {
             </p>
 
             <div className="clear-both" />
+
+            {/* Mobile hint */}
+            <div className="md:hidden mt-6 p-3 bg-[#fffef0] border border-[#e0d890] text-center">
+              <p className="text-[11px] text-[#666655] leading-relaxed">
+                <span className="text-base">💻</span>
+                <br />
+                <span className="italic">Tip: Visit on a computer for the full retro Mac experience!</span>
+              </p>
+            </div>
           </div>
         )}
 

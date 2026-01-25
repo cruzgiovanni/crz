@@ -778,7 +778,11 @@ function EmojiIcon({ emoji, label }: { emoji: string; label: string }) {
   )
 }
 
-export function DesktopSection() {
+interface DesktopSectionProps {
+  isMobileFullscreen?: boolean
+}
+
+export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionProps) {
   const { ref, isVisible } = useReveal(0.3)
   const [bootStage, setBootStage] = useState<'off' | 'happy' | 'loading' | 'desktop'>('off')
   const [currentTime, setCurrentTime] = useState('')
@@ -1036,6 +1040,307 @@ export function DesktopSection() {
 
   const currentYear = new Date().getFullYear()
 
+  // Mobile fullscreen: remove all padding, max constraints, and snap behavior
+  if (isMobileFullscreen) {
+    return (
+      <section ref={ref} className="flex h-full w-full items-center justify-center relative">
+        <div className="w-full h-full relative flex items-center justify-center">
+          {/* Macintosh Classic Style Monitor - Fullscreen on mobile */}
+          <div
+            className={`relative w-full h-full transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            {/* Monitor outer shell - simplified for mobile fullscreen */}
+            <div
+              className="relative w-full h-full overflow-hidden flex flex-col"
+              style={{
+                background: '#d4d0c8',
+              }}
+            >
+              {/* Screen area - takes most space */}
+              <div className="flex-1 flex flex-col pt-[2%] px-[2%]">
+                {/* Screen bezel */}
+                <div
+                  className="flex-1 relative"
+                  style={{
+                    background: 'linear-gradient(145deg, #c8c4bc 0%, #d4d0c8 50%, #ccc8c0 100%)',
+                    boxShadow: 'inset 2px 2px 8px rgba(0,0,0,0.25), inset -1px -1px 2px rgba(255,255,255,0.4)',
+                    padding: '2%',
+                  }}
+                >
+                  {/* Inner screen border */}
+                  <div
+                    className="w-full h-full relative"
+                    style={{
+                      background: '#1a1a1a',
+                      boxShadow: 'inset 0 0 10px rgba(0,0,0,0.8)',
+                      padding: '3px',
+                    }}
+                  >
+                    {/* Screen area */}
+                    <div
+                      ref={desktopRef}
+                      className="relative w-full h-full overflow-hidden"
+                      style={{ background: '#4477aa' }}
+                    >
+                      {/* Shutdown Screen */}
+                      {isShutdown && <MacShutdownScreen onPowerOn={handlePowerOn} />}
+
+                      {/* Boot Stages */}
+                      {!isShutdown && (bootStage === 'happy' || bootStage === 'loading') && (
+                        <MacBootScreen stage={bootStage} />
+                      )}
+
+                      {/* Desktop */}
+                      {!isShutdown && bootStage === 'desktop' && (
+                        <div className="absolute inset-0 flex flex-col animate-in fade-in duration-300">
+                          {/* Menu Bar */}
+                          <MacMenuBar
+                            currentTime={currentTime}
+                            onAppleMenuClick={() => setAppleMenuOpen(!appleMenuOpen)}
+                            appleMenuOpen={appleMenuOpen}
+                            onOpenWindow={openWindow}
+                            onShutdown={handleShutdown}
+                          />
+
+                          {/* Desktop Area */}
+                          <div
+                            className="flex-1 relative overflow-hidden"
+                            onClick={() => {
+                              setSelectedIcon(null)
+                              setAppleMenuOpen(false)
+                            }}
+                          >
+                            {/* Wallpaper Background */}
+                            <div
+                              className="absolute inset-0 overflow-hidden"
+                              style={{
+                                background:
+                                  'linear-gradient(180deg, #4a7ab5 0%, #3d6ca8 30%, #2d5a96 60%, #1e4a85 100%)',
+                              }}
+                            >
+                              <div
+                                className="absolute"
+                                style={{
+                                  width: '200%',
+                                  height: '120%',
+                                  left: '-80%',
+                                  bottom: '-60%',
+                                  background:
+                                    'radial-gradient(ellipse at center, rgba(120, 180, 220, 0.4) 0%, transparent 70%)',
+                                  borderRadius: '50%',
+                                }}
+                              />
+                              <div
+                                className="absolute"
+                                style={{
+                                  width: '180%',
+                                  height: '100%',
+                                  left: '-40%',
+                                  top: '-50%',
+                                  background:
+                                    'radial-gradient(ellipse at center, rgba(100, 160, 210, 0.3) 0%, transparent 60%)',
+                                  borderRadius: '50%',
+                                }}
+                              />
+                              <div
+                                className="absolute"
+                                style={{
+                                  width: '150%',
+                                  height: '80%',
+                                  left: '-20%',
+                                  top: '10%',
+                                  background:
+                                    'radial-gradient(ellipse at 30% 50%, rgba(140, 190, 230, 0.25) 0%, transparent 50%)',
+                                  borderRadius: '50%',
+                                  transform: 'rotate(-15deg)',
+                                }}
+                              />
+                            </div>
+
+                            {/* Desktop Icons - top right */}
+                            <div className="absolute top-[8px] right-[8px] flex flex-col gap-2">
+                              {desktopIcons.map((icon, i) => (
+                                <div
+                                  key={icon.id}
+                                  className="animate-in fade-in slide-in-from-right-2 duration-300"
+                                  style={{ animationDelay: `${i * 100}ms` }}
+                                >
+                                  <MacDesktopIcon
+                                    icon={icon.icon}
+                                    label={icon.label}
+                                    selected={selectedIcon === icon.id}
+                                    onSelect={() => setSelectedIcon(icon.id)}
+                                    onDoubleClick={() => openWindow(icon.id)}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Trash Icon - bottom right */}
+                            <div className="absolute bottom-[8px] right-[8px] animate-in fade-in slide-in-from-right-2 duration-300 delay-200">
+                              <MacDesktopIcon
+                                icon={<MacIcon src={trashIcon} alt="Trash" />}
+                                label="Trash"
+                                selected={selectedIcon === 'trash'}
+                                onSelect={() => setSelectedIcon('trash')}
+                                onDoubleClick={() => openWindow('trash')}
+                              />
+                            </div>
+
+                            {/* Hint */}
+                            {windows.filter((w) => w.isOpen).length === 0 && (
+                              <div className="absolute bottom-[8px] left-[8px] animate-in fade-in duration-1000 delay-500">
+                                <p
+                                  className="text-[10px] text-white/80"
+                                  style={{
+                                    fontFamily: 'Chicago, Charcoal, Geneva, sans-serif',
+                                    textShadow: '1px 1px 1px rgba(0,0,0,0.5)',
+                                  }}
+                                >
+                                  Double-click icon to open
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Windows */}
+                            {(() => {
+                              const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized)
+                              const maxZIndex = Math.max(...openWindows.map((w) => w.zIndex), 0)
+                              return windows
+                                .filter((w) => w.isOpen)
+                                .map((win) => (
+                                  <MacWindow
+                                    key={win.id}
+                                    window={win}
+                                    onClose={() => closeWindow(win.id)}
+                                    onMinimize={() => minimizeWindow(win.id)}
+                                    onMaximize={() => maximizeWindow(win.id)}
+                                    onFocus={() => focusWindow(win.id)}
+                                    onDrag={(x, y) => dragWindow(win.id, x, y)}
+                                    onResize={(w, h) => resizeWindow(win.id, w, h)}
+                                    isMobile={isMobile}
+                                    containerRef={desktopRef}
+                                    isActive={win.zIndex === maxZIndex}
+                                  />
+                                ))
+                            })()}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom section - Macintosh Classic style base */}
+              <div
+                className="h-[72px] flex flex-col shrink-0"
+                style={{
+                  background: '#d4d0c8',
+                }}
+              >
+                {/* Spacer */}
+                <div className="h-[8px]" />
+
+                {/* Recessed drive bay area */}
+                <div
+                  className="w-full h-[20px] flex items-center justify-end px-[6%]"
+                  style={{
+                    background: 'linear-gradient(180deg, #a8a498 0%, #b8b4a8 30%, #c4c0b4 70%, #ccc8bc 100%)',
+                    boxShadow:
+                      'inset 0 4px 8px rgba(0,0,0,0.25), inset 0 2px 3px rgba(0,0,0,0.2), inset 0 -2px 2px rgba(255,255,255,0.3)',
+                  }}
+                >
+                  {/* Floppy slot */}
+                  <div
+                    className="w-[80px] h-[6px]"
+                    style={{
+                      background: 'linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #333333 100%)',
+                      boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.3)',
+                      borderRadius: '1px',
+                      border: '0.5px solid #555555',
+                    }}
+                  />
+                  {/* Power LED */}
+                  <div className="ml-[10px]">
+                    <div
+                      className={`w-[5px] h-[5px] rounded-full transition-all duration-500 ${
+                        !isShutdown && bootStage === 'desktop'
+                          ? 'bg-[#00cc00]'
+                          : isShutdown
+                            ? 'bg-[#333333]'
+                            : 'bg-[#ffaa00]'
+                      }`}
+                      style={{
+                        boxShadow:
+                          !isShutdown && bootStage === 'desktop'
+                            ? '0 0 6px #00cc00, inset 0 -1px 2px rgba(0,0,0,0.3)'
+                            : isShutdown
+                              ? 'inset 0 1px 2px rgba(0,0,0,0.5)'
+                              : '0 0 4px #ffaa00, inset 0 -1px 2px rgba(0,0,0,0.3)',
+                        border: '1px solid #2a2a2a',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Apple logo and brand area */}
+                <div className="flex-1 flex items-center px-[4%]">
+                  <div className="flex items-center gap-2">
+                    {/* Rainbow Apple Logo */}
+                    <svg viewBox="0 0 18 22" className="w-[14px] h-[17px]">
+                      <defs>
+                        <clipPath id="mobileApple">
+                          <path d="M15.2 11.6c0-2.8 2.3-4.2 2.4-4.3-1.3-1.9-3.3-2.2-4-2.2-1.7-.2-3.3 1-4.2 1s-2.2-1-3.6-1c-1.9 0-3.6 1.1-4.5 2.7-1.9 3.3-.5 8.3 1.4 11 .9 1.3 2 2.8 3.5 2.8 1.4 0 1.9-.9 3.6-.9s2.2.9 3.6.9 2.5-1.4 3.4-2.7c1.1-1.5 1.5-3 1.5-3.1-.1 0-2.9-1.1-2.9-4.2zM12.5 3.8c.8-.9 1.3-2.2 1.1-3.5-1.1 0-2.4.7-3.2 1.6-.7.8-1.3 2.1-1.2 3.4 1.2.1 2.5-.6 3.3-1.5z" />
+                        </clipPath>
+                      </defs>
+                      <g clipPath="url(#mobileApple)">
+                        <rect x="0" y="0" width="20" height="3.6" fill="#61BB46" />
+                        <rect x="0" y="3.6" width="20" height="3.6" fill="#FDB827" />
+                        <rect x="0" y="7.2" width="20" height="3.6" fill="#F5821F" />
+                        <rect x="0" y="10.8" width="20" height="3.6" fill="#E03A3E" />
+                        <rect x="0" y="14.4" width="20" height="3.6" fill="#963D97" />
+                        <rect x="0" y="18" width="20" height="4" fill="#009DDC" />
+                      </g>
+                    </svg>
+                    {/* Brand text */}
+                    <span
+                      className="text-[1rem] tracking-wide"
+                      style={{
+                        fontFamily: 'Garamond, Georgia, serif',
+                        color: '#5a5a5a',
+                        fontWeight: 400,
+                      }}
+                    >
+                      Cruztosh Classic
+                    </span>
+                  </div>
+                </div>
+
+                {/* Copyright - engraved at the very bottom */}
+                <div
+                  className="text-left pb-[6px] px-[4%]"
+                  style={{
+                    fontFamily: 'Geneva, Helvetica, sans-serif',
+                    fontSize: '9px',
+                    color: '#a09a90',
+                    textShadow: '0 1px 0 rgba(255,255,255,0.5)',
+                    letterSpacing: '0.3px',
+                  }}
+                >
+                  © {currentYear} - Giovanni Cruz
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // Desktop: original layout with monitor frame
   return (
     <section
       ref={ref}
