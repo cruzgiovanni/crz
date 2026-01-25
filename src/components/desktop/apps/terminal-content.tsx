@@ -245,9 +245,9 @@ ${link ? `Link: ${link}` : ''}`
         <div key={index} className="mb-2">
           <div className="flex">
             <span className="shrink-0 whitespace-nowrap">
-              <span className="text-[#00aaff] hidden xs:inline">guest@cruz-os</span>
-              <span className="text-white hidden xs:inline">:</span>
-              <span className="text-[#aa00ff] hidden xs:inline">~</span>
+              <span className="text-[#00aaff] hidden md:inline">guest@cruz-os</span>
+              <span className="text-white hidden md:inline">:</span>
+              <span className="text-[#aa00ff]">~</span>
               <span className="text-white">$&nbsp;</span>
             </span>
             <span className="text-[#00ff00] break-all">{entry.command}</span>
@@ -261,9 +261,9 @@ ${link ? `Link: ${link}` : ''}`
       {/* Current input line */}
       <div className="flex items-center">
         <span className="shrink-0 whitespace-nowrap">
-          <span className="text-[#00aaff] hidden xs:inline">guest@cruz-os</span>
-          <span className="text-white hidden xs:inline">:</span>
-          <span className="text-[#aa00ff] hidden xs:inline">~</span>
+          <span className="text-[#00aaff] hidden md:inline">guest@cruz-os</span>
+          <span className="text-white hidden md:inline">:</span>
+          <span className="text-[#aa00ff]">~</span>
           <span className="text-white">$&nbsp;</span>
         </span>
         <input
