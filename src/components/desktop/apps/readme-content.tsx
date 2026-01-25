@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { Github, Linkedin, Mail, MapPin, ExternalLink, Code } from 'lucide-react'
 import { skillCategories, aboutSection, projects, hero, contactSection } from '@/data/info'
 import { siteConfig } from '@/data/config'
+import art from '../../../../public/art.jpeg'
+import me from '../../../../public/me.avif'
 
 type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
 
@@ -82,7 +84,7 @@ export function ReadmeContent() {
             <div className="float-right ml-3 sm:ml-6 mb-3 sm:mb-4">
               <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-40 md:h-40 border-2 border-[#cccccc] p-1 bg-[#f5f5f5]">
                 <Image
-                  src="/me.avif"
+                  src={art}
                   alt="Giovanni Cruz"
                   width={160}
                   height={160}
@@ -99,6 +101,11 @@ export function ReadmeContent() {
               {hero.paragraph}
             </p>
 
+            <p className="text-[10px] sm:text-xs md:text-sm text-[#555555] leading-relaxed mb-4 sm:mb-6">
+              <span className="italic">Cruztosh</span>: a portfolio disguised as a machine. Inspired by Mac OS 9, 1999.
+              With my own touch. Navigate the menus. Open the windows. Explore.
+            </p>
+
             <div className="clear-both" />
 
             {/* Mobile hint */}
@@ -106,7 +113,9 @@ export function ReadmeContent() {
               <p className="text-[11px] text-[#666655] leading-relaxed">
                 <span className="text-base">💻</span>
                 <br />
-                <span className="italic">Tip: Visit on a computer for the full retro Mac experience!</span>
+                <span className="italic">
+                  Tip: Visit on a computer for the full retro Macintosh (Cruztosh) experience!
+                </span>
               </p>
             </div>
           </div>
@@ -125,13 +134,7 @@ export function ReadmeContent() {
             {/* Photo */}
             <div className="float-left mr-3 sm:mr-6 mb-3 sm:mb-4">
               <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 border-2 border-[#cccccc] p-1 bg-[#f5f5f5]">
-                <Image
-                  src="/me.avif"
-                  alt="Giovanni Cruz"
-                  width={176}
-                  height={176}
-                  className="w-full h-full object-cover"
-                />
+                <Image src={me} alt="Giovanni Cruz" width={176} height={176} className="w-full h-full object-cover" />
               </div>
             </div>
 
