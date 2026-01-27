@@ -252,7 +252,7 @@ export function MusicPlayerContent() {
 
       {/* Status bar */}
       <div className="px-3 py-1 text-xs border-t border-[#888888] shrink-0" style={{ background: '#c0c0c0' }}>
-        <span className="text-[#666666] italic">Audio files not included</span>
+        <span className="text-[#666666]">⚠ Audio driver not found. Running in silent mode.</span>
       </div>
     </div>
   )
