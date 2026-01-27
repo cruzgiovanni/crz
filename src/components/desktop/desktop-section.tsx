@@ -8,6 +8,7 @@ import { MusicPlayerContent } from '@/components/desktop/apps/music-player-conte
 import { TrashContent } from '@/components/desktop/apps/trash-content'
 import { AboutContent } from '@/components/desktop/apps/about-content'
 import { PongContent } from '@/components/desktop/apps/pong-content'
+import { CalculatorWindow } from '@/components/desktop/apps/calculator-content'
 import Image from 'next/image'
 import finderIcon from '../../../public/mac-icons/finder.png'
 import readmeIcon from '../../../public/mac-icons/readme.png'
@@ -37,7 +38,11 @@ const DEFAULT_WINDOW_SIZES: Record<string, { width: number; height: number }> = 
   trash: { width: 450, height: 320 },
   about: { width: 400, height: 320 },
   pong: { width: 280, height: 320 },
+  calculator: { width: 148, height: 195 },
 }
+
+// Windows that should not be resizable
+const NON_RESIZABLE_WINDOWS = ['calculator']
 
 // Sound utilities
 const playClickSound = () => {
@@ -267,7 +272,7 @@ function MacWindow({
       >
         {/* Mac OS 9 Title Bar - active vs inactive styling */}
         <div
-          className="flex items-center h-[24px] md:h-[20px] px-[4px] md:px-[3px] select-none shrink-0"
+          className="flex items-center h-6 md:h-5 px-1 md:px-0.75 select-none shrink-0"
           style={{
             background: isActive
               ? `linear-gradient(180deg,
@@ -383,7 +388,7 @@ function MacWindow({
         </div>
 
         {/* Resize Handle - more visible */}
-        {!isMobile && !win.isMaximized && (
+        {!isMobile && !win.isMaximized && !NON_RESIZABLE_WINDOWS.includes(win.id) && (
           <div
             className="absolute bottom-0 right-0 w-[18px] h-[18px] cursor-se-resize group"
             onMouseDown={(e) => handleResizeStart(e, 'se')}
@@ -587,6 +592,31 @@ function MacMenuBar({
                 </svg>
               </span>
               <span>About This Computer</span>
+            </div>
+
+            <div className="mx-[4px] my-[3px] border-t border-[#888888]" />
+
+            <div
+              className="flex items-center gap-[6px] px-[12px] py-[3px] hover:bg-[#000080]/80 hover:text-white cursor-pointer text-black text-[11px] md:text-[12px]"
+              style={pixelFontStyle}
+              onClick={() => {
+                onOpenWindow('calculator')
+                onAppleMenuClick()
+              }}
+            >
+              <span className="w-[16px] text-center">
+                <svg viewBox="0 0 16 16" className="w-[14px] h-[14px] inline">
+                  <rect x="2" y="1" width="12" height="14" rx="1" fill="#dddddd" stroke="#000" strokeWidth="1" />
+                  <rect x="4" y="3" width="8" height="3" fill="#ffffff" stroke="#888" strokeWidth="0.5" />
+                  <rect x="4" y="7" width="2" height="2" fill="#cccccc" stroke="#888" strokeWidth="0.3" />
+                  <rect x="7" y="7" width="2" height="2" fill="#cccccc" stroke="#888" strokeWidth="0.3" />
+                  <rect x="10" y="7" width="2" height="2" fill="#cccccc" stroke="#888" strokeWidth="0.3" />
+                  <rect x="4" y="10" width="2" height="2" fill="#cccccc" stroke="#888" strokeWidth="0.3" />
+                  <rect x="7" y="10" width="2" height="2" fill="#cccccc" stroke="#888" strokeWidth="0.3" />
+                  <rect x="10" y="10" width="2" height="2" fill="#cccccc" stroke="#888" strokeWidth="0.3" />
+                </svg>
+              </span>
+              <span>Calculator</span>
             </div>
 
             <div className="mx-[4px] my-[3px] border-t border-[#888888]" />
@@ -867,6 +897,18 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       zIndex: 100,
       position: { x: 80, y: 50 },
       size: { width: 280, height: 320 },
+    },
+    {
+      id: 'calculator',
+      title: 'Calculator',
+      icon: '🧮',
+      content: null,
+      isOpen: false,
+      isMinimized: false,
+      isMaximized: false,
+      zIndex: 100,
+      position: { x: 100, y: 60 },
+      size: { width: 148, height: 195 },
     },
   ])
 
@@ -1209,7 +1251,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                               const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized)
                               const maxZIndex = Math.max(...openWindows.map((w) => w.zIndex), 0)
                               return windows
-                                .filter((w) => w.isOpen)
+                                .filter((w) => w.isOpen && w.id !== 'calculator')
                                 .map((win) => (
                                   <MacWindow
                                     key={win.id}
@@ -1225,6 +1267,23 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                                     isActive={win.zIndex === maxZIndex}
                                   />
                                 ))
+                            })()}
+
+                            {/* Calculator - custom window */}
+                            {(() => {
+                              const calcWindow = windows.find((w) => w.id === 'calculator')
+                              if (!calcWindow) return null
+                              return (
+                                <CalculatorWindow
+                                  isOpen={calcWindow.isOpen}
+                                  position={calcWindow.position}
+                                  zIndex={calcWindow.zIndex}
+                                  onClose={() => closeWindow('calculator')}
+                                  onFocus={() => focusWindow('calculator')}
+                                  onDrag={(x, y) => dragWindow('calculator', x, y)}
+                                  containerRef={desktopRef}
+                                />
+                              )
                             })()}
                           </div>
                         </div>
@@ -1340,7 +1399,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
     )
   }
 
-  // Desktop: original layout with monitor frame
+  // Desktop
   return (
     <section
       ref={ref}
@@ -1353,7 +1412,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Monitor outer shell - Macintosh Classic beige/cream color - UNIFORM */}
           <div
             className="relative w-full h-full overflow-hidden flex flex-col"
             style={{
@@ -1559,7 +1617,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                             const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized)
                             const maxZIndex = Math.max(...openWindows.map((w) => w.zIndex), 0)
                             return windows
-                              .filter((w) => w.isOpen)
+                              .filter((w) => w.isOpen && w.id !== 'calculator')
                               .map((win) => (
                                 <MacWindow
                                   key={win.id}
@@ -1575,6 +1633,23 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                                   isActive={win.zIndex === maxZIndex}
                                 />
                               ))
+                          })()}
+
+                          {/* Calculator - custom window */}
+                          {(() => {
+                            const calcWindow = windows.find((w) => w.id === 'calculator')
+                            if (!calcWindow) return null
+                            return (
+                              <CalculatorWindow
+                                isOpen={calcWindow.isOpen}
+                                position={calcWindow.position}
+                                zIndex={calcWindow.zIndex}
+                                onClose={() => closeWindow('calculator')}
+                                onFocus={() => focusWindow('calculator')}
+                                onDrag={(x, y) => dragWindow('calculator', x, y)}
+                                containerRef={desktopRef}
+                              />
+                            )
                           })()}
                         </div>
                       </div>

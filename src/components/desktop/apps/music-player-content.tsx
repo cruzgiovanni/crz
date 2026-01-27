@@ -272,7 +272,7 @@ function ControlButton({
   return (
     <button
       onClick={onClick}
-      className="w-8 h-8 flex items-center justify-center text-sm cursor-pointer active:translate-y-[1px] text-black"
+      className="w-8 h-8 flex items-center justify-center text-sm cursor-pointer active:translate-y-px text-black"
       style={{
         background: active
           ? 'linear-gradient(180deg, #aaaaaa 0%, #888888 100%)'
