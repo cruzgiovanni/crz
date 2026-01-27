@@ -37,12 +37,15 @@ The project demonstrates both frontend engineering skills and attention to desig
   - `projects` - Show project portfolio
   - `contact` - Display contact information
   - `whoami`, `date`, `echo`, `clear`
+  - `love`, - Displays the love of Giovanni’s life
 
 - **Music Player**: Retro-styled audio player interface with playlist display, playback controls, progress bar, and volume slider. Displays track metadata in authentic LCD-style display.
 
 - **Pong**: Classic arcade game playable against CPU opponent. Features paddle controls via keyboard (arrow keys/WASD) or touch, with score tracking.
 
 - **Trash**: Functional trash bin displaying deleted items with the ability to empty trash with animated deletion sequence. Persists state to localStorage.
+
+- **Calculator**: Retro-styled calculator interface with basic arithmetic operations and memory functions.
 
 - **About This Computer**: System information dialog showing "hardware specifications" in authentic Mac OS 9 styling, including memory usage bar and component details.
 
@@ -102,6 +105,7 @@ src/
         pong-content.tsx      # Pong game
         trash-content.tsx     # Trash bin
         about-content.tsx     # System information
+        calculator-content.tsx  # Retro-styled calculator interface
     graphite-write.tsx  # Decorative text component
   data/
     config.ts           # Site configuration (URLs, contact info)
@@ -201,8 +205,8 @@ Alternatively, deploy the `out/` directory to any static hosting provider after 
 
 ## Credits
 
-- Design inspired by Apple Macintosh System 7-9 and the Platinum appearance
-- Icons designed to match classic Mac OS icon style
+- Design inspired by Apple Macintosh System 9 and the Platinum appearance
+- Icons: original Mac OS icons from Apple
 - Fonts: Playfair Display (headings), system fonts for UI
 
 ---
