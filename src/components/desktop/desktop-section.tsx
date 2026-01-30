@@ -37,18 +37,59 @@ const DEFAULT_WINDOW_SIZES: Record<string, { width: number; height: number }> = 
   'music-player': { width: 320, height: 380 },
   trash: { width: 450, height: 320 },
   about: { width: 400, height: 320 },
-  pong: { width: 280, height: 320 },
+  pong: { width: 300, height: 320 },
   calculator: { width: 148, height: 195 },
 }
 
 // Windows that should not be resizable
 const NON_RESIZABLE_WINDOWS = ['calculator']
 
-// Sound utilities
+// Sound utilities - pre-loaded audio for instant playback
+let clickAudio: HTMLAudioElement | null = null
+let audioUnlocked = false
+
+const getClickAudio = () => {
+  if (typeof window === 'undefined') return null
+  if (!clickAudio) {
+    clickAudio = new Audio('/sounds/click.wav')
+    clickAudio.volume = 0.5
+    clickAudio.preload = 'auto'
+  }
+  return clickAudio
+}
+
+// Unlock audio on first user interaction (browser autoplay policy)
+const unlockAudio = () => {
+  if (audioUnlocked) return
+  const audio = getClickAudio()
+  if (audio) {
+    audio.volume = 0
+    audio
+      .play()
+      .then(() => {
+        audio.pause()
+        audio.currentTime = 0
+        audio.volume = 0.5
+        audioUnlocked = true
+      })
+      .catch(() => {})
+  }
+}
+
+// Initialize audio unlock listeners
+if (typeof window !== 'undefined') {
+  const events = ['click', 'touchstart', 'keydown']
+  const handleFirstInteraction = () => {
+    unlockAudio()
+    events.forEach((e) => window.removeEventListener(e, handleFirstInteraction))
+  }
+  events.forEach((e) => window.addEventListener(e, handleFirstInteraction, { once: true }))
+}
+
 const playClickSound = () => {
-  if (typeof window !== 'undefined') {
-    const audio = new Audio('/sounds/click.wav')
-    audio.volume = 0.5
+  const audio = getClickAudio()
+  if (audio) {
+    audio.currentTime = 0
     audio.play().catch(() => {})
   }
 }
