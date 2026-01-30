@@ -8,7 +8,7 @@ const PADDLE_HEIGHT = 40
 const PADDLE_WIDTH = 8
 const BALL_SIZE = 8
 const PADDLE_SPEED = 4
-const INITIAL_BALL_SPEED = 3
+const INITIAL_BALL_SPEED = 4
 
 export function PongContent() {
   const [playerY, setPlayerY] = useState(GAME_HEIGHT / 2 - PADDLE_HEIGHT / 2)
@@ -69,7 +69,7 @@ export function PongContent() {
         const cpuCenter = y + PADDLE_HEIGHT / 2
         const targetY = ballY + BALL_SIZE / 2
         const diff = targetY - cpuCenter
-        const speed = PADDLE_SPEED * 0.7
+        const speed = PADDLE_SPEED * 0.5
 
         if (Math.abs(diff) > 5) {
           const newY = y + (diff > 0 ? speed : -speed)
@@ -193,7 +193,7 @@ export function PongContent() {
   }, [gameStarted, startGame])
 
   return (
-    <div className="h-full flex flex-col bg-[#c0c0c0] font-['Geneva',_'Chicago',_sans-serif] text-[11px] md:text-[12px]">
+    <div className="h-full flex flex-col bg-[#c0c0c0] font-['Geneva','Chicago',sans-serif] text-[11px] md:text-[12px]">
       {/* Header */}
       <div
         className="px-3 py-2 border-b border-[#888888] shrink-0 flex items-center justify-between"
@@ -205,17 +205,32 @@ export function PongContent() {
           <span className="text-black font-bold">You: {playerScore}</span>
           <span className="text-[#666666]">CPU: {cpuScore}</span>
         </div>
-        <button
-          onClick={gameStarted ? () => setIsPaused((p) => !p) : startGame}
-          className="px-3 py-1 text-[10px] md:text-[11px] cursor-pointer active:brightness-90 text-black/90"
-          style={{
-            background: 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)',
-            border: '1px solid #000000',
-            boxShadow: 'inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff',
-          }}
-        >
-          {isPaused ? 'Start' : 'Pause'}
-        </button>
+
+        <div className="flex gap-2">
+          <button
+            onClick={gameStarted ? () => setIsPaused((p) => !p) : startGame}
+            className="px-3 py-1 text-[10px] md:text-[11px] cursor-pointer active:brightness-90 text-black/90"
+            style={{
+              background: 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)',
+              border: '1px solid #000000',
+              boxShadow: 'inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff',
+            }}
+          >
+            {isPaused ? 'Start' : 'Pause'}
+          </button>
+
+          <button
+            onClick={resetGame}
+            className="px-3 py-1 text-[10px] md:text-[11px] cursor-pointer active:brightness-90 text-black/90"
+            style={{
+              background: 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)',
+              border: '1px solid #000000',
+              boxShadow: 'inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff',
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </div>
 
       {/* Game Area */}
