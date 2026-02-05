@@ -66,18 +66,25 @@ export const skillCategories = [
     title: 'Backend',
     description: 'Building scalable APIs and server-side systems',
     technologies: [
+      'Java',
+      'Spring',
       'TypeScript',
       'Bun',
       'Node.js',
       'PostgreSQL',
-      'MongoDB',
+      'NoSQL Databases',
       'ORMs',
       'BaaS Platforms',
-      'Express.js',
-      'ElysiaJS',
     ],
     color: '#89b4fa',
     direction: 'top' as const,
+  },
+  {
+    title: 'DevOps',
+    description: 'Deploying and maintaining production systems',
+    technologies: ['Docker', 'Github Actions', 'AWS', 'Linux', 'Git'],
+    color: '#f5c2e7',
+    direction: 'bottom' as const,
   },
   {
     title: 'Frontend',
@@ -92,13 +99,6 @@ export const skillCategories = [
     technologies: ['Solidity', 'Hardhat', 'Ethereum'],
     color: '#fab387',
     direction: 'left' as const,
-  },
-  {
-    title: 'DevOps',
-    description: 'Deploying and maintaining production systems',
-    technologies: ['Docker', 'Github Actions', 'AWS', 'Linux', 'Git'],
-    color: '#f5c2e7',
-    direction: 'bottom' as const,
   },
 ]
 
