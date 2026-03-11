@@ -1,22 +1,22 @@
 import type React from 'react'
 import type { Metadata } from 'next'
-import { DM_Serif_Display, Geist, Geist_Mono, Playfair_Display } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
+import { Suspense } from 'react'
 import './globals.css'
+import { PageTransition } from '@/components/page-transition'
+import { NavigationTransition } from '@/components/navigation-transition'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Dancing_Script, Caveat } from 'next/font/google'
 
-const _geist = Geist({ subsets: ['latin'] })
-const _geistMono = Geist_Mono({ subsets: ['latin'] })
-const playfair = Playfair_Display({
+const dancingScript = Dancing_Script({
   subsets: ['latin'],
-  weight: ['700', '900'],
-  variable: '--font-display',
+  variable: '--font-dancing-script',
+  display: 'swap',
 })
 
-const dmSerifDisplay = DM_Serif_Display({
+const caveat = Caveat({
   subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-dm-serif',
+  variable: '--font-caveat',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   applicationName: 'Giovanni Cruz',
   openGraph: {
     type: 'website',
-    url: 'https://giovannicruz.dev',
+    url: 'https://giovannicruz.dev/organic',
     title: 'Giovanni Cruz',
     description: 'Giovanni Cruz - Portfolio',
     images: [
@@ -47,10 +47,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSerifDisplay.variable}`}>
-      <body className="font-sans antialiased">
-        <Analytics />
-        {children}
+    <html lang="en" className="dark">
+      <body className={`font-sans antialiased ${dancingScript.variable} ${caveat.variable}`}>
+        <Suspense fallback={null}>
+          <NavigationTransition />
+          <PageTransition>{children}</PageTransition>
+        </Suspense>
+        <SpeedInsights />
       </body>
     </html>
   )
