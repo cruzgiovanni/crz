@@ -6,7 +6,7 @@ import { Github, Linkedin, Mail, MapPin, ExternalLink, Code } from 'lucide-react
 import { skillCategories, aboutSection, projects, hero, contactSection } from '@/data/info'
 import { siteConfig } from '@/data/config'
 import art from '../../../../public/art.jpeg'
-import me from '../../../../public/me.avif'
+import me from '../../../../public/me.jpeg'
 
 type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
 
