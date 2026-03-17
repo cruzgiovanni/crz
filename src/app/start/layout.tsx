@@ -1,19 +1,9 @@
 import '@/app/start.css'
-
 import type { Metadata } from 'next'
-import { Inter, Bebas_Neue } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+import { GeistPixelSquare, GeistPixelGrid, GeistPixelCircle, GeistPixelTriangle, GeistPixelLine } from 'geist/font/pixel'
 import { ThemeProvider } from '@/components/theme-provider'
-
-const bebasNeue = Bebas_Neue({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-display',
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-})
 
 export const metadata: Metadata = {
   title: 'Create Next Project',
@@ -22,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function StartLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${inter.className} ${bebasNeue.variable}`}>
+    <div className={`${GeistSans.className} ${GeistMono.className}`}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         {children}
       </ThemeProvider>
