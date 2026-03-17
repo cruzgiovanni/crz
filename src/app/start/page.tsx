@@ -1,14 +1,16 @@
-import { Hero } from '@/components/sections/hero'
-import { Problems } from '@/components/sections/problems'
-import { Services } from '@/components/sections/services'
-import { About } from '@/components/sections/about'
-import { CTA } from '@/components/sections/cta'
-import { Footer } from '@/components/sections/footer'
-import { WhatsAppButton } from '@/components/whatsapp-button'
+import { Hero } from '@/components/start/sections/hero'
+import { Navbar } from '@/components/start/sections/navbar'
+import { Problems } from '@/components/start/sections/problems'
+import { Services } from '@/components/start/sections/services'
+import { About } from '@/components/start/sections/about'
+import { CTA } from '@/components/start/sections/cta'
+import { Footer } from '@/components/start/sections/footer'
+import { WhatsAppButton } from '@/components/start/whatsapp-button'
 
 export default function Start() {
   return (
     <main className="min-h-screen bg-background">
+      <Navbar />
       <Hero />
       <Problems />
       <Services />

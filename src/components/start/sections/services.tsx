@@ -1,54 +1,27 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
+import { servicesContent } from '@/data/lp-info'
 
-const services = [
-  {
-    id: "01",
-    title: "Sites",
-    count: "(04)",
-  },
-  {
-    id: "02", 
-    title: "Sistemas",
-    count: "(03)",
-  },
-  {
-    id: "03",
-    title: "E-commerce",
-    count: "(02)",
-  },
-  {
-    id: "04",
-    title: "Consultoria",
-    count: "(01)",
-  }
-]
+const { sectionLabel, services } = servicesContent
 
 export function Services() {
   return (
     <section id="servicos" className="relative bg-background py-12 md:py-20">
       {/* Section header */}
       <div className="px-2 md:px-4 mb-6">
-        <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
-          Serviços
-        </span>
+        <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{sectionLabel}</span>
       </div>
 
       {/* Services list - compact, no gaps */}
       <div className="border-t border-border">
-        {services.map((service, index) => (
-          <motion.div
+        {services.map((service) => (
+          <div
             key={service.id}
             className="group border-b border-border cursor-pointer relative overflow-hidden"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            viewport={{ once: true }}
           >
             {/* Wireframe grid background on hover */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-              <div 
+              <div
                 className="absolute inset-0"
                 style={{
                   backgroundImage: `
@@ -66,9 +39,8 @@ export function Services() {
                   {service.title}
                 </h3>
               </div>
-              <span className="text-[10px] text-muted-foreground">{service.count}</span>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
