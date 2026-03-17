@@ -75,7 +75,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans);
   --font-display: 'Bebas Neue', Impact, sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
