@@ -24,7 +24,7 @@ export function Hero() {
       {/* Navigation - Glassmorphism */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/50">
         <div className="flex items-center justify-between px-2 md:px-4 py-2">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/start" className="flex items-center gap-2">
             <Image
               src={art}
               alt="Giovanni Cruz"
@@ -61,11 +61,11 @@ export function Hero() {
       </nav>
 
       {/* Main Hero Content */}
-      <div className="relative z-10 flex flex-col justify-center min-h-screen px-2 md:px-4 pt-16">
+      <div className="relative z-10 flex flex-col justify-center min-h-screen px-2 md:px-4 pb-4">
         {/* Giant Title */}
-        <div className="font-[family-name:var(--font-display)] leading-[0.85] tracking-tight">
+        <div className="font-sans font-bold leading-[0.85] tracking-tight">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="block text-[16vw] md:text-[14vw] text-foreground">EU FAÇO</span>
+            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-foreground">EU FAÇO</span>
           </motion.div>
 
           <motion.div
@@ -77,7 +77,7 @@ export function Hero() {
             <AnimatePresence mode="wait">
               <motion.span
                 key={words[currentWord]}
-                className="block text-[16vw] md:text-[14vw] text-[#4a4a4a]"
+                className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#4a4a4a]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -93,7 +93,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="block text-[16vw] md:text-[14vw] text-foreground">QUE PERFORMAM.</span>
+            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-foreground">QUE PERFORMAM.</span>
           </motion.div>
         </div>
 
