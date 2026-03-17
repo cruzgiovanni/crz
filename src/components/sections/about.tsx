@@ -41,7 +41,7 @@ export function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl lg:text-5xl text-foreground tracking-tight leading-[0.9]">
+            <h2 className="font-sans font-bold text-3xl md:text-4xl lg:text-5xl text-foreground tracking-tight leading-[0.9]">
               VOCÊ FALA COMIGO.
               <br />
               <span className="text-[#4a4a4a]">NÃO COM UM ATENDENTE.</span>
@@ -61,15 +61,15 @@ export function About() {
             {/* Stats */}
             <div className="mt-10 pt-6 border-t border-border grid grid-cols-3 gap-6">
               <div>
-                <span className="font-[family-name:var(--font-display)] text-2xl md:text-3xl text-foreground">5+</span>
+                <span className="font-sans font-bold text-2xl md:text-3xl text-foreground">5+</span>
                 <p className="mt-1 text-[10px] text-muted-foreground uppercase tracking-wider">Anos</p>
               </div>
               <div>
-                <span className="font-[family-name:var(--font-display)] text-2xl md:text-3xl text-foreground">50+</span>
+                <span className="font-sans font-bold text-2xl md:text-3xl text-foreground">50+</span>
                 <p className="mt-1 text-[10px] text-muted-foreground uppercase tracking-wider">Projetos</p>
               </div>
               <div>
-                <span className="font-[family-name:var(--font-display)] text-2xl md:text-3xl text-foreground">100%</span>
+                <span className="font-sans font-bold text-2xl md:text-3xl text-foreground">100%</span>
                 <p className="mt-1 text-[10px] text-muted-foreground uppercase tracking-wider">Entrega</p>
               </div>
             </div>

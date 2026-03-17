@@ -13,7 +13,7 @@ export function CTA() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[0.85]">
+          <h2 className="font-sans font-bold text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[0.85]">
             VAMOS CRIAR ALGO
             <br />
             <span className="text-[#4a4a4a]">QUE FUNCIONA?</span>

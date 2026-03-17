@@ -44,7 +44,7 @@ export function Problems() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="font-[family-name:var(--font-display)] text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight">
+          <p className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight">
             AQUI É DIFERENTE.
           </p>
           <p className="mt-3 text-muted-foreground text-xs md:text-sm max-w-md">

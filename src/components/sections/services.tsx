@@ -62,7 +62,7 @@ export function Services() {
             <div className="relative px-2 md:px-4 py-3 md:py-4 flex items-center justify-between transition-colors">
               <div className="flex items-center gap-3 md:gap-6">
                 <span className="text-[10px] text-muted-foreground w-6">{service.id}</span>
-                <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight group-hover:text-[#6a6a6a] transition-colors">
+                <h3 className="font-sans font-bold text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight group-hover:text-[#6a6a6a] transition-colors">
                   {service.title}
                 </h3>
               </div>
