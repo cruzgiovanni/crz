@@ -36,9 +36,8 @@ export function Footer() {
             textLength="100"
             lengthAdjust="spacing"
             style={{
-              fontFamily: 'var(--font-display), Bebas Neue, Impact, sans-serif',
-              fontSize: '14px',
-              fontWeight: 400,
+              fontFamily: 'var(--font-sans), sans-serif',
+              fontWeight: 700,
             }}
           >
             GVNNCRZ.
@@ -88,7 +87,7 @@ export function Footer() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl text-foreground hover:text-muted-foreground transition-colors tracking-tight leading-[1.1]"
+                  className="block font-sans font-bold text-2xl md:text-3xl text-foreground hover:text-muted-foreground transition-colors tracking-tight leading-[1.1]"
                 >
                   {link.label}
                 </Link>
@@ -105,11 +104,11 @@ export function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <a href="https://www.instagram.com/giovannicruzdev" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                 Instagram
               </a>
               <span>,</span>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <a href="https://github.com/cruzgiovanni" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                 GitHub
               </a>
               <span>,</span>
