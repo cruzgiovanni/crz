@@ -19,9 +19,9 @@ export const heroContent = {
   words: ['SITES', 'SISTEMAS', 'RESULTADOS'],
   mainTitle: {
     line1: 'EU FAÇO',
-    line2: 'QUE PERFORMAM.',
+    line2: 'QUE TRABALHAM POR VOCÊ.',
   },
-  subtitle: 'Parceiro de empresários que buscam solidez, excelência e resultados reais no digital.',
+  subtitle: 'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
 }
 
 export const problemsContent = {
@@ -33,7 +33,7 @@ export const problemsContent = {
     'E no final, ficou com um site que você tem vergonha de mostrar.',
   ],
   transition: {
-    title: 'AQUI É DIFERENTE.',
+    title: 'COMIGO NÃO.',
     subtitle: 'Entrega silenciosa. Qualidade que fala por si.',
   },
 }
@@ -44,7 +44,7 @@ export const servicesContent = {
     { id: '01', title: 'Websites' },
     { id: '02', title: 'Sistemas' },
     { id: '03', title: 'E-commerce' },
-    { id: '04', title: 'Consultoria' },
+    { id: '04', title: 'Identidade Visual' },
   ],
 }
 
@@ -59,23 +59,23 @@ export const aboutContent = {
     'Meu trabalho é entregar soluções que funcionam — com clareza, prazo e qualidade. Simples assim.',
   ],
   stats: [
-    { value: '5+', label: 'Anos' },
-    { value: '50+', label: 'Projetos' },
-    { value: '100%', label: 'Entrega' },
+    { value: '4+', label: 'Anos' },
+    { value: 'Direto', label: 'Sem intermediários' },
+    { value: '1:1', label: 'Atendimento Exclusivo' },
   ],
 }
 
 export const ctaContent = {
   title: {
-    line1: 'VAMOS CRIAR ALGO',
-    line2: 'QUE FUNCIONA?',
+    line1: 'SEU PROJETO TEM',
+    line2: 'QUEM RESOLVER.',
   },
-  buttonText: 'Conversar no WhatsApp',
+  buttonText: 'Falar no WhatsApp',
 }
 
 export const footerContent = {
   logoText: 'GVNNCRZ.',
-  ctaText: 'Pronto para elevar seu negócio? Entre em contato e vamos conversar sobre seu projeto.',
+  ctaText: 'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
   ctaLinkText: 'Fale Comigo',
   navLinks: [
     { label: 'Home', href: '/' },
