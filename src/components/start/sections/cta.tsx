@@ -7,13 +7,16 @@ const { title, buttonText } = ctaContent
 
 export function CTA() {
   return (
-    <section id="contato" className="relative bg-background py-12 md:py-20 mb-[10vh] md:mb-[15vh]">
+    <section
+      id="contact"
+      className="relative bg-background py-12 md:py-20 mb-[10vh] md:mb-[15vh]"
+    >
       <div className="px-2 md:px-4">
         <div>
-          <h2 className="font-sans font-bold text-4xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-[0.98]">
+          <h2 className="text-muted-foreground font-sans font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[0.98]">
             {title.line1}
             <br />
-            <span className="text-[#4a4a4a]">{title.line2}</span>
+            <span className="">{title.line2}</span>
           </h2>
 
           <div className="mt-6">
@@ -23,7 +26,9 @@ export function CTA() {
               className="inline-flex items-center gap-2 bg-foreground text-background px-4 py-2 text-xs font-medium hover:bg-foreground/90 transition-colors group"
             >
               {buttonText}
-              <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+              <span className="group-hover:translate-x-1 transition-transform">
+                &rarr;
+              </span>
             </Link>
           </div>
         </div>
