@@ -188,6 +188,15 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-line-shadow: line-shadow 100s linear infinite;
+  @keyframes line-shadow {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% -100%;
+    }
+  }
 }
 
 @keyframes accordion-down {
