@@ -9,7 +9,7 @@ import { WhatsAppButton } from '@/components/start/whatsapp-button'
 
 export default function Start() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background font-bold ">
       <Navbar />
       <Hero />
       <Problems />
