@@ -16,13 +16,12 @@ export const navbarContent = {
 }
 
 export const heroContent = {
-  words: ['sites', 'sistemas', 'landing pages', 'resultados'],
+  words: ['sites', 'sistemas', 'landing pages', 'resultados', 'softwares'],
   mainTitle: {
     line1: 'Eu faço',
     line2: 'que trabalham por você.',
   },
-  subtitle:
-    'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
+  subtitle: 'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
 }
 
 export const problemsContent = {
@@ -73,8 +72,7 @@ export const ctaContent = {
 
 export const footerContent = {
   logoText: 'GVNNCRZ.',
-  ctaText:
-    'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
+  ctaText: 'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
   ctaLinkText: 'Fale Comigo',
   navLinks: [
     { label: 'Home', href: '/start' },
