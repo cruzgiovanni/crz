@@ -9,31 +9,29 @@ export const navbarContent = {
     href: '/start',
   },
   navLinks: [
-    { label: 'Serviços', href: '#servicos' },
-    { label: 'Sobre', href: '#sobre' },
+    { label: 'Serviços', href: '#services' },
+    { label: 'Sobre', href: '#about' },
     { label: 'Contato', href: contactContent.whatsapp },
   ],
 }
 
 export const heroContent = {
-  words: ['SITES', 'SISTEMAS', 'RESULTADOS'],
+  words: ['sites', 'sistemas', 'landing pages', 'resultados'],
   mainTitle: {
-    line1: 'EU FAÇO',
-    line2: 'QUE TRABALHAM POR VOCÊ.',
+    line1: 'Eu faço',
+    line2: 'que trabalham por você.',
   },
-  subtitle: 'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
+  subtitle:
+    'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
 }
 
 export const problemsContent = {
   sectionLabel: 'O Problema',
   problems: [
-    'Você já contratou alguém que sumiu no meio do projeto.',
-    'Pagou caro por algo que nunca funcionou direito.',
-    'Teve que explicar a mesma coisa mil vezes.',
-    'E no final, ficou com um site que você tem vergonha de mostrar.',
+    'Você já contratou alguém que sumiu no meio do projeto. Pagou caro por algo que nunca funcionou direito. Teve que explicar a mesma coisa mil vezes. E no final, ficou com um site que você tem vergonha de mostrar.',
   ],
   transition: {
-    title: 'COMIGO NÃO.',
+    title: 'Comigo não.',
     subtitle: 'Entrega silenciosa. Qualidade que fala por si.',
   },
 }
@@ -51,37 +49,38 @@ export const servicesContent = {
 export const aboutContent = {
   sectionLabel: 'Sobre',
   title: {
-    line1: 'VOCÊ FALA COMIGO.',
-    line2: 'NÃO COM UM ATENDENTE.',
+    line1: 'Você fala comigo.',
+    line2: 'Não com uma IA.',
   },
   description: [
     'Sou desenvolvedor e trabalho diretamente com cada cliente. Sem intermediários, sem ruído, sem aquele jogo de telefone sem fio que atrasa tudo.',
-    'Meu trabalho é entregar soluções que funcionam — com clareza, prazo e qualidade. Simples assim.',
+    'Meu trabalho é entregar soluções que funcionam. Com clareza, prazo e qualidade. Simples assim.',
   ],
   stats: [
-    { value: '4+', label: 'Anos' },
+    { value: '4+', label: 'Anos de vivêncian na área' },
     { value: 'Direto', label: 'Sem intermediários' },
-    { value: '1:1', label: 'Atendimento Exclusivo' },
+    { value: '1:1', label: 'Atendimento exclusivo' },
   ],
 }
 
 export const ctaContent = {
   title: {
-    line1: 'SEU PROJETO TEM',
-    line2: 'QUEM RESOLVER.',
+    line1: 'Seu projeto tem',
+    line2: 'quem resolver.',
   },
   buttonText: 'Falar no WhatsApp',
 }
 
 export const footerContent = {
   logoText: 'GVNNCRZ.',
-  ctaText: 'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
+  ctaText:
+    'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
   ctaLinkText: 'Fale Comigo',
   navLinks: [
-    { label: 'Home', href: '/' },
-    { label: 'Serviços', href: '#servicos' },
-    { label: 'Sobre', href: '#sobre' },
-    { label: 'Contato', href: '#contato' },
+    { label: 'Home', href: '/start' },
+    { label: 'Serviços', href: '#services' },
+    { label: 'Sobre', href: '#about' },
+    { label: 'Contato', href: '#contact' },
   ],
   socialLinks: [
     { label: 'Instagram', href: 'https://www.instagram.com/giovannicruzdev' },
