@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #0a0a0a;
+  --background: #000000;
   --foreground: #fafafa;
   --card: #111111;
   --card-foreground: #fafafa;
@@ -15,7 +15,7 @@
   --secondary: #1a1a1a;
   --secondary-foreground: #fafafa;
   --muted: #262626;
-  --muted-foreground: #a3a3a3;
+  --muted-foreground: #c4c4c4;
   --accent: #1a1a1a;
   --accent-foreground: #fafafa;
   --destructive: oklch(0.577 0.245 27.325);
@@ -40,7 +40,7 @@
 }
 
 .dark {
-  --background: #0a0a0a;
+  --background: #000000;
   --foreground: #fafafa;
   --card: #111111;
   --card-foreground: #fafafa;
@@ -51,7 +51,7 @@
   --secondary: #1a1a1a;
   --secondary-foreground: #fafafa;
   --muted: #262626;
-  --muted-foreground: #a3a3a3;
+  --muted-foreground: #c4c4c4;
   --accent: #1a1a1a;
   --accent-foreground: #fafafa;
   --destructive: oklch(0.396 0.141 25.723);
@@ -140,7 +140,7 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 2px;
 }
 
 ::-webkit-scrollbar-track {
