@@ -2,8 +2,21 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, MapPin, ExternalLink, Code } from 'lucide-react'
-import { skillCategories, aboutSection, projects, hero, contactSection } from '@/data/info'
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  ExternalLink,
+  Code,
+} from 'lucide-react'
+import {
+  skillCategories,
+  aboutSection,
+  projects,
+  hero,
+  contactSection,
+} from '@/data/info'
 import { siteConfig } from '@/data/config'
 import art from '../../../../public/art.jpeg'
 import me from '../../../../public/me.jpeg'
@@ -22,14 +35,20 @@ export function ReadmeContent() {
   ]
 
   return (
-    <div className="flex h-full min-h-full" style={{ fontFamily: "'Millennium', monospace" }}>
+    <div
+      className="flex h-full min-h-full"
+      style={{ fontFamily: "'Millennium', monospace" }}
+    >
       {/* ========== SIDEBAR ========== */}
       <aside className="w-20 xs:w-24 sm:w-36 md:w-48 shrink-0 flex flex-col pt-4 sm:pt-6 md:pt-8 px-1.5 xs:px-2 sm:px-3 md:px-5 border-r border-[#c0c0c0] bg-white">
         {/* Logo/Name */}
         <div className="mb-6 sm:mb-8 md:mb-10">
           <h2
             className="text-lg sm:text-2xl md:text-3xl text-[#2a2a2a] leading-tight tracking-tight"
-            style={{ fontFamily: 'var(--font-display), serif', fontWeight: 700 }}
+            style={{
+              fontFamily: 'var(--font-display), serif',
+              fontWeight: 700,
+            }}
           >
             Giovanni
             <br />
@@ -47,11 +66,17 @@ export function ReadmeContent() {
               key={item.id}
               onClick={() => setCurrentPage(item.id)}
               className={`text-left text-xs sm:text-sm md:text-lg transition-colors flex items-center gap-1 sm:gap-2 py-0.5 sm:py-1 cursor-pointer ${
-                currentPage === item.id ? 'text-[#000000] font-bold' : 'text-[#000066] hover:text-[#0000cc]'
+                currentPage === item.id
+                  ? 'text-[#000000] font-bold'
+                  : 'text-[#000066] hover:text-[#0000cc]'
               }`}
             >
-              {currentPage === item.id && <span className="text-[#000066] text-xs sm:text-base">○</span>}
-              <span className={currentPage === item.id ? 'underline' : ''}>{item.label}</span>
+              {currentPage === item.id && (
+                <span className="text-[#000066] text-xs sm:text-base">○</span>
+              )}
+              <span className={currentPage === item.id ? 'underline' : ''}>
+                {item.label}
+              </span>
             </button>
           ))}
         </nav>
@@ -62,14 +87,20 @@ export function ReadmeContent() {
         className="flex-1 overflow-y-auto overflow-x-hidden px-3 sm:px-5 md:px-8 py-4 sm:py-6 md:py-8 bg-white"
         onWheel={(e) => e.stopPropagation()}
         onTouchMove={(e) => e.stopPropagation()}
-        style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }}
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehavior: 'contain',
+        }}
       >
         {/* ========== HOME PAGE ========== */}
         {currentPage === 'home' && (
           <div className="animate-in fade-in duration-300">
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-2 sm:mb-3"
-              style={{ fontFamily: 'var(--font-display), serif', fontWeight: 700 }}
+              style={{
+                fontFamily: 'var(--font-display), serif',
+                fontWeight: 700,
+              }}
             >
               Welcome
             </h1>
@@ -102,8 +133,9 @@ export function ReadmeContent() {
             </p>
 
             <p className="text-[10px] sm:text-xs md:text-sm text-[#555555] leading-relaxed mb-4 sm:mb-6">
-              <span className="italic">Cruztosh</span>: a portfolio disguised as a machine. Inspired by Mac OS 9, 1999.
-              With my own touch. Navigate the menus. Open the windows. Explore.
+              <span className="italic">Cruztosh</span>: a portfolio disguised as
+              a machine. Inspired by Mac OS 9, 1999. With my own touch. Navigate
+              the menus. Open the windows. Explore.
             </p>
 
             <div className="clear-both" />
@@ -114,7 +146,8 @@ export function ReadmeContent() {
                 <span className="text-base">💻</span>
                 <br />
                 <span className="italic">
-                  Tip: Visit on a computer for the full retro Macintosh (Cruztosh) experience!
+                  Tip: Visit on a computer for the full retro Macintosh
+                  (Cruztosh) experience!
                 </span>
               </p>
             </div>
@@ -126,7 +159,10 @@ export function ReadmeContent() {
           <div className="animate-in fade-in duration-300">
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
-              style={{ fontFamily: 'var(--font-display), serif', fontWeight: 700 }}
+              style={{
+                fontFamily: 'var(--font-display), serif',
+                fontWeight: 700,
+              }}
             >
               About Me
             </h1>
@@ -134,7 +170,13 @@ export function ReadmeContent() {
             {/* Photo */}
             <div className="float-left mr-3 sm:mr-6 mb-3 sm:mb-4">
               <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 border-2 border-[#cccccc] p-1 bg-[#f5f5f5]">
-                <Image src={me} alt="Giovanni Cruz" width={176} height={176} className="w-full h-full object-cover" />
+                <Image
+                  src={me}
+                  alt="Giovanni Cruz"
+                  width={176}
+                  height={176}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -144,7 +186,9 @@ export function ReadmeContent() {
                   {p}
                 </p>
               ))}
-              <div className="text-[#1a1a1a]/60 italic">{aboutSection.signature}</div>
+              <div className="text-[#1a1a1a]/60 italic">
+                {aboutSection.signature}
+              </div>
             </div>
 
             <div className="clear-both" />
@@ -159,9 +203,16 @@ export function ReadmeContent() {
               </h2>
               <div className="space-y-2 sm:space-y-3 md:space-y-4">
                 {aboutSection.stats.map((stat, i) => (
-                  <div key={i} className="p-2 sm:p-3 md:p-4 bg-[#f8f8f8] border border-[#e0e0e0] ">
-                    <span className="text-lg sm:text-xl md:text-2xl font-bold text-[#000066]">{stat.value}</span>
-                    <span className=" text-xs sm:text-sm md:text-base text-[#666666] ml-2">{stat.label}</span>
+                  <div
+                    key={i}
+                    className="p-2 sm:p-3 md:p-4 bg-[#f8f8f8] border border-[#e0e0e0] "
+                  >
+                    <span className="text-lg sm:text-xl md:text-2xl font-bold text-[#000066]">
+                      {stat.value}
+                    </span>
+                    <span className=" text-xs sm:text-sm md:text-base text-[#666666] ml-2">
+                      {stat.label}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -174,16 +225,25 @@ export function ReadmeContent() {
           <div className="animate-in fade-in duration-300">
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
-              style={{ fontFamily: 'var(--font-display), serif', fontWeight: 700 }}
+              style={{
+                fontFamily: 'var(--font-display), serif',
+                fontWeight: 700,
+              }}
             >
               Skills
             </h1>
 
             <div className="space-y-6 sm:space-y-8">
               {skillCategories.map((category) => (
-                <div key={category.title} className="pb-4 sm:pb-6 border-b border-[#e0e0e0] last:border-0">
+                <div
+                  key={category.title}
+                  className="pb-4 sm:pb-6 border-b border-[#e0e0e0] last:border-0"
+                >
                   <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                    <div className="w-3 h-3 sm:w-4 sm:h-4 rounded" style={{ backgroundColor: category.color }} />
+                    <div
+                      className="w-3 h-3 sm:w-4 sm:h-4 rounded"
+                      style={{ backgroundColor: category.color }}
+                    />
                     <h2
                       className="text-lg sm:text-xl md:text-3xl font-bold text-[#2a2a2a]"
                       style={{ fontFamily: "'Millennium', monospace" }}
@@ -191,7 +251,9 @@ export function ReadmeContent() {
                       {category.title}
                     </h2>
                   </div>
-                  <p className="text-xs sm:text-sm md:text-lg text-[#666666] mb-3 sm:mb-4">{category.description}</p>
+                  <p className="text-xs sm:text-sm md:text-lg text-[#666666] mb-3 sm:mb-4">
+                    {category.description}
+                  </p>
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {category.technologies.map((tech) => (
                       <span
@@ -213,7 +275,10 @@ export function ReadmeContent() {
           <div className="animate-in fade-in duration-300">
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
-              style={{ fontFamily: 'var(--font-display), serif', fontWeight: 700 }}
+              style={{
+                fontFamily: 'var(--font-display), serif',
+                fontWeight: 700,
+              }}
             >
               Projects
             </h1>
@@ -235,7 +300,9 @@ export function ReadmeContent() {
                       {project.year}
                     </span>
                   </div>
-                  <p className="text-sm sm:text-base md:text-lg text-[#444444] mb-1 sm:mb-2">{project.category}</p>
+                  <p className="text-sm sm:text-base md:text-lg text-[#444444] mb-1 sm:mb-2">
+                    {project.category}
+                  </p>
                   <p className="text-xs sm:text-sm md:text-base text-[#666666] mb-3 sm:mb-4 break-words">
                     {project.tech}
                   </p>
@@ -259,7 +326,10 @@ export function ReadmeContent() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm md:text-base text-[#333333] bg-[#ffffff] border border-[#333333] hover:bg-[#f5f5f5] transition-colors"
                       >
-                        <ExternalLink size={14} className="sm:w-[18px] sm:h-[18px]" />
+                        <ExternalLink
+                          size={14}
+                          className="sm:w-[18px] sm:h-[18px]"
+                        />
                         Demo
                       </a>
                     )}
@@ -275,13 +345,17 @@ export function ReadmeContent() {
           <div className="animate-in fade-in duration-300">
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
-              style={{ fontFamily: 'var(--font-display), serif', fontWeight: 700 }}
+              style={{
+                fontFamily: 'var(--font-display), serif',
+                fontWeight: 700,
+              }}
             >
               Contact
             </h1>
 
             <p className="text-xs sm:text-sm md:text-lg text-[#444444] mb-6 sm:mb-8">
-              Feel free to reach out! I&apos;m always open to discussing new projects, creative ideas, or opportunities.
+              Feel free to reach out! I&apos;m always open to discussing new
+              projects, creative ideas, or opportunities.
             </p>
 
             {/* Contact Info */}
@@ -294,7 +368,9 @@ export function ReadmeContent() {
                   <Mail size={20} className="sm:w-6 sm:h-6" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs sm:text-sm md:text-base text-[#666666]">{contactSection.email.label}</p>
+                  <p className="text-xs sm:text-sm md:text-base text-[#666666]">
+                    {contactSection.email.label}
+                  </p>
                   <p className="text-sm sm:text-base md:text-xl text-[#000066] font-bold break-all">
                     {contactSection.email.value}
                   </p>
@@ -306,7 +382,9 @@ export function ReadmeContent() {
                   <MapPin size={20} className="sm:w-6 sm:h-6" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs sm:text-sm md:text-base text-[#666666]">{contactSection.location.label}</p>
+                  <p className="text-xs sm:text-sm md:text-base text-[#666666]">
+                    {contactSection.location.label}
+                  </p>
                   <p className="text-sm sm:text-base md:text-xl text-[#1a1a1a] font-bold">
                     {contactSection.location.value}
                   </p>
