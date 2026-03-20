@@ -17,20 +17,22 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen bg-background overflow-hidden">
+    <section className="relative min-h-screen bg-background overflow-hidden tracking-tight">
       {/* Main Hero Content */}
       <div className="relative z-10 flex flex-col justify-center min-h-screen px-2 md:px-4 pb-4">
         {/* Giant Title */}
-        <div className="font-sans font-bold leading-[0.85] tracking-tight">
+        <div className="font-sans font-bold leading-[0.95] ">
           <div>
-            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-foreground">{mainTitle.line1}</span>
+            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight ">
+              {mainTitle.line1}
+            </span>
           </div>
 
           <div className="relative">
             <AnimatePresence mode="wait">
               <motion.span
                 key={words[currentWord]}
-                className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#4a4a4a]"
+                className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#c4c4c494] my-0.5 tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -42,12 +44,14 @@ export function Hero() {
           </div>
 
           <div>
-            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-foreground">{mainTitle.line2}</span>
+            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight">
+              {mainTitle.line2}
+            </span>
           </div>
         </div>
 
         {/* Subtitle */}
-        <p className="mt-6 max-w-md text-muted-foreground text-xs md:text-sm leading-relaxed">
+        <p className="mt-6 max-w-md text-[#E6E6E6] text-[0.9rem] md:text-xl tracking-tight">
           {subtitle}
         </p>
       </div>
