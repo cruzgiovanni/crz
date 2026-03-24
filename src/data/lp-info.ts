@@ -1,6 +1,5 @@
 const message = 'Olá, tudo bem? Tenho um projeto e queria conversar com você.'
 const encodedMessage = encodeURIComponent(message)
-
 const link = `https://wa.me/5519996391410?text=${encodedMessage}`
 
 export const contactContent = {
@@ -21,23 +20,22 @@ export const navbarContent = {
 }
 
 export const heroContent = {
-  words: ['sites', 'sistemas', 'landing pages', 'resultados', 'softwares'],
+  words: ['sites', 'sistemas', 'landing pages', 'presença digital', 'resultados'],
   mainTitle: {
     line1: 'Eu faço',
     line2: 'que trabalham por você.',
   },
-  subtitle:
-    'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
+  subtitle: 'Desenvolvimento sob medida. Suporte que não expira. Um parceiro fixo para o seu negócio crescer.',
 }
 
 export const problemsContent = {
   sectionLabel: 'O Problema',
   problems: [
-    'Você já contratou alguém que sumiu no meio do projeto. Pagou caro por algo que nunca funcionou direito. Teve que explicar a mesma coisa mil vezes. E no final, ficou com um site que você tem vergonha de mostrar.',
+    'A maioria dos desenvolvedores entrega um arquivo e some. Você fica com um site que ninguém mantém, ninguém melhora e ninguém atende quando algo para de funcionar.',
   ],
   transition: {
-    title: 'Comigo não.',
-    subtitle: 'Entrega silenciosa. Qualidade que fala por si.',
+    title: 'Eu sou o oposto disso.',
+    subtitle: 'Presença constante. Do primeiro dia em diante.',
   },
 }
 
@@ -54,32 +52,31 @@ export const servicesContent = {
 export const aboutContent = {
   sectionLabel: 'Sobre',
   title: {
-    line1: 'Você fala comigo.',
-    line2: 'Não com uma IA.',
+    line1: 'Sou Giovanni Cruz.',
+    line2: 'Desenvolvedor de software.',
   },
   description: [
-    'Sou desenvolvedor e trabalho diretamente com cada cliente. Sem intermediários, sem ruído, sem aquele jogo de telefone sem fio que atrasa tudo.',
-    'Meu trabalho é entregar soluções que funcionam. Com clareza, prazo e qualidade. Simples assim.',
+    'Trabalho com desenvolvimento de software desde 2021. Cada projeto é feito do zero, com código próprio e design pensado para o negócio do cliente.',
+    'Você fala diretamente comigo. Eu executo, entrego e continuo do lado. O projeto não termina na entrega.',
   ],
   stats: [
-    { value: '4+', label: 'Anos de vivêncian na área' },
-    { value: 'Direto', label: 'Sem intermediários' },
-    { value: '1:1', label: 'Atendimento exclusivo' },
+    { value: 'Desde 2021', label: 'No mercado' },
+    { value: 'Código próprio', label: 'Nada de template' },
+    { value: '1:1', label: 'Direto comigo' },
   ],
 }
 
 export const ctaContent = {
   title: {
-    line1: 'Seu projeto tem',
-    line2: 'quem resolver.',
+    line1: 'Seu negócio merece',
+    line2: 'mais do que um site.',
   },
   buttonText: 'Falar no WhatsApp',
 }
 
 export const footerContent = {
   logoText: 'GVNNCRZ.',
-  ctaText:
-    'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
+  ctaText: 'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
   ctaLinkText: 'Fale Comigo',
   navLinks: [
     { label: 'Home', href: '/start' },
@@ -92,5 +89,5 @@ export const footerContent = {
     { label: 'GitHub', href: 'https://github.com/cruzgiovanni' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/eugiovannicruz/' },
   ],
-  copyright: (year: number) => `© Giovanni Cruz ${year} - All rights reserved.`,
+  copyright: (year: number) => `© Giovanni Cruz ${year}. Todos os direitos reservados.`,
 }

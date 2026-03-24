@@ -2,15 +2,11 @@
 
 import Link from 'next/link'
 import { ctaContent, contactContent } from '@/data/lp-info'
-import { RetroGrid } from '@/components/ui/retro-grid'
-
 const { title, buttonText } = ctaContent
 
 export function CTA() {
   return (
     <section id="contact" className="relative bg-background py-12 md:py-20 mb-[10vh] md:mb-[15vh]">
-      <RetroGrid angle={55} cellSize={70} opacity={0.3} />
-      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-background" />
       <div className="relative px-2 md:px-4">
         <div>
           <h2 className="text-muted-foreground font-sans font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[0.98]">
