@@ -1,5 +1,10 @@
+const message = 'Olá, tudo bem? Tenho um projeto e queria conversar com você.'
+const encodedMessage = encodeURIComponent(message)
+
+const link = `https://wa.me/5519996391410?text=${encodedMessage}`
+
 export const contactContent = {
-  whatsapp: 'https://wa.me/5500000000000',
+  whatsapp: link,
 }
 
 export const navbarContent = {
@@ -21,7 +26,8 @@ export const heroContent = {
     line1: 'Eu faço',
     line2: 'que trabalham por você.',
   },
-  subtitle: 'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
+  subtitle:
+    'Parceiro de empresários que precisam de presença digital sólida. Sem sumiço, sem enrolação.',
 }
 
 export const problemsContent = {
@@ -72,7 +78,8 @@ export const ctaContent = {
 
 export const footerContent = {
   logoText: 'GVNNCRZ.',
-  ctaText: 'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
+  ctaText:
+    'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
   ctaLinkText: 'Fale Comigo',
   navLinks: [
     { label: 'Home', href: '/start' },
@@ -85,5 +92,5 @@ export const footerContent = {
     { label: 'GitHub', href: 'https://github.com/cruzgiovanni' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/eugiovannicruz/' },
   ],
-  copyright: (year: number) => `© Giovanni Cruz ${year} all rights reserved`,
+  copyright: (year: number) => `© Giovanni Cruz ${year} - All rights reserved.`,
 }
