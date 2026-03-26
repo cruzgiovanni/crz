@@ -11,20 +11,35 @@ export function Hero() {
   const [currentWord, setCurrentWord] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length)
-    }, 2000)
-    return () => clearInterval(interval)
+    let interval: ReturnType<typeof setInterval>
+
+    const start = () => {
+      interval = setInterval(() => {
+        setCurrentWord((prev) => (prev + 1) % words.length)
+      }, 2000)
+    }
+
+    const onVisibility = () => {
+      clearInterval(interval)
+      if (!document.hidden) start()
+    }
+
+    start()
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      clearInterval(interval)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
   }, [])
 
   return (
-    <section className="relative min-h-screen bg-background overflow-hidden tracking-tight">
+    <section className="relative min-h-screen bg-background overflow-x-hidden tracking-tight">
       {/* Main Hero Content */}
       <div className="relative z-10 flex flex-col justify-center min-h-screen px-2 md:px-4 pb-4">
         {/* Giant Title */}
         <div className="font-sans font-bold leading-[0.97] uppercase">
           <div>
-            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight ">
+            <span className="block text-[10vw] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight">
               {mainTitle.line1}
             </span>
           </div>
@@ -33,7 +48,7 @@ export function Hero() {
             <AnimatePresence mode="wait">
               <motion.span
                 key={words[currentWord]}
-                className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] my-0.5 tracking-tight"
+                className="block text-[10vw] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] my-0.5 tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -45,7 +60,7 @@ export function Hero() {
           </div>
 
           <div>
-            <span className="block text-[8vh] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight">
+            <span className="block text-[10vw] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight">
               {mainTitle.line2}
             </span>
           </div>

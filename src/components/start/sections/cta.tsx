@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { ctaContent, contactContent } from '@/data/lp-info'
 const { title, buttonText } = ctaContent

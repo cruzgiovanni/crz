@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import { aboutContent } from '@/data/lp-info'
 
@@ -14,7 +12,7 @@ export function About() {
       <div className="px-2 md:px-4">
         {/* Section label */}
         <div className="mb-6">
-          <span className="text-[1.5rem] text-[#757575]">{sectionLabel}</span>
+          <span className="text-[1.5rem] text-[#757575] tracking-tight ml-[15vw]">{sectionLabel}</span>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
@@ -22,7 +20,7 @@ export function About() {
           <div>
             <div className="relative aspect-square max-w-xs">
               <Image
-                src="me.jpeg"
+                src="/me.jpeg"
                 alt="Giovanni Cruz"
                 width={300}
                 height={300}

@@ -41,11 +41,32 @@ export const problemsContent = {
 
 export const servicesContent = {
   sectionLabel: 'Serviços',
+  title: 'Tudo que seu negócio precisa pra existir de verdade na internet.',
   services: [
-    { id: '01', title: 'Websites' },
-    { id: '02', title: 'Sistemas' },
-    { id: '03', title: 'E-commerce' },
-    { id: '04', title: 'Identidade Visual' },
+    {
+      id: '01',
+      title: 'Websites',
+      description:
+        'Sites rápidos, responsivos e feitos do zero. Sem templates. Cada detalhe pensado para converter visitantes em clientes.',
+    },
+    {
+      id: '02',
+      title: 'Sistemas',
+      description:
+        'Painéis, dashboards e ferramentas internas sob medida. Automação real para o dia a dia do seu negócio.',
+    },
+    {
+      id: '03',
+      title: 'E-commerce',
+      description:
+        'Lojas virtuais com checkout otimizado, gestão de produtos e integração com meios de pagamento.',
+    },
+    {
+      id: '04',
+      title: 'Identidade Visual',
+      description:
+        'Logo, paleta de cores e linguagem visual consistente. Sua marca com cara profissional desde o primeiro contato.',
+    },
   ],
 }
 

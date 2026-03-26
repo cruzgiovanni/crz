@@ -1,11 +1,8 @@
-'use client'
-
 import React from 'react'
-import Link from 'next/link'
 import { footerContent, contactContent } from '@/data/lp-info'
+import { FooterNavLink } from './footer-nav-link'
 
-const { logoText, ctaText, ctaLinkText, navLinks, socialLinks, copyright } =
-  footerContent
+const { logoText, ctaText, ctaLinkText, navLinks, socialLinks, copyright } = footerContent
 
 export function Footer() {
   return (
@@ -30,34 +27,25 @@ export function Footer() {
       </div>
 
       {/* Footer content - tall section like basement */}
-      <div className="min-h-[55vh] flex flex-col justify-end px-2 md:px-4 pb-4 w-full">
+      <div className="min-h-[55vh] flex flex-col justify-end px-2 md:px-4 pb-20 md:pb-4 w-full">
         {/* CTA - desktop only */}
         <div className="hidden md:block mb-8">
-          <p className="text-xl text-foreground tracking-tight mb-4">
-            {ctaText}
-          </p>
-          <Link
+          <p className="text-xl text-foreground tracking-tight mb-4">{ctaText}</p>
+          <a
             href={contactContent.whatsapp}
             target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-xs text-foreground hover:text-muted-foreground transition-colors group"
           >
             {ctaLinkText}
-            <span className="group-hover:translate-x-0.5 transition-transform">
-              &rarr;
-            </span>
-          </Link>
+            <span className="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+          </a>
         </div>
 
         {/* Navigation */}
         <nav className="space-y-0 mb-8 ">
           {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="block font-sans font-bold text-[2.8rem] md:text-5xl text-foreground hover:text-muted-foreground transition-colors tracking-tight leading-[1.1]"
-            >
-              {link.label}
-            </Link>
+            <FooterNavLink key={link.label} href={link.href} label={link.label} />
           ))}
         </nav>
 
@@ -78,9 +66,7 @@ export function Footer() {
               </React.Fragment>
             ))}
           </div>
-          <p className="text-muted-foreground">
-            {copyright(new Date().getFullYear())}
-          </p>
+          <p className="text-muted-foreground text-[0.7rem] md:text-[0.9rem]">{copyright(new Date().getFullYear())}</p>
         </div>
       </div>
     </footer>

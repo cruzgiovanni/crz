@@ -27,6 +27,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   /* Catppuccin Mocha theme */
   --background: #1e1e2e;

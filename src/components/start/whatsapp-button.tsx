@@ -10,7 +10,7 @@ export function WhatsAppButton() {
       href={contactContent.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 z-50 flex items-center justify-center w-12 h-12 bg-foreground text-background text-sm hover:bg-foreground/90 transition-colors md:bottom-6 md:right-6"
+      className="fixed bottom-4 right-2 z-30 flex items-center justify-center w-12 h-12 bg-foreground text-background text-sm hover:bg-foreground/90 transition-colors md:bottom-6 md:right-4 sm:z-50"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1, duration: 0.4 }}
