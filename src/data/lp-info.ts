@@ -25,18 +25,23 @@ export const heroContent = {
     line1: 'Eu faço',
     line2: 'que trabalham por você.',
   },
-  subtitle: 'Desenvolvimento sob medida. Suporte que não expira. Um parceiro fixo para o seu negócio crescer.',
+  subtitle: 'Do código ao suporte. Um parceiro fixo pro seu negócio.',
 }
 
 export const problemsContent = {
   sectionLabel: 'O Problema',
-  problems: [
-    'A maioria dos desenvolvedores entrega um arquivo e some. Você fica com um site que ninguém mantém, ninguém melhora e ninguém atende quando algo para de funcionar.',
+  cards: [
+    {
+      text: 'Você pagou por um site. Recebeu um link e um "qualquer coisa me chama" que nunca mais foi atendido.',
+    },
+    {
+      text: 'Você fica com um site que ninguém mantém, ninguém melhora e ninguém atende quando algo para de funcionar.',
+    },
+    {
+      text: 'Eu sou o oposto disso.',
+      subtext: 'Presença constante. Do primeiro dia em diante.',
+    },
   ],
-  transition: {
-    title: 'Eu sou o oposto disso.',
-    subtitle: 'Presença constante. Do primeiro dia em diante.',
-  },
 }
 
 export const servicesContent = {
@@ -58,8 +63,7 @@ export const servicesContent = {
     {
       id: '03',
       title: 'E-commerce',
-      description:
-        'Lojas virtuais com checkout otimizado, gestão de produtos e integração com meios de pagamento.',
+      description: 'Lojas virtuais com checkout otimizado, gestão de produtos e integração com meios de pagamento.',
     },
     {
       id: '04',
@@ -89,8 +93,8 @@ export const aboutContent = {
 
 export const ctaContent = {
   title: {
-    line1: 'Seu negócio merece',
-    line2: 'mais do que um site.',
+    line1: 'Pronto pra ter alguém',
+    line2: 'do seu lado de verdade?',
   },
   buttonText: 'Falar no WhatsApp',
 }
@@ -105,10 +109,7 @@ export const footerContent = {
     { label: 'Sobre', href: '#about' },
     { label: 'Contato', href: '#contact' },
   ],
-  socialLinks: [
-    { label: 'Instagram', href: 'https://www.instagram.com/giovannicruzdev' },
-    { label: 'GitHub', href: 'https://github.com/cruzgiovanni' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/eugiovannicruz/' },
-  ],
+  email: 'crzwebdigital@gmail.com',
+  socialLinks: [{ label: 'Instagram', href: 'https://www.instagram.com/giovannicruzdev' }],
   copyright: (year: number) => `© Giovanni Cruz ${year}. Todos os direitos reservados.`,
 }
