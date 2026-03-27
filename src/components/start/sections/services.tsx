@@ -34,21 +34,12 @@ function ServiceItemDesktop({
   )
 }
 
-/* ── Mobile: simple fade-in on viewport enter ── */
-function ServiceItemMobile({ service, index }: { service: Service; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-50px' })
-
+/* ── Mobile: static (no animation) ── */
+function ServiceItemMobile({ service }: { service: Service }) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
-      className="border-b border-border group cursor-pointer relative overflow-hidden"
-    >
+    <div className="border-b border-border group cursor-pointer relative overflow-hidden">
       <ServiceItemContent service={service} />
-    </motion.div>
+    </div>
   )
 }
 
@@ -129,7 +120,7 @@ export function Services() {
 
         <div className="mt-8 border-t border-border">
           {services.map((service, index) => (
-            <ServiceItemMobile key={service.id} service={service} index={index} />
+            <ServiceItemMobile key={service.id} service={service} />
           ))}
         </div>
       </section>
