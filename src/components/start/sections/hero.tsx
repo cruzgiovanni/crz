@@ -37,7 +37,7 @@ export function Hero() {
       {/* Main Hero Content */}
       <div className="relative z-10 flex flex-col justify-center min-h-screen px-2 md:px-4 pb-4">
         {/* Giant Title */}
-        <div className="font-sans font-bold leading-[0.97] uppercase">
+        <div className="font-sans font-bold leading-[0.97] uppercase lg:max-w-[55%]">
           <div>
             <span className="block text-[10vw] md:text-[10vh] lg:text-[12vh] text-[#E6E6E6] tracking-tight">
               {mainTitle.line1}
@@ -67,7 +67,7 @@ export function Hero() {
         </div>
 
         {/* Subtitle */}
-        <p className="mt-6  text-[#E6E6E6] text-[0.9rem] md:text-xl tracking-tight">{subtitle}</p>
+        <p className="mt-6 text-[#E6E6E6] text-[0.9rem] md:text-xl tracking-tight lg:max-w-[50%]">{subtitle}</p>
       </div>
     </section>
   )
