@@ -2,7 +2,7 @@ import React from 'react'
 import { footerContent, contactContent } from '@/data/lp-info'
 import { FooterNavLink } from './footer-nav-link'
 
-const { logoText, ctaText, ctaLinkText, navLinks, socialLinks, copyright } = footerContent
+const { logoText, ctaText, ctaLinkText, navLinks, email, socialLinks, copyright } = footerContent
 
 export function Footer() {
   return (
@@ -62,9 +62,15 @@ export function Footer() {
                 >
                   {link.label}
                 </a>
-                {index < socialLinks.length - 1 && <span>-</span>}
+                <span>-</span>
               </React.Fragment>
             ))}
+            <a
+              href={`mailto:${email}`}
+              className="hover:text-foreground transition-colors"
+            >
+              {email}
+            </a>
           </div>
           <p className="text-muted-foreground text-[0.7rem] md:text-[0.9rem]">{copyright(new Date().getFullYear())}</p>
         </div>
