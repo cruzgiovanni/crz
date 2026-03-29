@@ -5,12 +5,12 @@ import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
   title: 'Giovanni Cruz',
-  description: 'Desenvolvimento web sob medida — sites, landing pages e sistemas para o seu negócio.',
+  description: 'Websites & Softwares que impressionam.',
   openGraph: {
     type: 'website',
     url: 'https://giovannicruz.dev/start',
     title: 'Giovanni Cruz',
-    description: 'Desenvolvimento web sob medida — sites, landing pages e sistemas para o seu negócio.',
+    description: 'Websites & Softwares que impressionam.',
     images: [
       {
         url: 'https://giovannicruz.dev/art.jpeg',
