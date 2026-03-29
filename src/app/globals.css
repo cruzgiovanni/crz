@@ -27,6 +27,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   /* Catppuccin Mocha theme */
   --background: #1e1e2e;
@@ -133,8 +137,8 @@
   /* Custom breakpoint for extra small screens */
   --breakpoint-xs: 400px;
 
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --font-caveat: var(--font-caveat), 'Caveat', cursive;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -188,6 +192,15 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-line-shadow: line-shadow 100s linear infinite;
+  @keyframes line-shadow {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% -100%;
+    }
+  }
 }
 
 @keyframes accordion-down {
