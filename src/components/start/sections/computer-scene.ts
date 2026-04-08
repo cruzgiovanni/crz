@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 export function initScene(container: HTMLDivElement, onReady?: () => void): () => void {
   // Scene setup
@@ -169,16 +170,6 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     const rightLegs = createAFrameLeg(1)
     rightLegs.position.x = 1.05
     deskGroup.add(rightLegs)
-
-    // Cable management shelf
-    const shelfMat = new THREE.MeshStandardMaterial({
-      color: 0xddd8cc,
-      roughness: 0.5,
-      metalness: 0.0,
-    })
-    const cableShelf = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.02, 0.25), shelfMat)
-    cableShelf.position.set(-0.6, 0.85, -0.3)
-    deskGroup.add(cableShelf)
 
     // CRT Monitor
     const monitorGroup = new THREE.Group()
@@ -486,6 +477,57 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   }
 
   // ============================
+  // Crucifix on desk
+  // ============================
+  let crucifixGroup: THREE.Group | null = null
+  const gltfLoader = new GLTFLoader()
+  gltfLoader.load('/crucifix.glb', (gltf) => {
+    const crucifix = gltf.scene
+
+    const box = new THREE.Box3().setFromObject(crucifix)
+    const size = new THREE.Vector3()
+    box.getSize(size)
+    const center = new THREE.Vector3()
+    box.getCenter(center)
+
+    const desiredHeight = 0.25
+    const scaleFactor = desiredHeight / size.y
+    crucifix.scale.setScalar(scaleFactor)
+
+    crucifix.position.set(-center.x * scaleFactor, -box.min.y * scaleFactor, -center.z * scaleFactor)
+
+    crucifixGroup = new THREE.Group()
+    crucifixGroup.add(crucifix)
+
+    // White base
+    const baseMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.35, metalness: 0.05 })
+    const base = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.045, 0.02, 16), baseMat)
+    base.position.y = 0.01
+    base.castShadow = true
+    base.receiveShadow = true
+    crucifixGroup.add(base)
+
+    crucifixGroup.position.set(-0.55, 1.02, -0.3)
+    crucifixGroup.rotation.y = -Math.PI / 2
+
+    const woodMat = new THREE.MeshStandardMaterial({
+      color: 0x6b3a2a,
+      roughness: 0.75,
+      metalness: 0.0,
+      envMapIntensity: 0.3,
+    })
+    crucifix.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material = woodMat
+        child.castShadow = true
+        child.receiveShadow = true
+      }
+    })
+
+    scene.add(crucifixGroup)
+  })
+
+  // ============================
   // Video texture for CRT screen
   // ============================
   const video = document.createElement('video')
@@ -767,7 +809,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       })
     }
     disposeScene(scene)
-
+    if (crucifixGroup) disposeScene(crucifixGroup)
     envRT.texture.dispose()
     pmremGenerator.dispose()
     controls.dispose()
