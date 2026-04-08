@@ -170,16 +170,6 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     rightLegs.position.x = 1.05
     deskGroup.add(rightLegs)
 
-    // Cable management shelf
-    const shelfMat = new THREE.MeshStandardMaterial({
-      color: 0xddd8cc,
-      roughness: 0.5,
-      metalness: 0.0,
-    })
-    const cableShelf = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.02, 0.25), shelfMat)
-    cableShelf.position.set(-0.6, 0.85, -0.3)
-    deskGroup.add(cableShelf)
-
     // CRT Monitor
     const monitorGroup = new THREE.Group()
     monitorGroup.position.set(0.1, 1.02, -0.15)
