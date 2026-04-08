@@ -5,13 +5,14 @@ import { GraphiteWrite } from '@/components/graphite-write'
 import { siteConfig } from '@/data/config'
 import { hero, navItems } from '@/data/info'
 import { Github, Linkedin } from 'lucide-react'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback } from 'react'
 
 const TOTAL_SECTIONS = navItems.length
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(0)
+  const currentSectionRef = useRef(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -20,6 +21,10 @@ export default function Home() {
   const backgroundRef = useRef<HTMLDivElement>(null)
   const scrollThrottleRef = useRef<number | null>(null)
   const isScrollingRef = useRef(false)
+
+  useEffect(() => {
+    currentSectionRef.current = currentSection
+  }, [currentSection])
 
   // Detect mobile on mount and resize
   useEffect(() => {
@@ -35,7 +40,7 @@ export default function Home() {
     setIsLoaded(true)
   }, [])
 
-  const scrollToSection = (index: number) => {
+  const scrollToSection = useCallback((index: number) => {
     if (scrollContainerRef.current && !isScrollingRef.current) {
       isScrollingRef.current = true
       const sectionWidth = scrollContainerRef.current.offsetWidth
@@ -50,7 +55,7 @@ export default function Home() {
         isScrollingRef.current = false
       }, 600)
     }
-  }
+  }, [])
 
   // Touch handlers - only for desktop
   useEffect(() => {
@@ -76,10 +81,11 @@ export default function Home() {
       const deltaX = touchStartX.current - touchEndX
 
       if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 60) {
-        if (deltaY > 0 && currentSection < TOTAL_SECTIONS - 1) {
-          scrollToSection(currentSection + 1)
-        } else if (deltaY < 0 && currentSection > 0) {
-          scrollToSection(currentSection - 1)
+        const section = currentSectionRef.current
+        if (deltaY > 0 && section < TOTAL_SECTIONS - 1) {
+          scrollToSection(section + 1)
+        } else if (deltaY < 0 && section > 0) {
+          scrollToSection(section - 1)
         }
       }
     }
@@ -98,7 +104,7 @@ export default function Home() {
         container.removeEventListener('touchend', handleTouchEnd)
       }
     }
-  }, [currentSection, isMobile])
+  }, [isMobile, scrollToSection])
 
   // Wheel handler - only for desktop
   useEffect(() => {
@@ -117,7 +123,7 @@ export default function Home() {
 
         const sectionWidth = scrollContainerRef.current.offsetWidth
         const newSection = Math.round(scrollContainerRef.current.scrollLeft / sectionWidth)
-        if (newSection !== currentSection) {
+        if (newSection !== currentSectionRef.current) {
           setCurrentSection(newSection)
         }
       }
@@ -133,7 +139,7 @@ export default function Home() {
         container.removeEventListener('wheel', handleWheel)
       }
     }
-  }, [currentSection, isMobile])
+  }, [isMobile])
 
   // Scroll handler - only for desktop
   useEffect(() => {
@@ -152,7 +158,7 @@ export default function Home() {
         const scrollLeft = scrollContainerRef.current.scrollLeft
         const newSection = Math.round(scrollLeft / sectionWidth)
 
-        if (newSection !== currentSection && newSection >= 0 && newSection < TOTAL_SECTIONS) {
+        if (newSection !== currentSectionRef.current && newSection >= 0 && newSection < TOTAL_SECTIONS) {
           setCurrentSection(newSection)
         }
 
@@ -173,7 +179,7 @@ export default function Home() {
         cancelAnimationFrame(scrollThrottleRef.current)
       }
     }
-  }, [currentSection, isMobile])
+  }, [isMobile])
 
   // Mobile: render only the Macintosh
   if (isMobile) {

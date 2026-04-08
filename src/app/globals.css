@@ -87,52 +87,6 @@ html {
   --base: #1e1e2e;
 }
 
-.dark {
-  --background: #1e1e2e;
-  --foreground: #cdd6f4;
-  --card: #181825;
-  --card-foreground: #cdd6f4;
-  --popover: #181825;
-  --popover-foreground: #cdd6f4;
-  --primary: #cba6f7;
-  --primary-foreground: #11111b;
-  --secondary: #313244;
-  --secondary-foreground: #cdd6f4;
-  --muted: #45475a;
-  --muted-foreground: #a6adc8;
-  --accent: #94e2d5;
-  --accent-foreground: #11111b;
-  --lavender: #b4befe;
-  --blue: #89b4fa;
-  --peach: #fab387;
-  --pink: #f5c2e7;
-  --sky: #89dceb;
-  --destructive: #f38ba8;
-  --destructive-foreground: #11111b;
-  --border: #313244;
-  --input: #313244;
-  --ring: #cba6f7;
-  --chart-1: #cba6f7;
-  --chart-2: #94e2d5;
-  --chart-3: #89b4fa;
-  --chart-4: #fab387;
-  --chart-5: #f5c2e7;
-  --sidebar: #11111b;
-  --sidebar-foreground: #cdd6f4;
-  --sidebar-primary: #cba6f7;
-  --sidebar-primary-foreground: #11111b;
-  --sidebar-accent: #181825;
-  --sidebar-accent-foreground: #cdd6f4;
-  --sidebar-border: #313244;
-  --sidebar-ring: #45475a;
-  --surface0: #313244;
-  --surface1: #45475a;
-  --surface2: #585b70;
-  --crust: #11111b;
-  --mantle: #181825;
-  --base: #1e1e2e;
-}
-
 @theme inline {
   /* Custom breakpoint for extra small screens */
   --breakpoint-xs: 400px;
@@ -290,20 +244,6 @@ html {
   [data-scroll-container] {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-
-  section {
-    transform: translateZ(0);
-    will-change: transform;
-    contain: layout style paint;
-  }
-
-  button {
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 
   /* Hide scrollbar for technologies container */
@@ -322,21 +262,6 @@ html {
 
   .overflow-y-auto::-webkit-scrollbar-thumb:hover {
     background: rgba(203, 166, 247, 0.4);
-  }
-}
-
-.marquee {
-  white-space: nowrap;
-  display: inline-block;
-  animation: marquee 15s linear infinite;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(-100%);
   }
 }
 

@@ -24,6 +24,7 @@ export function PongContent() {
 
   const gameAreaRef = useRef<HTMLDivElement>(null)
   const keysRef = useRef<Set<string>>(new Set())
+  const gameStateRef = useRef({ ballVelX, ballVelY, playerY, cpuY, ballY })
 
   const resetBall = useCallback((direction: number) => {
     setBallX(GAME_WIDTH / 2 - BALL_SIZE / 2)
@@ -48,11 +49,18 @@ export function PongContent() {
     setGameStarted(false)
   }, [resetBall])
 
-  // Game loop
+  // Sync game state ref
+  useEffect(() => {
+    gameStateRef.current = { ballVelX, ballVelY, playerY, cpuY, ballY }
+  }, [ballVelX, ballVelY, playerY, cpuY, ballY])
+
+  // Game loop - only recreated when paused state changes
   useEffect(() => {
     if (isPaused) return
 
     const gameLoop = setInterval(() => {
+      const gs = gameStateRef.current
+
       // Player movement
       setPlayerY((y) => {
         if (keysRef.current.has('ArrowUp') || keysRef.current.has('w') || keysRef.current.has('W')) {
@@ -67,7 +75,7 @@ export function PongContent() {
       // CPU AI - follows ball with some delay
       setCpuY((y) => {
         const cpuCenter = y + PADDLE_HEIGHT / 2
-        const targetY = ballY + BALL_SIZE / 2
+        const targetY = gs.ballY + BALL_SIZE / 2
         const diff = targetY - cpuCenter
         const speed = PADDLE_SPEED * 0.5
 
@@ -79,13 +87,10 @@ export function PongContent() {
       })
 
       // Ball movement
-      setBallX((x) => {
-        const newX = x + ballVelX
-        return newX
-      })
+      setBallX((x) => x + gs.ballVelX)
 
       setBallY((y) => {
-        let newY = y + ballVelY
+        let newY = y + gs.ballVelY
 
         // Top/bottom wall collision
         if (newY <= 0) {
@@ -103,13 +108,12 @@ export function PongContent() {
       setBallX((x) => {
         // Player paddle collision (left side)
         if (x <= PADDLE_WIDTH + 10) {
-          const paddleTop = playerY
-          const paddleBottom = playerY + PADDLE_HEIGHT
-          const ballCenter = ballY + BALL_SIZE / 2
+          const paddleTop = gs.playerY
+          const paddleBottom = gs.playerY + PADDLE_HEIGHT
+          const ballCenter = gs.ballY + BALL_SIZE / 2
 
           if (ballCenter >= paddleTop && ballCenter <= paddleBottom && x > 0) {
             setBallVelX((v) => Math.abs(v) * 1.05) // Speed up slightly
-            // Add angle based on where ball hits paddle
             const hitPos = (ballCenter - paddleTop) / PADDLE_HEIGHT
             setBallVelY((hitPos - 0.5) * INITIAL_BALL_SPEED * 2)
             return PADDLE_WIDTH + 11
@@ -118,9 +122,9 @@ export function PongContent() {
 
         // CPU paddle collision (right side)
         if (x >= GAME_WIDTH - PADDLE_WIDTH - BALL_SIZE - 10) {
-          const paddleTop = cpuY
-          const paddleBottom = cpuY + PADDLE_HEIGHT
-          const ballCenter = ballY + BALL_SIZE / 2
+          const paddleTop = gs.cpuY
+          const paddleBottom = gs.cpuY + PADDLE_HEIGHT
+          const ballCenter = gs.ballY + BALL_SIZE / 2
 
           if (ballCenter >= paddleTop && ballCenter <= paddleBottom && x < GAME_WIDTH - BALL_SIZE) {
             setBallVelX((v) => -Math.abs(v) * 1.05)
@@ -148,7 +152,7 @@ export function PongContent() {
     }, 16) // ~60fps
 
     return () => clearInterval(gameLoop)
-  }, [isPaused, ballVelX, ballVelY, playerY, cpuY, ballY, resetBall])
+  }, [isPaused, resetBall])
 
   // Keyboard controls
   const handleKeyDown = useCallback(
