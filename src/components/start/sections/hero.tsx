@@ -9,16 +9,14 @@ import { LineShadowText } from '@/components/ui/line-shadow-text'
 const sceneHeight = 'h-[60vh] md:h-[65vh]'
 
 // Preload Three.js chunk immediately (don't wait for hydration)
-const sceneModule = typeof window !== 'undefined'
-  ? import('./computer-scene-canvas')
-  : null
+const sceneModule = typeof window !== 'undefined' ? import('./computer-scene-canvas') : null
 
 const ComputerSceneCanvas = dynamic(
   () =>
     (sceneModule ?? import('./computer-scene-canvas')).then((mod) => ({
       default: mod.ComputerSceneCanvas,
     })),
-  { ssr: false }
+  { ssr: false },
 )
 
 const { words, mainTitle, subtitle } = heroContent
@@ -55,12 +53,12 @@ export function Hero() {
     <section className="bg-background overflow-x-hidden tracking-tight">
       {/* 3D Scene with reveal overlay */}
       <div className={`relative w-full ${sceneHeight} bg-background cursor-grab active:cursor-grabbing`}>
-        <ComputerSceneCanvas onReady={onSceneReady} />
+        <ComputerSceneCanvas onReadyAction={onSceneReady} />
 
         {/* Reveal overlay - two layers for staged dissolve */}
         {/* Layer 1: Grid lines - fade out first */}
         <div
-          className={`absolute inset-0 z-20 pointer-events-none transition-opacity ${sceneReady ? 'opacity-0 duration-[800ms] ease-out' : 'opacity-100 duration-0'}`}
+          className={`absolute inset-0 z-20 pointer-events-none transition-opacity ${sceneReady ? 'opacity-0 `duration-800 ease-out' : 'opacity-100 duration-0'}`}
         >
           <div
             className="absolute inset-0"
@@ -77,14 +75,12 @@ export function Hero() {
         <div
           className={`absolute inset-0 z-10 pointer-events-none bg-background ${sceneReady ? 'opacity-0' : 'opacity-100'}`}
           style={{
-            transition: sceneReady
-              ? 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s'
-              : 'none',
+            transition: sceneReady ? 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s' : 'none',
           }}
         />
 
         {/* Bottom edge separator */}
-        <div className="absolute bottom-0 left-0 right-0 z-[5] h-px bg-border pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 z-5 h-px bg-border pointer-events-none" />
 
         <style>{`
           @keyframes grid-breathe {
