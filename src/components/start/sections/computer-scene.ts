@@ -417,9 +417,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   let macOrigImage: HTMLImageElement | HTMLCanvasElement | null = null
 
   // Screen region in texture pixel coordinates (1024x1024)
-  const screenRect = { x: 45, y: 342, w: 234, h: 169 }
-  //37, 315,  250, 110
-  // 45, y_position, 234, height
+  const screenRect = { x: 46, y: 342, w: 233, h: 169 }
 
   // ============================
   // Load Macintosh Classic model
@@ -661,9 +659,11 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       tooltip.style.opacity = '0'
       originalCamPos.copy(camera.position)
       originalCamTarget.copy(controls.target)
-      const screenWorldPos = new THREE.Vector3()
-      screenMesh.getWorldPosition(screenWorldPos)
-      const zoomTargetPos = new THREE.Vector3(screenWorldPos.x, screenWorldPos.y + 0.01, screenWorldPos.z + 0.025)
+      // Target the screen center (upper portion of the Mac model)
+      const monitorWorldPos = new THREE.Vector3()
+      monitorGroup!.getWorldPosition(monitorWorldPos)
+      const screenWorldPos = new THREE.Vector3(monitorWorldPos.x, monitorWorldPos.y + 0.31, monitorWorldPos.z)
+      const zoomTargetPos = new THREE.Vector3(screenWorldPos.x, screenWorldPos.y + 0.01, screenWorldPos.z + 0.5)
       zoomedTarget = 'monitor'
       startCameraAnimation(camera.position, zoomTargetPos, controls.target, screenWorldPos, 'in')
       return
