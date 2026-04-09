@@ -115,6 +115,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   // ============================
   // Build desk scene
   // ============================
+  let monitorGroup: THREE.Group | null = null
+
   function createDeskScene() {
     const deskGroup = new THREE.Group()
 
@@ -172,7 +174,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     deskGroup.add(rightLegs)
 
     // CRT Monitor
-    const monitorGroup = new THREE.Group()
+    monitorGroup = new THREE.Group()
     monitorGroup.position.set(0.1, 1.02, -0.15)
 
     const crtMat = new THREE.MeshStandardMaterial({
@@ -511,10 +513,10 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     crucifixGroup.rotation.y = -Math.PI / 2
 
     const woodMat = new THREE.MeshStandardMaterial({
-      color: 0x6b3a2a,
-      roughness: 0.75,
+      color: 0x8b6030,
+      roughness: 0.6,
       metalness: 0.0,
-      envMapIntensity: 0.3,
+      envMapIntensity: 0.5,
     })
     crucifix.traverse((child) => {
       if (child instanceof THREE.Mesh) {
@@ -560,6 +562,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   const originalCamTarget = new THREE.Vector3()
   let isZoomed = false
   let isAnimating = false
+  let zoomedTarget: 'monitor' | 'crucifix' | null = null
 
   const animStartPos = new THREE.Vector3()
   const animEndPos = new THREE.Vector3()
@@ -581,6 +584,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     fromTarget: THREE.Vector3,
     toTarget: THREE.Vector3,
     direction: 'in' | 'out',
+    fovIn = 11,
   ) {
     animStartPos.copy(fromPos)
     animEndPos.copy(toPos)
@@ -591,7 +595,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     isAnimating = true
     controls.enabled = false
     animStartFOV = camera.fov
-    animEndFOV = direction === 'in' ? 11 : 40
+    animEndFOV = direction === 'in' ? fovIn : 40
   }
 
   // ============================
@@ -599,21 +603,6 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   // ============================
   const raycaster = new THREE.Raycaster()
   const mouse = new THREE.Vector2()
-
-  function getMonitorMeshes() {
-    const meshes: THREE.Mesh[] = []
-    deskScene.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        if (child === screenMesh) meshes.push(child)
-        const wp = new THREE.Vector3()
-        child.getWorldPosition(wp)
-        if (wp.y > 1.0 && wp.y < 2.0 && wp.z < 0.3 && wp.z > -0.5) {
-          meshes.push(child)
-        }
-      }
-    })
-    return meshes
-  }
 
   // Tooltip
   const tooltip = document.createElement('div')
@@ -638,14 +627,32 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   container.appendChild(tooltip)
 
   let isHoveringMonitor = false
+  let isHoveringCrucifix = false
 
   const onMouseMove = (e: MouseEvent) => {
-    if (isZoomed || isAnimating) {
-      if (isHoveringMonitor) {
-        tooltip.style.opacity = '0'
-        renderer.domElement.style.cursor = ''
-        isHoveringMonitor = false
+    if (isAnimating) {
+      if (isHoveringMonitor) { tooltip.style.opacity = '0'; isHoveringMonitor = false }
+      if (isHoveringCrucifix) { tooltip.style.opacity = '0'; isHoveringCrucifix = false }
+      renderer.domElement.style.cursor = ''
+      return
+    }
+
+    if (isZoomed) {
+      if (isHoveringMonitor) { tooltip.style.opacity = '0'; isHoveringMonitor = false }
+      if (isHoveringCrucifix) { tooltip.style.opacity = '0'; isHoveringCrucifix = false }
+
+      const rect = renderer.domElement.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(mouse, camera)
+
+      let onActiveObject = false
+      if (zoomedTarget === 'monitor' && screenMesh) {
+        onActiveObject = raycaster.intersectObject(screenMesh).length > 0
+      } else if (zoomedTarget === 'crucifix' && crucifixGroup) {
+        onActiveObject = raycaster.intersectObject(crucifixGroup, true).length > 0
       }
+      renderer.domElement.style.cursor = onActiveObject ? 'default' : 'pointer'
       return
     }
 
@@ -654,10 +661,9 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
     raycaster.setFromCamera(mouse, camera)
 
-    const monitorMeshes = getMonitorMeshes()
-    const intersects = raycaster.intersectObjects(monitorMeshes, true)
+    const monitorIntersects = monitorGroup ? raycaster.intersectObject(monitorGroup, true) : []
 
-    if (intersects.length > 0) {
+    if (monitorIntersects.length > 0) {
       if (!isHoveringMonitor) {
         isHoveringMonitor = true
         tooltip.style.opacity = '1'
@@ -669,6 +675,24 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       isHoveringMonitor = false
       tooltip.style.opacity = '0'
       renderer.domElement.style.cursor = ''
+    }
+
+    // Crucifix hover
+    if (crucifixGroup) {
+      const crucifixIntersects = raycaster.intersectObject(crucifixGroup, true)
+      if (crucifixIntersects.length > 0 && !isHoveringMonitor) {
+        if (!isHoveringCrucifix) {
+          isHoveringCrucifix = true
+          tooltip.style.opacity = '1'
+          renderer.domElement.style.cursor = 'pointer'
+        }
+        tooltip.style.left = `${e.clientX - rect.left}px`
+        tooltip.style.top = `${e.clientY - rect.top}px`
+      } else if (isHoveringCrucifix) {
+        isHoveringCrucifix = false
+        tooltip.style.opacity = '0'
+        renderer.domElement.style.cursor = ''
+      }
     }
   }
 
@@ -701,16 +725,37 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       return
     }
 
-    const monitorMeshes = getMonitorMeshes()
-    const intersects = raycaster.intersectObjects(monitorMeshes, true)
-    if (intersects.length > 0 && screenMesh) {
+    const monitorIntersects = monitorGroup ? raycaster.intersectObject(monitorGroup, true) : []
+    if (monitorIntersects.length > 0 && screenMesh) {
       tooltip.style.opacity = '0'
       originalCamPos.copy(camera.position)
       originalCamTarget.copy(controls.target)
       const screenWorldPos = new THREE.Vector3()
       screenMesh.getWorldPosition(screenWorldPos)
       const zoomTargetPos = new THREE.Vector3(screenWorldPos.x, screenWorldPos.y + 0.01, screenWorldPos.z + 0.025)
+      zoomedTarget = 'monitor'
       startCameraAnimation(camera.position, zoomTargetPos, controls.target, screenWorldPos, 'in')
+      return
+    }
+
+    // Crucifix click to zoom
+    if (crucifixGroup) {
+      const crucifixIntersects = raycaster.intersectObject(crucifixGroup, true)
+      if (crucifixIntersects.length > 0) {
+        tooltip.style.opacity = '0'
+        originalCamPos.copy(camera.position)
+        originalCamTarget.copy(controls.target)
+        const crucifixWorldPos = new THREE.Vector3()
+        crucifixGroup.getWorldPosition(crucifixWorldPos)
+        // Crucifix rotated -PI/2 on Y, so its front faces +X; position camera on that side
+        const crucifixCenterY = crucifixWorldPos.y + 0.13
+        // Position camera in front of the desk (z > crucifixWorldPos.z), slightly to the right
+        // matching the general direction of the initial camera angle
+        const zoomPos = new THREE.Vector3(crucifixWorldPos.x, crucifixCenterY + 0.15, crucifixWorldPos.z + 0.55)
+        const zoomTarget = new THREE.Vector3(crucifixWorldPos.x, crucifixCenterY, crucifixWorldPos.z)
+        zoomedTarget = 'crucifix'
+        startCameraAnimation(camera.position, zoomPos, controls.target, zoomTarget, 'in', 7)
+      }
     }
   }
 
@@ -740,7 +785,9 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
           controls.enabled = false
         } else {
           isZoomed = false
+          zoomedTarget = null
           controls.enabled = true
+          renderer.domElement.style.cursor = ''
         }
       }
       const t = easeInOutCubic(Math.min(animProgress, 1))
