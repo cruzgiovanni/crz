@@ -700,6 +700,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   let animFrameId: number
   const clock = new THREE.Clock()
   let firstFrame = true
+  let videoFrameCount = 0
 
   function animate() {
     animFrameId = requestAnimationFrame(animate)
@@ -737,13 +738,14 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     // Draw video frame onto Mac screen texture
     if (macScreenCtx && macScreenTexture && macOrigImage && video.readyState >= 2) {
       macScreenCtx.drawImage(macOrigImage!, 0, 0)
-      // Flip video both axes to match the UV mapping (texture is stored mirrored + upside-down)
       macScreenCtx.save()
       macScreenCtx.translate(screenRect.x, screenRect.y + screenRect.h)
       macScreenCtx.scale(1, -1)
       macScreenCtx.drawImage(video, 0, 0, screenRect.w, screenRect.h)
       macScreenCtx.restore()
-      macScreenTexture.needsUpdate = true
+      if (videoFrameCount++ % 2 === 0) {
+        macScreenTexture.needsUpdate = true
+      }
     }
 
     renderer.render(scene, camera)
