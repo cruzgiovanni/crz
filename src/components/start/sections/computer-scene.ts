@@ -9,8 +9,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   scene.fog = new THREE.FogExp2(0xc8c4c0, 0.06)
 
   const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 100)
-  camera.position.set(5, 4, 6)
-  camera.lookAt(0, 0.5, 0)
+  camera.position.set(2.5, 2, 3.2)
+  camera.lookAt(0, 0.8, 0)
 
   const isMobile = container.clientWidth < 768
   const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true })
@@ -115,6 +115,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   // ============================
   // Build desk scene
   // ============================
+  let monitorGroup: THREE.Group | null = null
+
   function createDeskScene() {
     const deskGroup = new THREE.Group()
 
@@ -171,116 +173,9 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     rightLegs.position.x = 1.05
     deskGroup.add(rightLegs)
 
-    // CRT Monitor
-    const monitorGroup = new THREE.Group()
+    // CRT Monitor - Macintosh Classic GLB loaded async
+    monitorGroup = new THREE.Group()
     monitorGroup.position.set(0.1, 1.02, -0.15)
-
-    const crtMat = new THREE.MeshStandardMaterial({
-      color: 0xf0ece5,
-      roughness: 0.35,
-      metalness: 0.05,
-      envMapIntensity: 0.5,
-    })
-    const monBase = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.03, 0.35), crtMat)
-    monBase.castShadow = true
-    monitorGroup.add(monBase)
-
-    const monStand = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.07, 0.18), crtMat)
-    monStand.position.set(0, 0.05, 0)
-    monStand.castShadow = true
-    monitorGroup.add(monStand)
-
-    // CRT body with rounded corners
-    const crtBodyShape = new THREE.Shape()
-    const crtW = 0.6,
-      crtH2 = 0.5,
-      crtR = 0.04
-    crtBodyShape.moveTo(-crtW / 2 + crtR, -crtH2 / 2)
-    crtBodyShape.lineTo(crtW / 2 - crtR, -crtH2 / 2)
-    crtBodyShape.quadraticCurveTo(crtW / 2, -crtH2 / 2, crtW / 2, -crtH2 / 2 + crtR)
-    crtBodyShape.lineTo(crtW / 2, crtH2 / 2 - crtR)
-    crtBodyShape.quadraticCurveTo(crtW / 2, crtH2 / 2, crtW / 2 - crtR, crtH2 / 2)
-    crtBodyShape.lineTo(-crtW / 2 + crtR, crtH2 / 2)
-    crtBodyShape.quadraticCurveTo(-crtW / 2, crtH2 / 2, -crtW / 2, crtH2 / 2 - crtR)
-    crtBodyShape.lineTo(-crtW / 2, -crtH2 / 2 + crtR)
-    crtBodyShape.quadraticCurveTo(-crtW / 2, -crtH2 / 2, -crtW / 2 + crtR, -crtH2 / 2)
-
-    const crtBodyGeom = new THREE.ExtrudeGeometry(crtBodyShape, {
-      depth: 0.45,
-      bevelEnabled: true,
-      bevelThickness: 0.02,
-      bevelSize: 0.02,
-      bevelSegments: 3,
-    })
-    crtBodyGeom.center()
-    const crtBody = new THREE.Mesh(crtBodyGeom, crtMat)
-    crtBody.position.set(0, 0.36, -0.02)
-    crtBody.rotation.x = Math.PI / 2
-    crtBody.castShadow = true
-    monitorGroup.add(crtBody)
-
-    const crtBack = new THREE.Mesh(new THREE.SphereGeometry(0.28, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), crtMat)
-    crtBack.rotation.x = Math.PI / 2
-    crtBack.position.set(0, 0.36, -0.2)
-    crtBack.scale.set(1, 1, 0.8)
-    crtBack.castShadow = true
-    monitorGroup.add(crtBack)
-
-    // Screen
-    const screenMat = new THREE.MeshStandardMaterial({
-      color: 0x7a9bb5,
-      roughness: 0.15,
-      metalness: 0.05,
-      emissive: 0x2a4a5a,
-      emissiveIntensity: 0.35,
-      envMapIntensity: 0.3,
-    })
-    const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.48, 0.38), screenMat)
-    screen.position.set(0, 0.36, 0.255)
-    monitorGroup.add(screen)
-
-    // Bezel
-    const bezelShape = new THREE.Shape()
-    const bzW = 0.56,
-      bzH = 0.46,
-      bzR = 0.03
-    bezelShape.moveTo(-bzW / 2 + bzR, -bzH / 2)
-    bezelShape.lineTo(bzW / 2 - bzR, -bzH / 2)
-    bezelShape.quadraticCurveTo(bzW / 2, -bzH / 2, bzW / 2, -bzH / 2 + bzR)
-    bezelShape.lineTo(bzW / 2, bzH / 2 - bzR)
-    bezelShape.quadraticCurveTo(bzW / 2, bzH / 2, bzW / 2 - bzR, bzH / 2)
-    bezelShape.lineTo(-bzW / 2 + bzR, bzH / 2)
-    bezelShape.quadraticCurveTo(-bzW / 2, bzH / 2, -bzW / 2, bzH / 2 - bzR)
-    bezelShape.lineTo(-bzW / 2, -bzH / 2 + bzR)
-    bezelShape.quadraticCurveTo(-bzW / 2, -bzH / 2, -bzW / 2 + bzR, -bzH / 2)
-    const bezelGeom = new THREE.ExtrudeGeometry(bezelShape, {
-      depth: 0.02,
-      bevelEnabled: true,
-      bevelThickness: 0.005,
-      bevelSize: 0.005,
-      bevelSegments: 2,
-    })
-    bezelGeom.center()
-    const bezelMat = new THREE.MeshStandardMaterial({
-      color: 0xe5e0d8,
-      roughness: 0.35,
-      metalness: 0.05,
-      envMapIntensity: 0.4,
-    })
-    const bezelFrame = new THREE.Mesh(bezelGeom, bezelMat)
-    bezelFrame.position.set(0, 0.36, 0.14)
-    monitorGroup.add(bezelFrame)
-
-    // Power LED
-    const ledMat = new THREE.MeshStandardMaterial({
-      color: 0x44ff44,
-      emissive: 0x44ff44,
-      emissiveIntensity: 0.8,
-    })
-    const led = new THREE.Mesh(new THREE.SphereGeometry(0.008, 8, 8), ledMat)
-    led.position.set(0.22, 0.15, 0.23)
-    monitorGroup.add(led)
-
     deskGroup.add(monitorGroup)
 
     // Keyboard
@@ -301,13 +196,21 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       metalness: 0.15,
       envMapIntensity: 0.4,
     })
+    const keyGeom = new THREE.BoxGeometry(0.024, 0.005, 0.022)
+    const keyCount = 4 * 13
+    const keyMesh = new THREE.InstancedMesh(keyGeom, keyMat, keyCount)
+    const dummy = new THREE.Object3D()
+    let idx = 0
     for (let row = 0; row < 4; row++) {
       for (let col = 0; col < 13; col++) {
-        const key = new THREE.Mesh(new THREE.BoxGeometry(0.024, 0.005, 0.022), keyMat)
-        key.position.set(0.1 - 0.17 + col * 0.028, 1.038, 0.25 - 0.04 + row * 0.028)
-        deskGroup.add(key)
+        dummy.position.set(0.1 - 0.17 + col * 0.028, 1.038, 0.25 - 0.04 + row * 0.028)
+        dummy.updateMatrix()
+        keyMesh.setMatrixAt(idx++, dummy.matrix)
       }
     }
+    keyMesh.instanceMatrix.needsUpdate = true
+    keyMesh.castShadow = true
+    deskGroup.add(keyMesh)
 
     // Mouse
     const mouseMat = new THREE.MeshStandardMaterial({
@@ -450,31 +353,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
 
   const deskScene = createDeskScene()
 
-  // ============================
-  // Find screen mesh
-  // ============================
   let screenMesh: THREE.Mesh | null = null
-
-  function findScreenMesh() {
-    deskScene.traverse((child) => {
-      if (child instanceof THREE.Mesh && child.geometry) {
-        const wp = new THREE.Vector3()
-        child.getWorldPosition(wp)
-        if (child.geometry.type === 'PlaneGeometry' && wp.y > 1.0 && wp.y < 2.0 && wp.z < 0.5) {
-          screenMesh = child
-        }
-      }
-    })
-  }
-  findScreenMesh()
-
-  if (!screenMesh) {
-    deskScene.traverse((child) => {
-      if (child instanceof THREE.Mesh && child.geometry && child.geometry.type === 'PlaneGeometry') {
-        if (!screenMesh) screenMesh = child
-      }
-    })
-  }
 
   // ============================
   // Crucifix on desk
@@ -511,10 +390,10 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     crucifixGroup.rotation.y = -Math.PI / 2
 
     const woodMat = new THREE.MeshStandardMaterial({
-      color: 0x6b3a2a,
-      roughness: 0.75,
+      color: 0x8b6030,
+      roughness: 0.6,
       metalness: 0.0,
-      envMapIntensity: 0.3,
+      envMapIntensity: 0.5,
     })
     crucifix.traverse((child) => {
       if (child instanceof THREE.Mesh) {
@@ -528,7 +407,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   })
 
   // ============================
-  // Video texture for CRT screen
+  // Video for CRT screen
   // ============================
   const video = document.createElement('video')
   video.src = '/ascii-animation.mp4'
@@ -539,19 +418,62 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   video.autoplay = true
   video.play().catch(() => {})
 
-  const videoTexture = new THREE.VideoTexture(video)
-  videoTexture.minFilter = THREE.LinearFilter
-  videoTexture.magFilter = THREE.LinearFilter
-  videoTexture.colorSpace = THREE.SRGBColorSpace
+  // Canvas-based texture to composite video onto baked texture
+  let macScreenCanvas: HTMLCanvasElement | null = null
+  let macScreenCtx: CanvasRenderingContext2D | null = null
+  let macScreenTexture: THREE.CanvasTexture | null = null
+  let macOrigImage: HTMLImageElement | HTMLCanvasElement | null = null
 
-  const screenVideoMat = new THREE.MeshBasicMaterial({
-    map: videoTexture,
-    toneMapped: false,
+  // Screen region in texture pixel coordinates (1024x1024)
+  const screenRect = { x: 46, y: 342, w: 233, h: 169 }
+
+  // ============================
+  // Load Macintosh Classic model
+  // ============================
+  gltfLoader.load('/macintosh_classic_1991.glb', (gltf) => {
+    const mac = gltf.scene
+
+    const box = new THREE.Box3().setFromObject(mac)
+    const size = new THREE.Vector3()
+    box.getSize(size)
+    const center = new THREE.Vector3()
+    box.getCenter(center)
+
+    const desiredHeight = 0.5
+    const scaleFactor = desiredHeight / size.y
+    mac.scale.setScalar(scaleFactor)
+    mac.position.set(-center.x * scaleFactor, -box.min.y * scaleFactor, -center.z * scaleFactor)
+
+    mac.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.castShadow = true
+        child.receiveShadow = true
+
+        // Replace baked texture with canvas texture for video compositing
+        const mat = child.material as THREE.MeshStandardMaterial
+        if (mat.map && mat.map.image) {
+          macOrigImage = mat.map.image as HTMLImageElement | HTMLCanvasElement
+
+          macScreenCanvas = document.createElement('canvas')
+          macScreenCanvas.width = 1024
+          macScreenCanvas.height = 1024
+          macScreenCtx = macScreenCanvas.getContext('2d')!
+          macScreenCtx.drawImage(macOrigImage as CanvasImageSource, 0, 0)
+
+          macScreenTexture = new THREE.CanvasTexture(macScreenCanvas)
+          macScreenTexture.colorSpace = THREE.SRGBColorSpace
+          macScreenTexture.flipY = mat.map.flipY
+
+          mat.map = macScreenTexture
+          mat.needsUpdate = true
+        }
+
+        screenMesh = child
+      }
+    })
+
+    monitorGroup!.add(mac)
   })
-
-  if (screenMesh) {
-    ;(screenMesh as THREE.Mesh).material = screenVideoMat
-  }
 
   // ============================
   // Zoom state
@@ -560,6 +482,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   const originalCamTarget = new THREE.Vector3()
   let isZoomed = false
   let isAnimating = false
+  let zoomedTarget: 'monitor' | 'crucifix' | null = null
 
   const animStartPos = new THREE.Vector3()
   const animEndPos = new THREE.Vector3()
@@ -581,6 +504,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     fromTarget: THREE.Vector3,
     toTarget: THREE.Vector3,
     direction: 'in' | 'out',
+    fovIn = 11,
   ) {
     animStartPos.copy(fromPos)
     animEndPos.copy(toPos)
@@ -591,7 +515,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     isAnimating = true
     controls.enabled = false
     animStartFOV = camera.fov
-    animEndFOV = direction === 'in' ? 11 : 40
+    animEndFOV = direction === 'in' ? fovIn : 40
   }
 
   // ============================
@@ -599,21 +523,6 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   // ============================
   const raycaster = new THREE.Raycaster()
   const mouse = new THREE.Vector2()
-
-  function getMonitorMeshes() {
-    const meshes: THREE.Mesh[] = []
-    deskScene.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        if (child === screenMesh) meshes.push(child)
-        const wp = new THREE.Vector3()
-        child.getWorldPosition(wp)
-        if (wp.y > 1.0 && wp.y < 2.0 && wp.z < 0.3 && wp.z > -0.5) {
-          meshes.push(child)
-        }
-      }
-    })
-    return meshes
-  }
 
   // Tooltip
   const tooltip = document.createElement('div')
@@ -638,14 +547,44 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   container.appendChild(tooltip)
 
   let isHoveringMonitor = false
+  let isHoveringCrucifix = false
 
   const onMouseMove = (e: MouseEvent) => {
-    if (isZoomed || isAnimating) {
+    if (isAnimating) {
       if (isHoveringMonitor) {
         tooltip.style.opacity = '0'
-        renderer.domElement.style.cursor = ''
         isHoveringMonitor = false
       }
+      if (isHoveringCrucifix) {
+        tooltip.style.opacity = '0'
+        isHoveringCrucifix = false
+      }
+      renderer.domElement.style.cursor = ''
+      return
+    }
+
+    if (isZoomed) {
+      if (isHoveringMonitor) {
+        tooltip.style.opacity = '0'
+        isHoveringMonitor = false
+      }
+      if (isHoveringCrucifix) {
+        tooltip.style.opacity = '0'
+        isHoveringCrucifix = false
+      }
+
+      const rect = renderer.domElement.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(mouse, camera)
+
+      let onActiveObject = false
+      if (zoomedTarget === 'monitor' && screenMesh) {
+        onActiveObject = raycaster.intersectObject(screenMesh).length > 0
+      } else if (zoomedTarget === 'crucifix' && crucifixGroup) {
+        onActiveObject = raycaster.intersectObject(crucifixGroup, true).length > 0
+      }
+      renderer.domElement.style.cursor = onActiveObject ? 'default' : 'pointer'
       return
     }
 
@@ -654,10 +593,9 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
     raycaster.setFromCamera(mouse, camera)
 
-    const monitorMeshes = getMonitorMeshes()
-    const intersects = raycaster.intersectObjects(monitorMeshes, true)
+    const monitorIntersects = monitorGroup ? raycaster.intersectObject(monitorGroup, true) : []
 
-    if (intersects.length > 0) {
+    if (monitorIntersects.length > 0) {
       if (!isHoveringMonitor) {
         isHoveringMonitor = true
         tooltip.style.opacity = '1'
@@ -669,6 +607,24 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       isHoveringMonitor = false
       tooltip.style.opacity = '0'
       renderer.domElement.style.cursor = ''
+    }
+
+    // Crucifix hover
+    if (crucifixGroup) {
+      const crucifixIntersects = raycaster.intersectObject(crucifixGroup, true)
+      if (crucifixIntersects.length > 0 && !isHoveringMonitor) {
+        if (!isHoveringCrucifix) {
+          isHoveringCrucifix = true
+          tooltip.style.opacity = '1'
+          renderer.domElement.style.cursor = 'pointer'
+        }
+        tooltip.style.left = `${e.clientX - rect.left}px`
+        tooltip.style.top = `${e.clientY - rect.top}px`
+      } else if (isHoveringCrucifix) {
+        isHoveringCrucifix = false
+        tooltip.style.opacity = '0'
+        renderer.domElement.style.cursor = ''
+      }
     }
   }
 
@@ -694,23 +650,51 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     raycaster.setFromCamera(mouse, camera)
 
     if (isZoomed) {
-      const screenHits = screenMesh ? raycaster.intersectObject(screenMesh) : []
-      if (screenHits.length === 0) {
+      const zoomedHits =
+        zoomedTarget === 'monitor' && monitorGroup
+          ? raycaster.intersectObject(monitorGroup, true)
+          : zoomedTarget === 'crucifix' && crucifixGroup
+            ? raycaster.intersectObject(crucifixGroup, true)
+            : []
+      if (zoomedHits.length === 0) {
         startCameraAnimation(camera.position, originalCamPos, controls.target, originalCamTarget, 'out')
       }
       return
     }
 
-    const monitorMeshes = getMonitorMeshes()
-    const intersects = raycaster.intersectObjects(monitorMeshes, true)
-    if (intersects.length > 0 && screenMesh) {
+    const monitorIntersects = monitorGroup ? raycaster.intersectObject(monitorGroup, true) : []
+    if (monitorIntersects.length > 0 && screenMesh) {
       tooltip.style.opacity = '0'
       originalCamPos.copy(camera.position)
       originalCamTarget.copy(controls.target)
-      const screenWorldPos = new THREE.Vector3()
-      screenMesh.getWorldPosition(screenWorldPos)
-      const zoomTargetPos = new THREE.Vector3(screenWorldPos.x, screenWorldPos.y + 0.01, screenWorldPos.z + 0.025)
+      // Target the screen center (upper portion of the Mac model)
+      const monitorWorldPos = new THREE.Vector3()
+      monitorGroup!.getWorldPosition(monitorWorldPos)
+      const screenWorldPos = new THREE.Vector3(monitorWorldPos.x, monitorWorldPos.y + 0.31, monitorWorldPos.z)
+      const zoomTargetPos = new THREE.Vector3(screenWorldPos.x, screenWorldPos.y + 0.01, screenWorldPos.z + 0.5)
+      zoomedTarget = 'monitor'
       startCameraAnimation(camera.position, zoomTargetPos, controls.target, screenWorldPos, 'in')
+      return
+    }
+
+    // Crucifix click to zoom
+    if (crucifixGroup) {
+      const crucifixIntersects = raycaster.intersectObject(crucifixGroup, true)
+      if (crucifixIntersects.length > 0) {
+        tooltip.style.opacity = '0'
+        originalCamPos.copy(camera.position)
+        originalCamTarget.copy(controls.target)
+        const crucifixWorldPos = new THREE.Vector3()
+        crucifixGroup.getWorldPosition(crucifixWorldPos)
+        // Crucifix rotated -PI/2 on Y, so its front faces +X; position camera on that side
+        const crucifixCenterY = crucifixWorldPos.y + 0.13
+        // Position camera in front of the desk (z > crucifixWorldPos.z), slightly to the right
+        // matching the general direction of the initial camera angle
+        const zoomPos = new THREE.Vector3(crucifixWorldPos.x, crucifixCenterY + 0.15, crucifixWorldPos.z + 0.55)
+        const zoomTarget = new THREE.Vector3(crucifixWorldPos.x, crucifixCenterY, crucifixWorldPos.z)
+        zoomedTarget = 'crucifix'
+        startCameraAnimation(camera.position, zoomPos, controls.target, zoomTarget, 'in', 7)
+      }
     }
   }
 
@@ -724,6 +708,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   let animFrameId: number
   const clock = new THREE.Clock()
   let firstFrame = true
+  let videoFrameCount = 0
 
   function animate() {
     animFrameId = requestAnimationFrame(animate)
@@ -740,7 +725,9 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
           controls.enabled = false
         } else {
           isZoomed = false
+          zoomedTarget = null
           controls.enabled = true
+          renderer.domElement.style.cursor = ''
         }
       }
       const t = easeInOutCubic(Math.min(animProgress, 1))
@@ -754,6 +741,19 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
 
     if (!isZoomed && !isAnimating) {
       controls.update()
+    }
+
+    // Draw video frame onto Mac screen texture
+    if (macScreenCtx && macScreenTexture && macOrigImage && video.readyState >= 2) {
+      macScreenCtx.drawImage(macOrigImage!, 0, 0)
+      macScreenCtx.save()
+      macScreenCtx.translate(screenRect.x, screenRect.y + screenRect.h)
+      macScreenCtx.scale(1, -1)
+      macScreenCtx.drawImage(video, 0, 0, screenRect.w, screenRect.h)
+      macScreenCtx.restore()
+      if (videoFrameCount++ % 2 === 0) {
+        macScreenTexture.needsUpdate = true
+      }
     }
 
     renderer.render(scene, camera)
@@ -793,8 +793,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     video.pause()
     video.src = ''
     video.load()
-    videoTexture.dispose()
-    screenVideoMat.dispose()
+    if (macScreenTexture) macScreenTexture.dispose()
 
     function disposeScene(s: THREE.Scene | THREE.Group) {
       s.traverse((obj) => {

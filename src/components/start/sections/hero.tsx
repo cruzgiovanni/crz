@@ -52,7 +52,7 @@ export function Hero() {
   return (
     <section className="bg-background overflow-x-hidden tracking-tight">
       {/* 3D Scene with reveal overlay */}
-      <div className={`relative w-full ${sceneHeight} bg-background cursor-grab active:cursor-grabbing`}>
+      <div className={`relative w-full ${sceneHeight} bg-background cursor-grab active:cursor-grabbing border`}>
         <ComputerSceneCanvas onReadyAction={onSceneReady} />
 
         {/* Reveal overlay - two layers for staged dissolve */}

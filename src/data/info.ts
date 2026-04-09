@@ -21,16 +21,26 @@ export const hero = {
 export const projects = [
   {
     number: '01',
-    title: 'Piva Insurances',
-    category: 'Insurance Management Platform',
-    year: '11/2024 - 01/2026',
-    tech: 'React • Pocketbase • Shadcn UI',
-    direction: 'left' as const,
-    repo: 'https://github.com/emiliobiasi/pivaseguros',
-    type: 'experience' as const,
+    title: 'giovannicruz.dev - landing page',
+    category: 'My own landing page about my work',
+    year: '2026',
+    tech: 'Next.js • TypeScript • Tailwind CSS • Framer Motion',
+    direction: 'right' as const,
+    demo: 'https://giovannicruz.dev/start',
+    type: 'project' as const,
   },
   {
     number: '02',
+    title: 'Piva Insurances',
+    category: 'Insurance Management Platform',
+    year: '2026',
+    tech: 'Vite • React • TypeScript • Shadcn UI • Pocketbase',
+    direction: 'left' as const,
+    // repo: 'https://github.com/emiliobiasi/pivaseguros',
+    type: 'experience' as const,
+  },
+  {
+    number: '03',
     title: 'Solution Card',
     category: 'Digital Health Platform',
     year: '07/2025',
@@ -40,7 +50,7 @@ export const projects = [
     type: 'project' as const,
   },
   {
-    number: '03',
+    number: '04',
     title: 'Book SaaS',
     category: 'SaaS with Auth & Subscriptions',
     year: '02/2025',
@@ -50,7 +60,7 @@ export const projects = [
     type: 'project' as const,
   },
   {
-    number: '04',
+    number: '05',
     title: 'Delivery FSW',
     category: 'Real-time Delivery System',
     year: '02/2025',
@@ -113,7 +123,7 @@ export const aboutSection = {
   signature: '// I code on faith and old blues from the 70s.',
   stats: [
     { value: `${new Date().getFullYear() - 2023}+`, label: 'in software development', accent: true },
-    { value: 'Curious', label: 'by nature', accent: true },
+    { value: 'Catholic', label: 'by nature', accent: true },
   ],
 }
 
