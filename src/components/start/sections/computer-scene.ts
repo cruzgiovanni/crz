@@ -196,13 +196,20 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       metalness: 0.15,
       envMapIntensity: 0.4,
     })
+    const keyGeom = new THREE.BoxGeometry(0.024, 0.005, 0.022)
+    const keyCount = 4 * 13
+    const keyMesh = new THREE.InstancedMesh(keyGeom, keyMat, keyCount)
+    const dummy = new THREE.Object3D()
+    let idx = 0
     for (let row = 0; row < 4; row++) {
       for (let col = 0; col < 13; col++) {
-        const key = new THREE.Mesh(new THREE.BoxGeometry(0.024, 0.005, 0.022), keyMat)
-        key.position.set(0.1 - 0.17 + col * 0.028, 1.038, 0.25 - 0.04 + row * 0.028)
-        deskGroup.add(key)
+        dummy.position.set(0.1 - 0.17 + col * 0.028, 1.038, 0.25 - 0.04 + row * 0.028)
+        dummy.updateMatrix()
+        keyMesh.setMatrixAt(idx++, dummy.matrix)
       }
     }
+    keyMesh.castShadow = true
+    deskGroup.add(keyMesh)
 
     // Mouse
     const mouseMat = new THREE.MeshStandardMaterial({
