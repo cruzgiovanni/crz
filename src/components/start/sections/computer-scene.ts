@@ -208,6 +208,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
         keyMesh.setMatrixAt(idx++, dummy.matrix)
       }
     }
+    keyMesh.instanceMatrix.needsUpdate = true
     keyMesh.castShadow = true
     deskGroup.add(keyMesh)
 
