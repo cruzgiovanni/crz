@@ -23,7 +23,6 @@ interface WindowState {
   icon: string
   content: React.ReactNode
   isOpen: boolean
-  isMinimized: boolean
   isMaximized: boolean
   zIndex: number
   position: { x: number; y: number }
@@ -98,7 +97,6 @@ const playClickSound = () => {
 function MacWindow({
   window: win,
   onClose,
-  onMinimize,
   onMaximize,
   onFocus,
   onDrag,
@@ -109,7 +107,6 @@ function MacWindow({
 }: {
   window: WindowState
   onClose: () => void
-  onMinimize: () => void
   onMaximize: () => void
   onFocus: () => void
   onDrag: (x: number, y: number) => void
@@ -256,17 +253,10 @@ function MacWindow({
     onClose()
   }
 
-  const handleMinimize = () => {
-    playClickSound()
-    onMinimize()
-  }
-
   const handleMaximize = () => {
     playClickSound()
     onMaximize()
   }
-
-  if (win.isMinimized) return null
 
   const isFullscreen = isMobile || win.isMaximized
 
@@ -378,20 +368,6 @@ function MacWindow({
 
           {/* Window Controls */}
           <div className="flex">
-            <button
-              onClick={handleMinimize}
-              className="w-[18px] h-[18px] md:w-[13px] md:h-[13px] flex items-center justify-center cursor-pointer mr-[2px] hover:brightness-90 active:brightness-75 transition-all"
-              style={{
-                background: isActive ? 'linear-gradient(180deg, #ffffff 0%, #cccccc 100%)' : '#bbbbbb',
-                border: '1px solid #000000',
-                boxShadow: isActive ? 'inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff' : 'none',
-              }}
-            >
-              <div
-                className="w-[10px] md:w-[7px] h-[2px] md:h-[1px]"
-                style={{ background: isActive ? '#000000' : '#666666', marginTop: '2px' }}
-              />
-            </button>
             <button
               onClick={handleMaximize}
               className="w-[18px] h-[18px] md:w-[13px] md:h-[13px] flex items-center justify-center cursor-pointer hover:brightness-90 active:brightness-75 transition-all"
@@ -873,7 +849,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '📄',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 30, y: 30 },
@@ -885,7 +860,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '💻',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 60, y: 60 },
@@ -897,7 +871,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '🎵',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 90, y: 90 },
@@ -909,7 +882,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '🗑️',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 120, y: 120 },
@@ -921,7 +893,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '🖥️',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 50, y: 40 },
@@ -933,7 +904,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '🏓',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 80, y: 50 },
@@ -945,7 +915,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       icon: '🧮',
       content: null,
       isOpen: false,
-      isMinimized: false,
       isMaximized: false,
       zIndex: 100,
       position: { x: 100, y: 60 },
@@ -965,7 +934,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized)
+        const openWindows = windows.filter((w) => w.isOpen)
         if (openWindows.length > 0) {
           const topWindow = openWindows.reduce((a, b) => (a.zIndex > b.zIndex ? a : b))
           closeWindow(topWindow.id)
@@ -1053,11 +1022,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       const newZIndex = highestZIndex + 1
       setHighestZIndex(newZIndex)
       setWindows((prev) =>
-        prev.map((w) =>
-          w.id === id
-            ? { ...w, isOpen: true, isMinimized: false, zIndex: newZIndex, content: getWindowContent(id) }
-            : w,
-        ),
+        prev.map((w) => (w.id === id ? { ...w, isOpen: true, zIndex: newZIndex, content: getWindowContent(id) } : w)),
       )
       setSelectedIcon(null)
     },
@@ -1077,10 +1042,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
           : w,
       ),
     )
-  }, [])
-
-  const minimizeWindow = useCallback((id: string) => {
-    setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, isMinimized: true } : w)))
   }, [])
 
   const maximizeWindow = useCallback((id: string) => {
@@ -1105,7 +1066,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
   }, [])
 
   const handleShutdown = useCallback(() => {
-    setWindows((prev) => prev.map((w) => ({ ...w, isOpen: false, isMinimized: false, isMaximized: false })))
+    setWindows((prev) => prev.map((w) => ({ ...w, isOpen: false, isMaximized: false })))
     setIsShutdown(true)
   }, [])
 
@@ -1289,7 +1250,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
 
                             {/* Windows */}
                             {(() => {
-                              const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized)
+                              const openWindows = windows.filter((w) => w.isOpen)
                               const maxZIndex = Math.max(...openWindows.map((w) => w.zIndex), 0)
                               return windows
                                 .filter((w) => w.isOpen && w.id !== 'calculator')
@@ -1298,7 +1259,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                                     key={win.id}
                                     window={win}
                                     onClose={() => closeWindow(win.id)}
-                                    onMinimize={() => minimizeWindow(win.id)}
                                     onMaximize={() => maximizeWindow(win.id)}
                                     onFocus={() => focusWindow(win.id)}
                                     onDrag={(x, y) => dragWindow(win.id, x, y)}
@@ -1655,7 +1615,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
 
                           {/* Windows */}
                           {(() => {
-                            const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized)
+                            const openWindows = windows.filter((w) => w.isOpen)
                             const maxZIndex = Math.max(...openWindows.map((w) => w.zIndex), 0)
                             return windows
                               .filter((w) => w.isOpen && w.id !== 'calculator')
@@ -1664,7 +1624,6 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                                   key={win.id}
                                   window={win}
                                   onClose={() => closeWindow(win.id)}
-                                  onMinimize={() => minimizeWindow(win.id)}
                                   onMaximize={() => maximizeWindow(win.id)}
                                   onFocus={() => focusWindow(win.id)}
                                   onDrag={(x, y) => dragWindow(win.id, x, y)}
