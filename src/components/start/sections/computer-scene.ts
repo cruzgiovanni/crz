@@ -9,8 +9,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   scene.fog = new THREE.FogExp2(0xc8c4c0, 0.06)
 
   const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 100)
-  camera.position.set(5, 4, 6)
-  camera.lookAt(0, 0.5, 0)
+  camera.position.set(2.5, 2, 3.2)
+  camera.lookAt(0, 0.8, 0)
 
   const isMobile = container.clientWidth < 768
   const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true })
