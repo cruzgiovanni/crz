@@ -8,8 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import art from '../../../../public/art.jpeg'
 import { navbarContent, footerContent } from '@/data/lp-info'
 
-const { logo, navLinks } = navbarContent
-const { navLinks: menuLinks, socialLinks } = footerContent
+const { logo, navLinks: defaultNavLinks } = navbarContent
+const { navLinks: defaultMenuLinks, socialLinks } = footerContent
 
 // Grid configuration
 const COLS = 5
@@ -41,11 +41,8 @@ interface NavbarProps {
 }
 
 export function Navbar({ navLinks: customNavLinks }: NavbarProps) {
-  const navLinks = customNavLinks || [
-    { label: 'Serviços', href: '#services' },
-    { label: 'Sobre', href: '#about' },
-    { label: 'Contato', href: '#contact' },
-  ]
+  const navLinks = customNavLinks || defaultNavLinks
+  const menuLinks = customNavLinks || defaultMenuLinks
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
