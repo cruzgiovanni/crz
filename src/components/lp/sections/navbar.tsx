@@ -84,36 +84,11 @@ export function Navbar({ navLinks: customNavLinks }: NavbarProps) {
               className="sm:hidden p-1"
               aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             >
-              <motion.svg width="18" height="18" viewBox="0 0 20 20" className="text-foreground">
-                <motion.line
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  animate={isOpen ? { x1: 3, y1: 3, x2: 10, y2: 10 } : { x1: 1, y1: 6, x2: 8, y2: 6 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                />
-                <motion.line
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  animate={isOpen ? { x1: 17, y1: 3, x2: 10, y2: 10 } : { x1: 12, y1: 6, x2: 19, y2: 6 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                />
-                <motion.line
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  animate={isOpen ? { x1: 3, y1: 17, x2: 10, y2: 10 } : { x1: 1, y1: 14, x2: 8, y2: 14 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                />
-                <motion.line
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  animate={isOpen ? { x1: 10, y1: 10, x2: 17, y2: 17 } : { x1: 12, y1: 14, x2: 19, y2: 14 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                />
-              </motion.svg>
+              <svg width="18" height="18" viewBox="0 0 20 20" className="text-foreground">
+                <line x1="1" y1="6" x2="19" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="1" y1="10" x2="19" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="1" y1="14" x2="19" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
             </button>
           </div>
         </div>
