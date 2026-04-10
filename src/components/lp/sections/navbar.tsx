@@ -84,11 +84,18 @@ export function Navbar({ navLinks: customNavLinks }: NavbarProps) {
               className="sm:hidden p-1"
               aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             >
-              <svg width="18" height="18" viewBox="0 0 20 20" className="text-foreground">
-                <line x1="1" y1="6" x2="19" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="1" y1="10" x2="19" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="1" y1="14" x2="19" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
+              {isOpen ? (
+                <svg width="18" height="18" viewBox="0 0 20 20" className="text-foreground">
+                  <line x1="3" y1="3" x2="17" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="17" y1="3" x2="3" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 20 20" className="text-foreground">
+                  <line x1="1" y1="6" x2="19" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="1" y1="10" x2="19" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="1" y1="14" x2="19" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
