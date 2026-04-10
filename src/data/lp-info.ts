@@ -10,7 +10,7 @@ export const navbarContent = {
   logo: {
     alt: 'Giovanni Cruz',
     text: 'giovannicruz.dev',
-    href: '/start',
+    href: '/',
   },
   navLinks: [
     { label: 'Serviços', href: '#services' },
@@ -104,7 +104,7 @@ export const footerContent = {
   ctaText: 'Tem um projeto parado ou um site que você tem vergonha de mostrar? Me fala.',
   ctaLinkText: 'Fale Comigo',
   navLinks: [
-    { label: 'Home', href: '/start' },
+    { label: 'Home', href: '/' },
     { label: 'Serviços', href: '#services' },
     { label: 'Sobre', href: '#about' },
     { label: 'Contato', href: '#contact' },
