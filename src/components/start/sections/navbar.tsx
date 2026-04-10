@@ -52,9 +52,7 @@ export function Navbar() {
         <div className="flex items-center justify-between px-2 md:px-4 py-2">
           <Link href={logo.href} className="flex items-center gap-2">
             <Image src={art} alt={logo.alt} width={22} height={22} loading="eager" priority />
-            <span className="text-[10px] font-semibold text-muted-foreground tracking-tight">
-              {logo.text}
-            </span>
+            <span className="text-[10px] font-semibold text-muted-foreground tracking-tight">{logo.text}</span>
           </Link>
 
           <div className="flex items-center gap-4 md:gap-6">
@@ -80,50 +78,33 @@ export function Navbar() {
               className="sm:hidden p-1"
               aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             >
-              <motion.svg
-                width="18"
-                height="18"
-                viewBox="0 0 20 20"
-                className="text-foreground"
-              >
+              <motion.svg width="18" height="18" viewBox="0 0 20 20" className="text-foreground">
                 <motion.line
                   stroke="currentColor"
                   strokeWidth="1.5"
                   strokeLinecap="round"
-                  animate={isOpen
-                    ? { x1: 3, y1: 3, x2: 10, y2: 10 }
-                    : { x1: 1, y1: 6, x2: 8, y2: 6 }
-                  }
+                  animate={isOpen ? { x1: 3, y1: 3, x2: 10, y2: 10 } : { x1: 1, y1: 6, x2: 8, y2: 6 }}
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
                 />
                 <motion.line
                   stroke="currentColor"
                   strokeWidth="1.5"
                   strokeLinecap="round"
-                  animate={isOpen
-                    ? { x1: 17, y1: 3, x2: 10, y2: 10 }
-                    : { x1: 12, y1: 6, x2: 19, y2: 6 }
-                  }
+                  animate={isOpen ? { x1: 17, y1: 3, x2: 10, y2: 10 } : { x1: 12, y1: 6, x2: 19, y2: 6 }}
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
                 />
                 <motion.line
                   stroke="currentColor"
                   strokeWidth="1.5"
                   strokeLinecap="round"
-                  animate={isOpen
-                    ? { x1: 3, y1: 17, x2: 10, y2: 10 }
-                    : { x1: 1, y1: 14, x2: 8, y2: 14 }
-                  }
+                  animate={isOpen ? { x1: 3, y1: 17, x2: 10, y2: 10 } : { x1: 1, y1: 14, x2: 8, y2: 14 }}
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
                 />
                 <motion.line
                   stroke="currentColor"
                   strokeWidth="1.5"
                   strokeLinecap="round"
-                  animate={isOpen
-                    ? { x1: 10, y1: 10, x2: 17, y2: 17 }
-                    : { x1: 12, y1: 14, x2: 19, y2: 14 }
-                  }
+                  animate={isOpen ? { x1: 10, y1: 10, x2: 17, y2: 17 } : { x1: 12, y1: 14, x2: 19, y2: 14 }}
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
                 />
               </motion.svg>
