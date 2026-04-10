@@ -13,7 +13,7 @@ export function AboutContent() {
       className="h-full select-none"
       style={{
         background: '#dddddd',
-        fontFamily: 'Chicago, Charcoal, Geneva, sans-serif',
+        fontFamily: 'var(--font-geist-mono), monospace',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
         overscrollBehavior: 'contain',
@@ -41,7 +41,7 @@ export function AboutContent() {
             <rect x="0" y="32" width="40" height="8" fill="#963D97" />
             <rect x="0" y="40" width="40" height="10" fill="#009DDC" />
           </g>
-          <text x="42" y="36" fill="#000000" fontSize="22" fontFamily="Chicago, sans-serif" fontWeight="bold">
+          <text x="42" y="36" fill="#000000" fontSize="22" fontFamily="var(--font-geist-mono), monospace" fontWeight="bold">
             Cruz OS 9
           </text>
         </svg>

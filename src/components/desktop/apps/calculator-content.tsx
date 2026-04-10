@@ -192,7 +192,7 @@ export function CalculatorWindow({
         background: '#fff',
         border: '1px solid #000000',
         boxShadow: '1px 1px 0 #000000',
-        fontFamily: 'Chicago, Monaco, monospace',
+        fontFamily: 'var(--font-geist-mono), monospace',
         fontSize: '10px',
         fontWeight: 'normal',
       }}
@@ -230,7 +230,7 @@ export function CalculatorWindow({
           left: position.x,
           top: position.y,
           zIndex,
-          fontFamily: 'Chicago, Monaco, monospace',
+          fontFamily: 'var(--font-geist-mono), monospace',
         }}
         onClick={onFocus}
       >
@@ -276,7 +276,7 @@ export function CalculatorWindow({
             <span
               className="text-white text-[13px] font-bold"
               style={{
-                fontFamily: 'Chicago, Monaco, monospace',
+                fontFamily: 'var(--font-geist-mono), monospace',
               }}
             >
               Calculator
@@ -291,7 +291,7 @@ export function CalculatorWindow({
                 width: '85px',
                 background: '#ffffff',
                 border: '1px solid #000000',
-                fontFamily: 'Monaco, Chicago, monospace',
+                fontFamily: 'var(--font-geist-mono), monospace',
                 height: '20px',
                 lineHeight: '16px',
                 overflow: 'hidden',

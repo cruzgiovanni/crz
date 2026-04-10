@@ -227,6 +227,7 @@ ${link ? `Link: ${link}` : ''}`
       ref={terminalRef}
       className="h-full bg-[#1a1a1a] text-[#00ff00] font-mono text-xs md:text-sm p-3 cursor-text"
       style={{
+        fontFamily: 'var(--font-geist-mono), ui-monospace, monospace',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
         overscrollBehavior: 'contain',

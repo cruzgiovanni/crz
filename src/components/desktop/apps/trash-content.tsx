@@ -49,7 +49,7 @@ export function TrashContent() {
   }
 
   return (
-    <div className="h-full flex flex-col bg-white font-['Geneva',_'Chicago',_sans-serif] text-[11px] md:text-[12px]">
+    <div className="h-full flex flex-col bg-white font-mono text-[11px] md:text-[12px]">
       {/* Header */}
       <div
         className="px-3 py-2 border-b border-[#888888] shrink-0 flex items-center justify-between"

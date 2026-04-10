@@ -22,7 +22,7 @@ export function ReadmeContent() {
   ]
 
   return (
-    <div className="flex h-full min-h-full" style={{ fontFamily: "'Millennium', monospace" }}>
+    <div className="flex h-full min-h-full" style={{ fontFamily: "var(--font-geist-pixel-square)" }}>
       {/* ========== SIDEBAR ========== */}
       <aside className="w-20 xs:w-24 sm:w-36 md:w-48 shrink-0 flex flex-col pt-4 sm:pt-6 md:pt-8 px-1.5 xs:px-2 sm:px-3 md:px-5 border-r border-[#c0c0c0] bg-white">
         {/* Logo/Name */}
@@ -30,7 +30,7 @@ export function ReadmeContent() {
           <h2
             className="text-lg sm:text-2xl md:text-3xl text-[#2a2a2a] leading-tight tracking-tight"
             style={{
-              fontFamily: 'var(--font-display), serif',
+              fontFamily: 'var(--font-geist-pixel-square)',
               fontWeight: 700,
             }}
           >
@@ -76,7 +76,7 @@ export function ReadmeContent() {
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-2 sm:mb-3"
               style={{
-                fontFamily: 'var(--font-display), serif',
+                fontFamily: 'var(--font-geist-pixel-square)',
                 fontWeight: 700,
               }}
             >
@@ -84,7 +84,7 @@ export function ReadmeContent() {
             </h1>
             <p
               className="text-base sm:text-lg md:text-2xl text-[#2a2a2a] italic mb-4 sm:mb-6"
-              style={{ fontFamily: 'var(--font-display), serif' }}
+              style={{ fontFamily: 'var(--font-geist-pixel-square)' }}
             >
               I&apos;m {hero.name}
             </p>
@@ -136,7 +136,7 @@ export function ReadmeContent() {
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
               style={{
-                fontFamily: 'var(--font-display), serif',
+                fontFamily: 'var(--font-geist-pixel-square)',
                 fontWeight: 700,
               }}
             >
@@ -165,7 +165,7 @@ export function ReadmeContent() {
             <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-[#e0e0e0]">
               <h2
                 className="text-lg sm:text-xl md:text-2xl font-bold text-[#2a2a2a] mb-3 sm:mb-4"
-                style={{ fontFamily: "'Millennium', monospace" }}
+                style={{ fontFamily: "var(--font-geist-pixel-square)" }}
               >
                 Quick Facts
               </h2>
@@ -187,7 +187,7 @@ export function ReadmeContent() {
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
               style={{
-                fontFamily: 'var(--font-display), serif',
+                fontFamily: 'var(--font-geist-pixel-square)',
                 fontWeight: 700,
               }}
             >
@@ -201,7 +201,7 @@ export function ReadmeContent() {
                     <div className="w-3 h-3 sm:w-4 sm:h-4 rounded" style={{ backgroundColor: category.color }} />
                     <h2
                       className="text-lg sm:text-xl md:text-3xl font-bold text-[#2a2a2a]"
-                      style={{ fontFamily: "'Millennium', monospace" }}
+                      style={{ fontFamily: "var(--font-geist-pixel-square)" }}
                     >
                       {category.title}
                     </h2>
@@ -229,7 +229,7 @@ export function ReadmeContent() {
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
               style={{
-                fontFamily: 'var(--font-display), serif',
+                fontFamily: 'var(--font-geist-pixel-square)',
                 fontWeight: 700,
               }}
             >
@@ -245,7 +245,7 @@ export function ReadmeContent() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-2">
                     <h2
                       className="text-base sm:text-lg md:text-2xl font-bold text-[#2a2a2a]"
-                      style={{ fontFamily: "'Millennium', monospace" }}
+                      style={{ fontFamily: "var(--font-geist-pixel-square)" }}
                     >
                       {project.title}
                     </h2>
@@ -294,7 +294,7 @@ export function ReadmeContent() {
             <h1
               className="text-3xl sm:text-4xl md:text-6xl text-[#2a2a2a] mb-4 sm:mb-6"
               style={{
-                fontFamily: 'var(--font-display), serif',
+                fontFamily: 'var(--font-geist-pixel-square)',
                 fontWeight: 700,
               }}
             >
@@ -339,7 +339,7 @@ export function ReadmeContent() {
             <div>
               <h2
                 className="text-base sm:text-xl md:text-2xl font-bold text-[#2a2a2a] mb-3 sm:mb-4"
-                style={{ fontFamily: "'Millennium', monospace" }}
+                style={{ fontFamily: "var(--font-geist-pixel-square)" }}
               >
                 Find me on
               </h2>
