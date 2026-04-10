@@ -6,16 +6,6 @@ export const hero = {
   intro: 'Writing code that reads like prose and performs like a machine. Precise. Intentional. Uncluttered.',
   description: 'I design systems with a strong sense of structure and restraint.',
   paragraph: 'Less noise. More intention.',
-  cta: {
-    keyword: 'await',
-    object: 'portfolio',
-    method: 'explore',
-  },
-  graphite: {
-    crossedOutWord: 'Overengineered',
-    graphitedWord: 'Essential',
-    continuationText: 'logic',
-  },
 }
 
 export const projects = [
@@ -26,7 +16,7 @@ export const projects = [
     year: '2026',
     tech: 'Next.js • TypeScript • Tailwind CSS • Framer Motion',
     direction: 'right' as const,
-    demo: 'https://giovannicruz.dev/start',
+    demo: 'https://giovannicruz.dev',
     type: 'project' as const,
   },
   {
@@ -140,5 +130,3 @@ export const contactSection = {
   },
   socials: ['LinkedIn', 'GitHub'],
 }
-
-export const navItems = ['Home', 'Terminal']

@@ -146,7 +146,7 @@ export function MusicPlayerContent() {
       className="h-full flex flex-col"
       style={{
         background: 'linear-gradient(180deg, #c0c0c0 0%, #a0a0a0 100%)',
-        fontFamily: 'Chicago, Geneva, sans-serif',
+        fontFamily: 'var(--font-geist-mono), monospace',
       }}
     >
       <audio

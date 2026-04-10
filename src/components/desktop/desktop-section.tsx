@@ -1,6 +1,5 @@
 'use client'
 
-import { useReveal } from '@/hooks/use-reveal'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { ReadmeContent } from '@/components/desktop/apps/readme-content'
 import { TerminalContent } from '@/components/desktop/apps/terminal-content'
@@ -830,7 +829,7 @@ interface DesktopSectionProps {
 }
 
 export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionProps) {
-  const { ref, isVisible } = useReveal(0.3)
+  const ref = useRef<HTMLDivElement>(null)
   const [bootStage, setBootStage] = useState<'off' | 'happy' | 'loading' | 'desktop'>('off')
   const [currentTime, setCurrentTime] = useState('')
   const [appleMenuOpen, setAppleMenuOpen] = useState(false)
@@ -947,7 +946,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
 
   // Boot sequence
   useEffect(() => {
-    if (!isVisible || isShutdown) return
+    if (isShutdown) return
 
     setBootStage('happy')
     const timer1 = setTimeout(() => setBootStage('loading'), 1200)
@@ -979,7 +978,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       clearTimeout(timer1)
       clearTimeout(timer2)
     }
-  }, [isVisible, isShutdown])
+  }, [isShutdown])
 
   // Clock
   useEffect(() => {
@@ -1090,11 +1089,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
       <section ref={ref} className="flex h-full w-full items-center justify-center relative">
         <div className="w-full h-full relative flex items-center justify-center">
           {/* Macintosh Classic Style Monitor - Fullscreen on mobile */}
-          <div
-            className={`relative w-full h-full transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div className="relative w-full h-full">
             {/* Monitor outer shell - simplified for mobile fullscreen */}
             <div
               className="relative w-full h-full overflow-hidden flex flex-col"
@@ -1408,11 +1403,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
     >
       <div className="w-full h-full max-w-6xl max-h-[90vh] md:max-h-[85vh] relative flex items-center justify-center">
         {/* Macintosh Classic Style Monitor */}
-        <div
-          className={`relative w-full h-full transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
+        <div className="relative w-full h-full">
           <div
             className="relative w-full h-full overflow-hidden flex flex-col"
             style={{

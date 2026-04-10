@@ -197,7 +197,7 @@ export function PongContent() {
   }, [gameStarted, startGame])
 
   return (
-    <div className="h-full flex flex-col bg-[#c0c0c0] font-['Geneva','Chicago',sans-serif] text-[11px] md:text-[12px]">
+    <div className="h-full flex flex-col bg-[#c0c0c0] font-mono text-[11px] md:text-[12px]">
       {/* Header */}
       <div
         className="px-3 py-2 border-b border-[#888888] shrink-0 flex items-center justify-between"
