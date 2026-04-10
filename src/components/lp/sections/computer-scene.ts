@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
-export function initScene(container: HTMLDivElement, onReady?: () => void): () => void {
+export function initScene(container: HTMLDivElement, onReady?: () => void, onScreenClick?: () => void): () => void {
   // Scene setup
   const scene = new THREE.Scene()
   scene.background = new THREE.Color(0xc8c4c0)
@@ -526,7 +526,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
 
   // Tooltip
   const tooltip = document.createElement('div')
-  tooltip.textContent = 'Click'
+  tooltip.textContent = isMobile ? '' : 'Click'
   Object.assign(tooltip.style, {
     position: 'absolute',
     pointerEvents: 'none',
@@ -564,27 +564,35 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     }
 
     if (isZoomed) {
-      if (isHoveringMonitor) {
-        tooltip.style.opacity = '0'
-        isHoveringMonitor = false
-      }
-      if (isHoveringCrucifix) {
-        tooltip.style.opacity = '0'
-        isHoveringCrucifix = false
-      }
+      isHoveringCrucifix = false
 
       const rect = renderer.domElement.getBoundingClientRect()
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
 
-      let onActiveObject = false
-      if (zoomedTarget === 'monitor' && screenMesh) {
-        onActiveObject = raycaster.intersectObject(screenMesh).length > 0
+      if (zoomedTarget === 'monitor' && monitorGroup) {
+        const hits = raycaster.intersectObject(monitorGroup, true)
+        if (hits.length > 0) {
+          if (!isHoveringMonitor) {
+            isHoveringMonitor = true
+            tooltip.textContent = '▸ explore cruztosh'
+            tooltip.style.opacity = '1'
+          }
+          renderer.domElement.style.cursor = 'pointer'
+          tooltip.style.left = `${e.clientX - rect.left}px`
+          tooltip.style.top = `${e.clientY - rect.top}px`
+        } else {
+          if (isHoveringMonitor) {
+            isHoveringMonitor = false
+            tooltip.style.opacity = '0'
+          }
+          renderer.domElement.style.cursor = ''
+        }
       } else if (zoomedTarget === 'crucifix' && crucifixGroup) {
-        onActiveObject = raycaster.intersectObject(crucifixGroup, true).length > 0
+        const onCrucifix = raycaster.intersectObject(crucifixGroup, true).length > 0
+        renderer.domElement.style.cursor = onCrucifix ? 'default' : 'pointer'
       }
-      renderer.domElement.style.cursor = onActiveObject ? 'default' : 'pointer'
       return
     }
 
@@ -598,6 +606,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     if (monitorIntersects.length > 0) {
       if (!isHoveringMonitor) {
         isHoveringMonitor = true
+        tooltip.textContent = 'Click to enter'
         tooltip.style.opacity = '1'
         renderer.domElement.style.cursor = 'pointer'
       }
@@ -615,6 +624,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
       if (crucifixIntersects.length > 0 && !isHoveringMonitor) {
         if (!isHoveringCrucifix) {
           isHoveringCrucifix = true
+          tooltip.textContent = 'Click to zoom'
           tooltip.style.opacity = '1'
           renderer.domElement.style.cursor = 'pointer'
         }
@@ -650,15 +660,18 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     raycaster.setFromCamera(mouse, camera)
 
     if (isZoomed) {
-      const zoomedHits =
-        zoomedTarget === 'monitor' && monitorGroup
-          ? raycaster.intersectObject(monitorGroup, true)
-          : zoomedTarget === 'crucifix' && crucifixGroup
-            ? raycaster.intersectObject(crucifixGroup, true)
-            : []
-      if (zoomedHits.length === 0) {
-        startCameraAnimation(camera.position, originalCamPos, controls.target, originalCamTarget, 'out')
+      if (zoomedTarget === 'monitor' && monitorGroup) {
+        const monitorHits = raycaster.intersectObject(monitorGroup, true)
+        if (monitorHits.length > 0) {
+          onScreenClick?.()
+          return
+        }
       }
+      if (zoomedTarget === 'crucifix' && crucifixGroup) {
+        const crucifixHits = raycaster.intersectObject(crucifixGroup, true)
+        if (crucifixHits.length > 0) return
+      }
+      startCameraAnimation(camera.position, originalCamPos, controls.target, originalCamTarget, 'out')
       return
     }
 
@@ -701,6 +714,63 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
   renderer.domElement.addEventListener('mousemove', onMouseMove)
   renderer.domElement.addEventListener('mousedown', onMouseDown)
   renderer.domElement.addEventListener('mouseup', onMouseUp)
+
+  // Touch handlers for mobile tap interaction
+  let touchStartTime = 0
+  let touchStartPos = { x: 0, y: 0 }
+
+  const onTouchStart = (e: TouchEvent) => {
+    touchStartTime = performance.now()
+    touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+
+  const onTouchEnd = (e: TouchEvent) => {
+    if (isAnimating) return
+    const touch = e.changedTouches[0]
+    const elapsed = performance.now() - touchStartTime
+    const dist = Math.hypot(touch.clientX - touchStartPos.x, touch.clientY - touchStartPos.y)
+    if (elapsed > 300 || dist > 15) return
+
+    const rect = renderer.domElement.getBoundingClientRect()
+    mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1
+    mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1
+    raycaster.setFromCamera(mouse, camera)
+
+    // Mobile: tap monitor → navigate directly, no zoom
+    const monitorIntersects = monitorGroup ? raycaster.intersectObject(monitorGroup, true) : []
+    if (monitorIntersects.length > 0) {
+      onScreenClick?.()
+      return
+    }
+
+    // Crucifix zoom still works on mobile
+    if (isZoomed) {
+      if (zoomedTarget === 'crucifix' && crucifixGroup) {
+        const crucifixHits = raycaster.intersectObject(crucifixGroup, true)
+        if (crucifixHits.length > 0) return
+      }
+      startCameraAnimation(camera.position, originalCamPos, controls.target, originalCamTarget, 'out')
+      return
+    }
+
+    if (crucifixGroup) {
+      const crucifixIntersects = raycaster.intersectObject(crucifixGroup, true)
+      if (crucifixIntersects.length > 0) {
+        originalCamPos.copy(camera.position)
+        originalCamTarget.copy(controls.target)
+        const crucifixWorldPos = new THREE.Vector3()
+        crucifixGroup.getWorldPosition(crucifixWorldPos)
+        const crucifixCenterY = crucifixWorldPos.y + 0.13
+        const zoomPos = new THREE.Vector3(crucifixWorldPos.x, crucifixCenterY + 0.15, crucifixWorldPos.z + 0.55)
+        const zoomTarget = new THREE.Vector3(crucifixWorldPos.x, crucifixCenterY, crucifixWorldPos.z)
+        zoomedTarget = 'crucifix'
+        startCameraAnimation(camera.position, zoomPos, controls.target, zoomTarget, 'in', 7)
+      }
+    }
+  }
+
+  renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: true })
+  renderer.domElement.addEventListener('touchend', onTouchEnd, { passive: true })
 
   // ============================
   // Animation loop
@@ -788,6 +858,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void): () =
     renderer.domElement.removeEventListener('mousemove', onMouseMove)
     renderer.domElement.removeEventListener('mousedown', onMouseDown)
     renderer.domElement.removeEventListener('mouseup', onMouseUp)
+    renderer.domElement.removeEventListener('touchstart', onTouchStart)
+    renderer.domElement.removeEventListener('touchend', onTouchEnd)
     tooltip.remove()
 
     video.pause()

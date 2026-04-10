@@ -36,7 +36,16 @@ const cellVariants = {
   }),
 }
 
-export function Navbar() {
+interface NavbarProps {
+  navLinks?: { label: string; href: string }[]
+}
+
+export function Navbar({ navLinks: customNavLinks }: NavbarProps) {
+  const navLinks = customNavLinks || [
+    { label: 'Serviços', href: '#services' },
+    { label: 'Sobre', href: '#about' },
+    { label: 'Contato', href: '#contact' },
+  ]
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
