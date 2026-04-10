@@ -6,6 +6,7 @@ import { contactContent } from '@/data/lp-info'
 import { useEffect, useState } from 'react'
 
 const portfolioNavLinks = [
+  { label: 'Home', href: '/' },
   { label: 'Serviços', href: '/#services' },
   { label: 'Sobre', href: '/#about' },
   { label: 'Contato', href: contactContent.whatsapp },
@@ -27,7 +28,8 @@ export default function Portfolio() {
     return (
       <main className="relative w-full overflow-hidden bg-background" style={{ height: '100dvh' }}>
         <div className="absolute inset-0 z-0" style={{ background: '#191919' }} />
-        <div className="relative z-10 h-full w-full">
+        <Navbar navLinks={portfolioNavLinks} />
+        <div className="relative z-10 flex h-full w-full overflow-hidden pt-12">
           <DesktopSection isMobileFullscreen />
         </div>
       </main>
