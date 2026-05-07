@@ -445,7 +445,7 @@ function MacDesktopIcon({
 }) {
   return (
     <button
-      className="flex flex-col items-center gap-[2px] p-[2px] w-[68px] md:w-[74px] focus:outline-none"
+      className="flex flex-col items-center gap-[2px] p-[2px] w-[54px] min-[400px]:w-[68px] md:w-[74px] focus:outline-none"
       onClick={(e) => {
         e.stopPropagation()
         onSelect()
@@ -463,7 +463,7 @@ function MacDesktopIcon({
       </div>
       {/* Label - Mac OS 9 style: translucent white bg when not selected, black bg when selected */}
       <span
-        className="text-[10px] md:text-[11px] text-center leading-tight px-[3px] py-[1px]"
+        className="text-[9px] min-[400px]:text-[10px] md:text-[11px] text-center leading-tight px-[3px] py-[1px]"
         style={{
           fontFamily: 'Chicago, Charcoal, Geneva, sans-serif',
           color: selected ? '#ffffff' : '#000000',
@@ -806,7 +806,7 @@ function MacIcon({ src, alt }: { src: typeof readmeIcon; alt: string }) {
       alt={alt}
       width={48}
       height={48}
-      className="w-[32px] h-[32px] md:w-[48px] md:h-[48px]"
+      className="w-[26px] h-[26px] min-[400px]:w-[32px] min-[400px]:h-[32px] md:w-[48px] md:h-[48px]"
       style={{ imageRendering: 'pixelated' }}
     />
   )
@@ -815,7 +815,7 @@ function MacIcon({ src, alt }: { src: typeof readmeIcon; alt: string }) {
 function EmojiIcon({ emoji, label }: { emoji: string; label: string }) {
   return (
     <div
-      className="w-[32px] h-[32px] md:w-[48px] md:h-[48px] flex items-center justify-center text-2xl md:text-4xl"
+      className="w-[26px] h-[26px] min-[400px]:w-[32px] min-[400px]:h-[32px] md:w-[48px] md:h-[48px] flex items-center justify-center text-xl min-[400px]:text-2xl md:text-4xl"
       role="img"
       aria-label={label}
     >
@@ -1199,7 +1199,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                             </div>
 
                             {/* Desktop Icons - top right */}
-                            <div className="absolute top-[8px] right-[8px] flex flex-col gap-2">
+                            <div className="absolute top-[4px] right-[4px] min-[400px]:top-[8px] min-[400px]:right-[8px] flex flex-col gap-1 min-[400px]:gap-2">
                               {desktopIcons.map((icon, i) => (
                                 <div
                                   key={icon.id}
@@ -1218,7 +1218,7 @@ export function DesktopSection({ isMobileFullscreen = false }: DesktopSectionPro
                             </div>
 
                             {/* Trash Icon - bottom right */}
-                            <div className="absolute bottom-[8px] right-[8px] animate-in fade-in slide-in-from-right-2 duration-300 delay-200">
+                            <div className="absolute bottom-[4px] right-[4px] min-[400px]:bottom-[8px] min-[400px]:right-[8px] animate-in fade-in slide-in-from-right-2 duration-300 delay-200">
                               <MacDesktopIcon
                                 icon={<MacIcon src={trashIcon} alt="Trash" />}
                                 label="Trash"
