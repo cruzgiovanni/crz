@@ -22,13 +22,49 @@ export function ReadmeContent() {
   ]
 
   return (
-    <div className="flex h-full min-h-full" style={{ fontFamily: "var(--font-geist-pixel-square)" }}>
-      {/* ========== SIDEBAR ========== */}
-      <aside className="w-20 xs:w-24 sm:w-36 md:w-48 shrink-0 flex flex-col pt-4 sm:pt-6 md:pt-8 px-1.5 xs:px-2 sm:px-3 md:px-5 border-r border-[#c0c0c0] bg-white">
-        {/* Logo/Name */}
-        <div className="mb-6 sm:mb-8 md:mb-10">
+    <div
+      className="flex flex-col md:flex-row h-full min-h-full"
+      style={{ fontFamily: "var(--font-geist-pixel-square)" }}
+    >
+      {/* ========== MOBILE TOP NAV ========== */}
+      <header className="md:hidden shrink-0 border-b border-[#c0c0c0] bg-white">
+        <div className="flex items-baseline justify-between gap-3 px-4 pt-3 pb-2">
           <h2
-            className="text-lg sm:text-2xl md:text-3xl text-[#2a2a2a] leading-tight tracking-tight"
+            className="text-xl xs:text-2xl text-[#2a2a2a] leading-tight tracking-tight"
+            style={{
+              fontFamily: 'var(--font-geist-pixel-square)',
+              fontWeight: 700,
+            }}
+          >
+            Giovanni Cruz
+          </h2>
+          <p className="text-xs xs:text-sm text-[#888888] shrink-0">
+            Portfolio &apos;{new Date().getFullYear().toString().slice(-2)}
+          </p>
+        </div>
+        <nav className="grid grid-cols-5 px-2 pb-2">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setCurrentPage(item.id)}
+              className={`text-[10px] xs:text-xs transition-colors py-1 cursor-pointer text-center ${
+                currentPage === item.id
+                  ? 'text-[#000000] font-bold underline'
+                  : 'text-[#000066] hover:text-[#0000cc]'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </header>
+
+      {/* ========== SIDEBAR (desktop) ========== */}
+      <aside className="hidden md:flex md:w-48 shrink-0 flex-col md:pt-8 md:px-5 border-r border-[#c0c0c0] bg-white">
+        {/* Logo/Name */}
+        <div className="md:mb-10">
+          <h2
+            className="md:text-3xl text-[#2a2a2a] leading-tight tracking-tight"
             style={{
               fontFamily: 'var(--font-geist-pixel-square)',
               fontWeight: 700,
@@ -38,22 +74,22 @@ export function ReadmeContent() {
             <br />
             Cruz
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-[#888888] mt-1 sm:mt-2">
+          <p className="md:text-base text-[#888888] md:mt-2">
             Portfolio &apos;{new Date().getFullYear().toString().slice(-2)}
           </p>
         </div>
 
         {/* Nav Links */}
-        <nav className="flex flex-col gap-1 sm:gap-2">
+        <nav className="flex flex-col md:gap-2">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => setCurrentPage(item.id)}
-              className={`text-left text-xs sm:text-sm md:text-lg transition-colors flex items-center gap-1 sm:gap-2 py-0.5 sm:py-1 cursor-pointer ${
+              className={`text-left md:text-lg transition-colors flex items-center md:gap-2 md:py-1 cursor-pointer ${
                 currentPage === item.id ? 'text-[#000000] font-bold' : 'text-[#000066] hover:text-[#0000cc]'
               }`}
             >
-              {currentPage === item.id && <span className="text-[#000066] text-xs sm:text-base">○</span>}
+              {currentPage === item.id && <span className="text-[#000066] md:text-base">○</span>}
               <span className={currentPage === item.id ? 'underline' : ''}>{item.label}</span>
             </button>
           ))}

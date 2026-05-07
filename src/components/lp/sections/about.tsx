@@ -45,7 +45,7 @@ export function About() {
                   <span className="font-sans font-bold text-2xl lg:text-3xl tracking-tight">
                     {stat.value}
                   </span>
-                  <p className="mt-1 text-[0.625rem] lg:text-xs text-[#757575]">{stat.label}</p>
+                  <p className="s mt-1 text-[0.625rem] lg:text-xs text-[#757575]">{stat.label}</p>
                 </div>
               ))}
             </div>
