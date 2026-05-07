@@ -15,9 +15,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void, onScr
   const isMobile = container.clientWidth < 768
   const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true })
   renderer.setSize(container.clientWidth, container.clientHeight)
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2))
-  renderer.shadowMap.enabled = !isMobile
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+  renderer.shadowMap.enabled = false
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = 1.1
   renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -62,8 +61,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void, onScr
   const dirLight = new THREE.DirectionalLight(0xfff5e0, 2.8)
   dirLight.position.set(5, 8, 4)
   dirLight.castShadow = true
-  dirLight.shadow.mapSize.width = 1024
-  dirLight.shadow.mapSize.height = 1024
+  dirLight.shadow.mapSize.width = 512
+  dirLight.shadow.mapSize.height = 512
   dirLight.shadow.camera.near = 0.5
   dirLight.shadow.camera.far = 25
   dirLight.shadow.camera.left = -8
@@ -209,7 +208,6 @@ export function initScene(container: HTMLDivElement, onReady?: () => void, onScr
       }
     }
     keyMesh.instanceMatrix.needsUpdate = true
-    keyMesh.castShadow = true
     deskGroup.add(keyMesh)
 
     // Mouse
