@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useRef } from 'react'
-import { motion, useScroll, useTransform, type MotionValue, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { problemsContent } from '@/data/lp-info'
 
 const { sectionLabel, cards } = problemsContent
@@ -48,9 +48,16 @@ function StackCard({
   )
 }
 
-function MobileCard({ card }: { card: (typeof cards)[number] }) {
+function MobileCard({ card, index }: { card: (typeof cards)[number]; index: number }) {
+  const num = String(index + 1).padStart(2, '0')
   return (
-    <div className="border border-border p-6">
+    <div className="border-t border-border px-2 py-12">
+      <p
+        className="font-sans font-bold text-[6rem] leading-none tracking-tighter text-foreground/15 mb-10"
+        style={{ fontFeatureSettings: '"tnum"' }}
+      >
+        {num}
+      </p>
       <p className="font-sans font-bold text-3xl tracking-tight leading-[1.1] text-foreground">
         {card.text}
       </p>
@@ -98,20 +105,32 @@ export function Problems() {
         </div>
       </section>
 
-      {/* Mobile: simple cards with fade-in */}
-      <section className="md:hidden bg-background py-20">
-        <div className="px-2">
-          <div className="mb-6">
-            <span className="text-[1.5rem] text-[#757575] tracking-tight ml-[15vw]">
-              {sectionLabel}
-            </span>
-          </div>
-          <div className="space-y-4">
-            {cards.map((card, index) => (
-              <MobileCard key={index} card={card} />
-            ))}
-          </div>
+      {/* Mobile: numbered manifesto + free-floating answer */}
+      <section className="md:hidden bg-background pt-20 pb-20">
+        <div className="px-2 mb-8">
+          <span className="text-[1.5rem] text-[#757575] tracking-tight">
+            {sectionLabel}
+          </span>
         </div>
+        {cards.slice(0, -1).map((card, index) => (
+          <MobileCard key={index} card={card} index={index} />
+        ))}
+        <div className="border-t border-border" />
+        {(() => {
+          const answer = cards[cards.length - 1]
+          return (
+            <div className="px-2 pt-32 pb-8">
+              <p className="font-sans font-bold text-3xl tracking-tight leading-[1.1] text-foreground">
+                {answer.text}
+              </p>
+              {answer.subtext && (
+                <p className="bg-accent mt-8 text-[0.9rem] tracking-tight text-muted-foreground">
+                  {answer.subtext}
+                </p>
+              )}
+            </div>
+          )
+        })()}
       </section>
     </>
   )
