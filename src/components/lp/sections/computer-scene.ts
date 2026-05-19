@@ -13,7 +13,8 @@ export function initScene(container: HTMLDivElement, onReady?: () => void, onScr
   camera.lookAt(0, 0.8, 0)
 
   const isMobile = container.clientWidth < 768
-  const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true })
+  const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: false })
+  renderer.setClearColor(0xc8c4c0, 1)
   renderer.setSize(container.clientWidth, container.clientHeight)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
   renderer.shadowMap.enabled = false
@@ -777,10 +778,26 @@ export function initScene(container: HTMLDivElement, onReady?: () => void, onScr
   const clock = new THREE.Clock()
   let firstFrame = true
   let videoFrameCount = 0
+  let pendingResize = false
+  let lastW = container.clientWidth
+  let lastH = container.clientHeight
 
   function animate() {
     animFrameId = requestAnimationFrame(animate)
     const dt = clock.getDelta()
+
+    if (pendingResize) {
+      pendingResize = false
+      const w = container.clientWidth
+      const h = container.clientHeight
+      if (w > 0 && h > 0 && (w !== lastW || h !== lastH)) {
+        lastW = w
+        lastH = h
+        camera.aspect = w / h
+        camera.updateProjectionMatrix()
+        renderer.setSize(w, h)
+      }
+    }
 
     // Camera animation
     if (isAnimating) {
@@ -837,12 +854,7 @@ export function initScene(container: HTMLDivElement, onReady?: () => void, onScr
   // Resize handling
   // ============================
   const resizeObserver = new ResizeObserver(() => {
-    const w = container.clientWidth
-    const h = container.clientHeight
-    if (w === 0 || h === 0) return
-    camera.aspect = w / h
-    camera.updateProjectionMatrix()
-    renderer.setSize(w, h)
+    pendingResize = true
   })
   resizeObserver.observe(container)
 
