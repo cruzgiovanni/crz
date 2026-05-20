@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Giovanni Cruz',
   description: 'Websites & Softwares que impressionam.',
   manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: 'Giovanni Cruz',
+  },
   openGraph: {
     type: 'website',
     url: 'https://giovannicruz.dev',
