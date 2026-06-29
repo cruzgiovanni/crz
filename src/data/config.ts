@@ -6,6 +6,6 @@ export const siteConfig = {
   },
 
   // Contact
-  email: 'crzwebdigital@gmail.com',
+  email: 'giovannicruz.dev@gmail.com',
   location: 'São Paulo, Brazil',
 }
