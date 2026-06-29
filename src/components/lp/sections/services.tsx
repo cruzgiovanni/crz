@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useScroll, useTransform, MotionValue, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import { servicesContent } from '@/data/lp-info'
 
 const { sectionLabel, title, services } = servicesContent
@@ -24,8 +24,8 @@ function ServiceItemDesktop({
   const start = 0.1 + index * step
   const end = start + step * 0.8
 
-  const opacity = useTransform(scrollYProgress, [start, end], [0, 1])
-  const y = useTransform(scrollYProgress, [start, end], [60, 0])
+  const opacity = useTransform(scrollYProgress, [start, end, 1], [0, 1, 1])
+  const y = useTransform(scrollYProgress, [start, end, 1], [60, 0, 0])
 
   return (
     <motion.div style={{ opacity, y }} className="border-b border-border group cursor-pointer relative overflow-hidden">
