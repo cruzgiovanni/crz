@@ -109,7 +109,7 @@ export const footerContent = {
     { label: 'Sobre', href: '#about' },
     { label: 'Contato', href: '#contact' },
   ],
-  email: 'crzwebdigital@gmail.com',
-  socialLinks: [{ label: 'Instagram', href: 'https://www.instagram.com/giovannicruzdev' }],
+  email: 'giovannicruz.dev@gmail.com',
+  socialLinks: [{ label: 'Instagram', href: 'https://www.instagram.com/giovannicruz.dev' }],
   copyright: (year: number) => `© Giovanni Cruz ${year}. Todos os direitos reservados.`,
 }

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import art from '../../../../public/art.jpeg'
 import { navbarContent, footerContent } from '@/data/lp-info'
 
@@ -25,7 +25,7 @@ const cellDelays = Array.from({ length: COLS * ROWS }, (_, i) => {
   return (dist / maxDist) * MAX_CELL_DELAY
 })
 
-const cellVariants = {
+const cellVariants: Variants = {
   closed: {
     opacity: 0,
     transition: { duration: 0.15 },
